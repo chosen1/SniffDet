@@ -642,7 +642,6 @@ static int get_mac(struct config_variables_t *self, enum section_state state)
 	int i = 0;
 	int j;
 	unsigned char *var = (unsigned char *) self->var[state];
-	unsigned int value;
 	char *buf_ptr, *end_ptr;
 
 
