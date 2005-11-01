@@ -1,0 +1,63 @@
+* Introduction
+
+These are templates for a modern autoconf/automake build system, using separate
+directories for everything and non-recursive make.
+
+This document assumes you have basic notions of what autoconf and automake are.
+
+Some important directory path variables set by configure.ac are:
+
+  srcdir: The top directory for your package (standard autoconf variable).
+  csource: Where you keep the source files.  These templates
+           assume that you keep the source in a subdirectory of $srcdir.
+  headerdir: If your package distribute header files, set to the directory
+             where you keep them.
+  utestdir: Directory where Check test suites are kept.
+
+If you want to build libraries, you should use pkg-config.
+
+* Using the template files
+
+There are instructions as comments marked with two hash characters (##) in the
+files configure.ac and Makefile.am.  Edit them and remove these comments.
+
+The file svn-ignore contains listing of files which should not be kept under
+revision control. Use them like this:
+
+  frobnicator $ svn propset svn:ignore -F svn-ignore .
+
+After that, be sure to read doc/BUILD-FAQ to know how to build your own
+package ;)
+
+
+* Portability
+
+The system.h is an example of how to use the autoconf-determined
+system-dependent information.  I think it is a good idea to keep all system
+dependencies (all "#ifdef HAVE_SOMETHING") in a single header file like
+system.h.  If you do that, it will be your choice whether to explicitly include
+"config.h" too.
+
+
+* Glossary
+
+  . Autoconf is a tool for configuring sources.  It's main use is to deal with
+    portability issues and ensuring the presence of needed dependencies.  It's
+    also useful for configuring C defines and other options which should be set
+    by the user before compiling.
+
+  . Automake is a tool for generating makefiles with lots of standard targets.
+    These targets are complicated to be built in a manner portable to different
+    make implementations.  Many of them, like "make tags", "make uninstall" or
+    "make distcheck", came to be expected by users.  Since they're complicated
+    and mechanic, they're good candidates for auto generation.  Automake assumes
+    that the package uses autoconf, and provides the infrastructure for libtool,
+    gettext and check.
+
+    We're requiring Automake to ensure portable, VPATH-enabled makefiles with
+    targets used in the test system, like "make distcheck".
+
+  . Libtool is a tool for building shared libraries and dlopen(3) modules.  Not
+    all systems have a shared library system, and those who do often use very
+    different schemes for building, installing, using and removing the
+    libraries.  Libtool can take care of these tasks for many different systems.

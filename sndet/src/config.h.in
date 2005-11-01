@@ -1,4 +1,21 @@
-/* src/config.h.in.  Generated from configure.in by autoheader.  */
+/* src/config.h.in.  Generated from configure.ac by autoheader.  */
+
+/* dir for installing executables that users run. Example: /usr/local/bin */
+#undef BINDIR
+
+/* "Tag or version of build" */
+#undef BUILDVERSION
+
+/* dir for installing modifiable single-machine data. Example:
+   /usr/local/share */
+#undef DATADIR
+
+/* Set if in debug mode */
+#undef DEBUG
+
+/* installation prefix for architecture-dependent files. Example: /usr/local
+   */
+#undef EXEC_PREFIX
 
 /* Define to 1 if you have the `alarm' function. */
 #undef HAVE_ALARM
@@ -33,7 +50,8 @@
 /* Define to 1 if you have the <limits.h> header file. */
 #undef HAVE_LIMITS_H
 
-/* Define to 1 if your system has a working `malloc' function. */
+/* Define to 1 if your system has a GNU libc compatible `malloc' function, and
+   to 0 otherwise. */
 #undef HAVE_MALLOC
 
 /* Define to 1 if you have the <memory.h> header file. */
@@ -99,6 +117,34 @@
 /* Define to 1 if you have the `vprintf' function. */
 #undef HAVE_VPRINTF
 
+/* dir for installing C header files. Example: /usr/local/include */
+#undef INCLUDEDIR
+
+/* top-level dir for installing documentation in info format. Example:
+   /usr/local/info */
+#undef INFODIR
+
+/* dir for installing object code libraries. Example: /usr/local/lib */
+#undef LIBDIR
+
+/* dir for installing executables that other programs run. Example:
+   /usr/local/libexec */
+#undef LIBEXECDIR
+
+/* dir for installing modifiable single-machine data. Examples:
+   /usr/local/var, /var */
+#undef LOCALSTATEDIR
+
+/* top-level dir for installing documentation in man format. Example:
+   /usr/local/man */
+#undef MANDIR
+
+/* Set if not in debug mode */
+#undef NDEBUG
+
+/* Name of package */
+#undef PACKAGE
+
 /* Define to the address where bug reports for this package should be sent. */
 #undef PACKAGE_BUGREPORT
 
@@ -114,8 +160,19 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
+/* installation prefix for all files. Example: /usr/local */
+#undef PREFIX
+
 /* Define as the return type of signal handlers (`int' or `void'). */
 #undef RETSIGTYPE
+
+/* dir for installing executables that sys-admins run. Example:
+   /usr/local/sbin */
+#undef SBINDIR
+
+/* dir for installing modifiable architecture-independent data. Example:
+   /usr/local/com */
+#undef SHAREDSTATEDIR
 
 /* GID to be used when dropping root privs */
 #undef SNDET_DEFAULT_GID
@@ -129,18 +186,32 @@
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
+/* dir for installing read-only single-machine data. Examples: /usr/local/etc,
+   /etc */
+#undef SYSCONFDIR
+
 /* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
 #undef TIME_WITH_SYS_TIME
 
 /* Define to 1 if your <sys/time.h> declares `struct tm'. */
 #undef TM_IN_SYS_TIME
 
-/* Define _GNU_SOURCE so that we get all necessary prototypes */
-#undef _GNU_SOURCE
+/* Version number of package */
+#undef VERSION
+
+/* Enable GNU extensions on systems that have them.  */
+#ifndef _GNU_SOURCE
+# undef _GNU_SOURCE
+#endif
 
 /* Define to empty if `const' does not conform to ANSI C. */
 #undef const
 
-/* Define as `__inline' if that's what the C compiler calls it, or to nothing
-   if it is not supported. */
+/* Define to `__inline__' or `__inline' if that's what the C compiler
+   calls it, or to nothing if 'inline' is not supported under any name.  */
+#ifndef __cplusplus
 #undef inline
+#endif
+
+/* Define to rpl_malloc if the replacement function should be used. */
+#undef malloc
