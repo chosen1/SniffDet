@@ -643,6 +643,8 @@ static int get_mac(struct config_variables_t *self, enum section_state state)
 	int j;
 	unsigned char *var = (unsigned char *) self->var[state];
 	unsigned int value;
+	char *buf_ptr, *end_ptr;
+
 
 	if (var == NULL) {
 		syntax_error("Ooops... something bad happened while reading your config file... :-(\n");
@@ -653,12 +655,22 @@ static int get_mac(struct config_variables_t *self, enum section_state state)
 		;
 
 	DEBUG_CODE(printf("\t\tvalue: { ");)
+
+	buf_ptr = line_buffer + i;
+	end_ptr = buf_ptr;
+
 	for (j = 0; j < 6; j++) {
-		sscanf(&(line_buffer[i]), "%x", &value);
-		var[j] = value;
-		i += 5;
-		DEBUG_CODE(printf("0x%.2x ", var[j]);)
+		var[j] = (unsigned char) strtoul(buf_ptr, &end_ptr, 16);
+
+		if (*end_ptr != ',' && j < 5)
+			syntax_error("Expected ',' instead of %c.\n", *end_ptr);
+		else
+			buf_ptr = end_ptr + 1;
 	}
+	
+	if(*end_ptr != '}')
+	  syntax_error("Expected '}' instead of %c.\n", *end_ptr);
+
 	DEBUG_CODE(printf("}\n");)
 
 	return 0;
