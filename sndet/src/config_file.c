@@ -27,7 +27,7 @@
  * Then we create a big structure with all possible variable names inside
  * all sections. In this structure, we have pointers to functions
  * responsible to get that kind of value (int, string, mac address, etc). It
- * also have a pointer to the config file structure, which is the place
+ * also has a pointer to the config file structure, which is the place
  * where we hold the configuration (it's visible by the application).
  *
  * If a section cannot have such a varname, then its pointer to the
