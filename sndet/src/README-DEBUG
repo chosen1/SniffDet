@@ -1,0 +1,11 @@
+To run sniffdet for debug purposes, you have to avoid dropping root (to
+get coredump files) and must specify a valid config file name and a
+plugindir if you didn't installed it yet:
+
+./sniffdet -g 0 -u 0 --configfile=../sniffdet.conf \
+	--pluginsdir=./plugins/ -t TEST(s) TARGET
+
+Of course, remember to compile it with debug activated (pass
+--enable-debug to configure)
+
+# vim: set et tw=74:

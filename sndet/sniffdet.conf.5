@@ -1,0 +1,219 @@
+.\" libsniffdet - A library for network sniffers detection
+.\" Copyright (c) 2002
+.\"   Ademar de Souza Reis Jr. <myself@ademar.org>
+.\"   Milton Soares Filho <eu_mil@yahoo.com>
+.\"
+.\" This is free documentation; you can redistribute it and/or
+.\" modify it under the terms of the GNU General Public License as
+.\" published by the Free Software Foundation; either version 2 of
+.\" the License, or (at your option) any later version.
+.\"
+.\" The GNU General Public License's references to "object code"
+.\" and "executables" are to be interpreted as the output of any
+.\" document formatting or typesetting system, including
+.\" intermediate and printed output.
+.\"
+.\" This manual is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public
+.\" License along with this manual; if not, write to the Free
+.\" Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111,
+.\" USA.
+.\"
+.TH SNIFFDET 1 2002-11-28 "sniffdet manpage" "Remote Sniffer Detection Tool"
+.SH NAME
+sniffdet.conf - sniffdet configuration file
+.PP
+.SH DESCRIPTION
+.PP
+sniffdet.conf allows you to configure the way sniffdet performs its tests.
+It's located in /etc by default and has various sections, all described
+below.
+.PP
+.SH SYNTAX
+.PP
+The syntax is very simple. Each section has a name and is delimited by
+brackets "{}". Inside the section, simple attributions are made to
+variables.
+.PP
+Comments are started with "#" and can be located anywhere in the file.
+Everything after a "#" is ignored by the parser until a line break.
+.PP
+Blank lines are ignored.
+.PP
+.SH EXAMPLE
+.PP
+An example of a configuration file follows (it's filled with some default
+values from the current implementation of libsniffdet, but should not be
+used in production enviroments. We strongly recommend that you create your
+own config file to avoid identification of the tests by the sniffers.
+.PP
+Please notice the example below is not a complete config file. Every
+test has almost the same variables, so we're not repeating all of
+them here.
+.PP
+# snifdet example configuration file
+.br
+# http://sniffdet.sourceforge.net
+.br
+#
+.br
+# see sniffdet.conf (5) manpage
+.br
+
+.br
+# global configuration
+.br
+global {
+.br
+	verbose = 0;
+.br
+	# this is one or a combination of FILE, STDOUT, STDERR, SYSLOG
+.br
+	logtype = FILE;
+.br
+	# want a log by default?
+.br
+	logfile = "sniffdet.log";
+.br
+	#plugins_dir = "/usr/lib/sniffdet/plugins";
+.br
+	plugin = "stdout.so";
+.br
+	# UID to use after dropping root privileges
+.br
+	UID = 280;
+.br
+	# GID to use after dropping root privileges
+.br
+	GID = 280;
+.br
+	iface = "eth0";
+.br
+	fake_hwaddr = {0xff, 0x00, 0x00, 0x00, 0x00, 0x00};
+.br
+	fake_ipaddr = "192.168.1.100";
+.br
+}
+.br
+
+.br
+# icmp test variables
+.br
+icmptest {
+.br
+	# interface per test not supported yet
+.br
+	#iface = "eth0";
+.br
+	timeout = 20; # secs
+.br
+	tries = 10;
+.br
+	interval = 1000 # msecs
+.br
+	fake_hwaddr = {0xff, 0x00, 0x00, 0x00, 0x00, 0x00};
+.br
+}
+.br
+
+.br
+# arp test variables
+.br
+arptest {
+.br
+	# interface per test not supported yet
+.br
+	#iface = "eth0";
+.br
+	timeout = 20; # secs
+.br
+	tries = 10;
+.br
+	interval = 1000 # msecs
+.br
+	fake_hwaddr = {0xff, 0x00, 0x00, 0x00, 0x00, 0x00};
+.br
+}
+.br
+
+.br
+# dns test variables
+.br
+dnstest {
+.br
+	# interface per test not supported yet
+.br
+	#iface = "eth0";
+.br
+	timeout = 20; # secs
+.br
+	tries = 10;
+.br
+	interval = 1000 # msecs
+.br
+	fake_ipaddr = "10.0.0.10"
+.br
+	fake_hwaddr = {0x46, 0x0f, 0xA4, 0x33, 0x11, 0xD1};
+.br
+	sport = 22;
+.br
+	dport = 22;
+.br
+	# payload support not implemented in parser yet...
+.br
+	#payload = "login: foobar";
+.br
+}
+.br
+
+.br
+# latency test variables
+.br
+latencytest {
+.br
+	# interface per test not supported yet
+.br
+	#iface = "eth0";
+.br
+	timeout = 300; # secs
+.br
+	interval = 1500; # msecs
+.br
+	# tcpflags supported: SYN, FIN, RST, ACK, PUSH and URG
+.br
+	tcpflags = SYN;
+.br
+	# payload support not implemented in parser yet...
+.br
+	#payload = "";
+.br
+}
+.br
+# plugins specific options
+.br
+plugins {
+.br
+	xmlplugin_filename = "xmloutput.xml"
+.br
+}
+.br
+# EOF
+.PP
+.br
+.SH COPYRIGHT
+Copyright (c) 2002-2003
+   Ademar de Souza Reis Jr. <myself@ademar.org>
+   Milton Soares Filho <eu_mil@yahoo.com>
+.SH BUGS
+- payload parser not implemented yet
+.br
+- multi-line support not implemented
+.SH SEE ALSO
+.BR sniffdet (1)
+.BR libsniffdet (3)
+.PP
+.BR http://sniffdet.sourceforge.net

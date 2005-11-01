@@ -1,0 +1,16 @@
+# snifdet targets file example
+#
+# http://sniffdet.sourceforge.net
+# see sniffdet (3) manpage
+
+# this is a comment
+# comments are allowed *only* at the beginning of a line
+#
+# You can put hostnames or IPv4 addresses
+# TODO: add network support (like 192.168.1.0)
+# TODO: add IP range support (like 192.168.1.0-10)
+# TODO: add support for comments at the end of a line
+
+# examples:
+192.168.1.1
+foo.localdomain

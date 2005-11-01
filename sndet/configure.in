@@ -1,0 +1,160 @@
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(sniffdet, 0.9, sniffdet-devel@lists.sourceforge.net)
+AC_PREREQ(2.52)
+AC_CONFIG_SRCDIR([src/config.h.in])
+AC_CONFIG_HEADER([src/config.h])
+
+AC_DEFINE([_GNU_SOURCE], 1,
+          [Define _GNU_SOURCE so that we get all necessary prototypes])
+
+AC_CANONICAL_HOST
+AC_ARG_PROGRAM
+
+dnl Checks make and install
+AC_PROG_MAKE_SET
+AC_PROG_INSTALL
+AC_LN_S
+
+dnl Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS([limits.h netdb.h netinet/in.h stdlib.h string.h sys/time.h unistd.h dlfcn.h syslog.h sys/param.h])
+AC_CHECK_HEADERS([pcap.h])
+AC_CHECK_HEADER(pthread.h,,AC_MSG_ERROR([*** POSIX thread support not
+installed - please install first ***]))
+
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_C_INLINE
+AC_HEADER_TIME
+AC_TYPE_SIGNAL
+AC_STRUCT_TM
+
+AC_FUNC_MALLOC
+AC_FUNC_STRFTIME
+AC_FUNC_VPRINTF
+AC_CHECK_FUNCS([alarm gettimeofday memset strndup inet_ntoa])
+AC_CHECK_FUNCS([strstr select strerror])
+
+test "$prefix" = "NONE" && prefix=/usr/local
+test "$exec_prefix" = "NONE" && exec_prefix='${prefix}'
+
+dnl libnet-config
+AC_CHECK_PROG(LIBNETCONFIG, libnet-config, yes, no)
+if test $LIBNETCONFIG = "yes"; then
+    LIBNET_DEFINES=`libnet-config --defines`
+    AC_SUBST(LIBNET_DEFINES)
+else
+    AC_MSG_ERROR("*** libnet-config not found! You need it to build $PACKAGE_NAME! ***")
+fi
+
+dnl Checks for libraries.
+AC_CHECK_LIB(net, libnet_open_link_interface,, \
+    AC_MSG_ERROR("*** libnet not found! You need it to build $PACKAGE_NAME! ***"))
+AC_CHECK_LIB(pcap, pcap_open_live,, \
+    AC_MSG_ERROR("*** libpcap not found! You need it to build $PACKAGE_NAME! ***"))
+
+
+dnl borrowed from xmms configure.in:
+PTHREAD_LIBS=error
+AC_MSG_CHECKING(for old style FreeBSD -pthread flag)
+AC_EGREP_CPP(yes,
+    [#if defined(__FreeBSD_cc_version) && __FreeBSD_cc_version <= 500001
+      yes
+    #endif
+    ], AC_MSG_RESULT(yes)
+    CFLAGS="$CFLAGS -D_THREAD_SAFE" PTHREAD_LIBS="-pthread",
+    AC_MSG_RESULT(no))
+if test "x$PTHREAD_LIBS" = xerror; then
+    AC_CHECK_LIB(pthread, pthread_create,
+        PTHREAD_LIBS="-lpthread")
+fi
+if test "x$PTHREAD_LIBS" = xerror; then
+        AC_CHECK_LIB(pthreads, pthread_create,
+        PTHREAD_LIBS="-lpthreads")
+fi
+if test "x$PTHREAD_LIBS" = xerror; then
+        AC_CHECK_LIB(c_r, pthread_create,
+        PTHREAD_LIBS="-lc_r")
+fi
+if test "x$PTHREAD_LIBS" = xerror; then
+    AC_CHECK_FUNC(pthread_create, PTHREAD_LIBS="")
+fi
+if test "x$PTHREAD_LIBS" = xerror; then
+    AC_MSG_ERROR("*** Unable to locate working posix thread library. You need it to build $PACKAGE_NAME! ***")
+fi
+AC_SUBST(PTHREAD_LIBS)
+
+dnl FIXME:
+dnl freeBSD doesn't have libdl...
+dnl AC_CHECK_LIB([dl], [dlopen],, \
+dnl    AC_MSG_ERROR(\
+dnl "*** libdl not found! You need it to build $PACKAGE_NAME! (plugins support) ***"))
+dnl but linux does...
+AC_CHECK_LIB([dl], [dlopen],,)
+
+dnl# Supply default CFLAGS, if not specified by `CFLAGS=flags ./configure'
+
+dnl interesting and userful warnings for debug
+EXTRA_WARN_OPTIONS="-Wshadow -Wbad-function-cast -Wcast-qual \
+-Wcast-align -Wmissing-prototypes -Wmissing-declarations \
+-Wnested-externs -Winline -Waggregate-return"
+
+dnl are we debugging the program?
+AC_ARG_ENABLE(debug, [  --enable-debug         build everything in debug mode (not default)])
+
+if test "$enable_debug" = "yes" ; then
+    DEBUG_OPTIONS="-ggdb3 -DDEBUG $EXTRA_WARN_OPTIONS"
+    AC_CHECK_LIB(efence, main)
+fi
+
+DEFAULT_CFLAGS="-Wall $DEBUG_OPTIONS"
+
+dnl FIXME:
+dnl I'm not sure what's the best way to do this
+if ! test $ac_env_CFLAGS_set; then
+    CFLAGS="$CFLAGS $DEFAULT_CFLAGS"
+fi
+  
+dnl test CC
+AC_PROG_CC
+AC_LANG_C
+
+dnl FIXME:
+dnl create --uid and --gid
+sndet_uid=280
+sndet_gid=280
+AC_DEFINE_UNQUOTED(SNDET_DEFAULT_UID, ${sndet_uid}, UID to be used when dropping root privs)
+AC_DEFINE_UNQUOTED(SNDET_DEFAULT_GID, ${sndet_gid}, GID to be used when dropping root privs)
+
+dnl FIXME:
+dnl create --plugins-dir or something like that
+sndet_pluginsdir="${prefix}/lib/sniffdet/plugins"
+AC_DEFINE_UNQUOTED(SNDET_PLUGINSDIR, "${sndet_pluginsdir}", Plugins directory)
+
+PACKAGE_URL="http://sniffdet.sourceforge.net"
+AC_SUBST(PACKAGE_URL)
+
+AC_CONFIG_FILES([Makefile
+                 src/Makefile
+                 src/plugins/Makefile
+                 src/lib/Makefile])
+AC_OUTPUT
+
+echo "
+$PACKAGE_NAME $PACKAGE_VERSION configuration:
+-----------------------------
+  Source code location:       ${srcdir}
+  Host System Type:           ${host}
+  Compiler:                   ${CC}
+  CFLAGS:                     ${CFLAGS}
+  Libraries:                  ${LIBS}
+  Pthread flag:               ${PTHREAD_LIBS}
+  Install path:               ${prefix}
+
+  UID to be used by sniffdet: ${sndet_uid}
+  GID to be used by sniffdet: ${sndet_gid}
+  Plugins directory:          ${sndet_pluginsdir}
+
+  Now type 'make' to build $PACKAGE_NAME $PACKAGE_VERSION.
+"

@@ -1,0 +1,307 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.4	//
+ARP_TEST	libsniffdet.h	/^	ARP_TEST,$/;"	e	enum:test_code
+CAPTURE_READ_TMOUT	libsniffdet.h	97;"	d
+CC	Makefile	/^CC = gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -g -O2 -Wall  $(LIBNET_OPTIONS)$/;"	m
+CTAGS	Makefile	/^CTAGS = ctags -R$/;"	m
+CUSTOM_ACK	libsniffdet.h	115;"	d
+CUSTOM_DEST_IP	libsniffdet.h	110;"	d
+CUSTOM_DMAC	libsniffdet.h	105;"	d
+CUSTOM_DPORT	libsniffdet.h	117;"	d
+CUSTOM_FLAGS	libsniffdet.h	113;"	d
+CUSTOM_ID	libsniffdet.h	107;"	d
+CUSTOM_PAYLOAD	libsniffdet.h	119;"	d
+CUSTOM_PROTOCOL	libsniffdet.h	112;"	d
+CUSTOM_SEQ	libsniffdet.h	114;"	d
+CUSTOM_SMAC	libsniffdet.h	106;"	d
+CUSTOM_SPORT	libsniffdet.h	118;"	d
+CUSTOM_SRC_IP	libsniffdet.h	111;"	d
+CUSTOM_TIMESTAMP	libsniffdet.h	108;"	d
+CUSTOM_TTL	libsniffdet.h	109;"	d
+CUSTOM_WINSIZE	libsniffdet.h	116;"	d
+DABORT	libsniffdet.h	32;"	d
+DABORT	libsniffdet.h	41;"	d
+DEBUG	ping.c	24;"	d	file:
+DEBUG_CODE	libsniffdet.h	31;"	d
+DEBUG_CODE	libsniffdet.h	40;"	d
+DEFAULT_BURST_SIZE	ping.c	37;"	d	file:
+DEFAULT_DPORT	dnstest.c	32;"	d	file:
+DEFAULT_NUMBER_OF_TRIES	arptest.c	25;"	d	file:
+DEFAULT_NUMBER_OF_TRIES	dnstest.c	28;"	d	file:
+DEFAULT_NUMBER_OF_TRIES	icmptest.c	31;"	d	file:
+DEFAULT_PROBE_INTERVAL_TIME	latencytests.c	26;"	d	file:
+DEFAULT_RECEIVER_HOLD_TO_CANCEL	arptest.c	28;"	d	file:
+DEFAULT_RECEIVER_HOLD_TO_CANCEL	dnstest.c	30;"	d	file:
+DEFAULT_RECEIVER_HOLD_TO_CANCEL	icmptest.c	34;"	d	file:
+DEFAULT_SEND_INTERVAL	arptest.c	27;"	d	file:
+DEFAULT_SEND_INTERVAL	dnstest.c	29;"	d	file:
+DEFAULT_SEND_INTERVAL	icmptest.c	33;"	d	file:
+DEFAULT_SEND_INTERVAL	ping.c	36;"	d	file:
+DEFAULT_SPORT	dnstest.c	31;"	d	file:
+DEFAULT_TIMEOUT	arptest.c	26;"	d	file:
+DEFAULT_TIMEOUT	dnstest.c	27;"	d	file:
+DEFAULT_TIMEOUT	icmptest.c	32;"	d	file:
+DEFAULT_TIMEOUT	latencytests.c	27;"	d	file:
+DEFAULT_TIMEOUT	ping.c	35;"	d	file:
+DESTDIR	Makefile	/^DESTDIR=$/;"	m
+DETECTION	libsniffdet.h	75;"	d
+DNS_TEST	libsniffdet.h	/^	DNS_TEST,$/;"	e	enum:test_code
+DNS_TEST_PKTS_PER_BURST	libsniffdet.h	299;"	d
+ENDING	libsniffdet.h	76;"	d
+ERROR	libsniffdet.h	73;"	d
+ICMP_TEST	libsniffdet.h	/^	ICMP_TEST = 0,$/;"	e	enum:test_code
+INSTALLCMD	Makefile	/^INSTALLCMD = \/usr\/bin\/install -c$/;"	m
+LATENCY_TEST	libsniffdet.h	/^	LATENCY_TEST,$/;"	e	enum:test_code
+LIBNET_OPTIONS	Makefile	/^LIBNET_OPTIONS = -D_BSD_SOURCE -D__BSD_SOURCE -D__FAVOR_BSD -DHAVE_NET_ETHERNET_H -DLIBNET_LIL_ENDIAN$/;"	m
+LIBS	Makefile	/^LIBS = -ldl -lpcap -lnet $/;"	m
+LIBSNIFFDET_ERR_BUF_LEN	libsniffdet.h	91;"	d
+LIBSNIFFDET_MSG_BUF_LEN	libsniffdet.h	90;"	d
+MAX_BURST_SIZE	ping.c	38;"	d	file:
+MAX_CAPTURE_BYTES	libsniffdet.h	94;"	d
+MAX_DEVICE_NAME_LEN	libsniffdet.h	93;"	d
+MAX_HOSTNAME_LEN	libsniffdet.h	96;"	d
+MAX_TESTS	libsniffdet.h	/^	MAX_TESTS$/;"	e	enum:test_code
+NOTIFICATION	libsniffdet.h	72;"	d
+OBJECTS	Makefile	/^OBJECTS = icmptest.o latencytests.o arptest.o dnstest.o init.o helpers.o ping.o$/;"	m
+PCAP_FILTER_BUFF_SIZE	libsniffdet.h	92;"	d
+PKTLEN_HEADER	ping.c	40;"	d	file:
+PKTLEN_PAYLOAD	ping.c	41;"	d	file:
+PKTLEN_SIZE	ping.c	42;"	d	file:
+RUNNING	libsniffdet.h	71;"	d
+SHELL	Makefile	/^SHELL = \/bin\/sh$/;"	m
+SNDET_FLAG_FIN	libsniffdet.h	124;"	d
+SNDET_FLAG_RST	libsniffdet.h	125;"	d
+SNDET_FLAG_SYN	libsniffdet.h	123;"	d
+SNDET_FREE	libsniffdet.h	50;"	d
+SNDET_PROTOCOL_ICMP	libsniffdet.h	130;"	d
+SNDET_PROTOCOL_TCP	libsniffdet.h	128;"	d
+SNDET_PROTOCOL_UDP	libsniffdet.h	129;"	d
+WARNING	libsniffdet.h	74;"	d
+__LIBSNIFFDET_H__	libsniffdet.h	21;"	d
+__USE_GNU	init.c	24;"	d	file:
+__USE_GNU	init.c	26;"	d	file:
+ack	libsniffdet.h	/^	uint ack;$/;"	m	struct:custom_info
+arp	libsniffdet.h	/^		struct arptest_result arp;$/;"	m	union:test_info::<anonymous>
+arp_thread_data	arptest.c	/^struct arp_thread_data {$/;"	s	file:
+arptest_receiver	arptest.c	/^static void *arptest_receiver(void *thread_data)$/;"	f	file:
+arptest_result	libsniffdet.h	/^struct arptest_result {$/;"	s
+arptest_sender	arptest.c	/^static void *arptest_sender(void *thread_data)$/;"	f	file:
+avg_time	libsniffdet.h	/^	long avg_time;$/;"	m	struct:sndet_ping_result
+b_recvd	libsniffdet.h	/^	unsigned int b_recvd;$/;"	m	struct:test_info
+b_sent	libsniffdet.h	/^	unsigned int b_sent;$/;"	m	struct:test_info
+bindir	Makefile	/^bindir=${exec_prefix}\/bin$/;"	m
+bogus_callback	arptest.c	/^static inline int bogus_callback(struct test_status *status, int msg_type,$/;"	f	file:
+bogus_callback	dnstest.c	/^static inline int bogus_callback(struct test_status *status, int msg_type,$/;"	f	file:
+bogus_callback	icmptest.c	/^static inline int bogus_callback(struct test_status *status, int msg_type,$/;"	f	file:
+bogus_callback	latencytests.c	/^static inline int bogus_callback(struct test_status *status, int msg_type,$/;"	f	file:
+bogus_pkt	latencytests.c	/^	struct custom_info *bogus_pkt;$/;"	m	struct:thread_data	file:
+build_default_pkt	latencytests.c	/^static struct custom_info *build_default_pkt(struct sndet_device *device)$/;"	f	file:
+burst_size	ping.c	/^	unsigned int burst_size;$/;"	m	struct:ping_th_data	file:
+bytes_recvd	arptest.c	/^static unsigned int bytes_recvd;$/;"	v	file:
+bytes_recvd	dnstest.c	/^static unsigned int bytes_recvd;$/;"	v	file:
+bytes_recvd	icmptest.c	/^static unsigned int bytes_recvd;$/;"	v	file:
+bytes_recvd	latencytests.c	/^static unsigned int bytes_recvd;$/;"	v	file:
+bytes_recvd	libsniffdet.h	/^	unsigned int bytes_recvd;$/;"	m	struct:test_status
+bytes_sent	arptest.c	/^static unsigned int bytes_sent;$/;"	v	file:
+bytes_sent	dnstest.c	/^static unsigned int bytes_sent;$/;"	v	file:
+bytes_sent	icmptest.c	/^static unsigned int bytes_sent;$/;"	v	file:
+bytes_sent	latencytests.c	/^static unsigned int bytes_sent;$/;"	v	file:
+bytes_sent	libsniffdet.h	/^	unsigned int bytes_sent;$/;"	m	struct:test_status
+callback	arptest.c	/^	user_callback callback;$/;"	m	struct:arp_thread_data	file:
+callback	dnstest.c	/^	user_callback callback;$/;"	m	struct:dns_thread_data	file:
+callback	icmptest.c	/^	user_callback callback;$/;"	m	struct:icmp_thread_data	file:
+callback	latencytests.c	/^	user_callback callback;$/;"	m	struct:thread_data	file:
+callback_mutex	arptest.c	/^pthread_mutex_t callback_mutex;$/;"	v
+callback_mutex	dnstest.c	/^pthread_mutex_t callback_mutex;$/;"	v
+callback_mutex	icmptest.c	/^static pthread_mutex_t callback_mutex;$/;"	v	file:
+callback_mutex	latencytests.c	/^static pthread_mutex_t callback_mutex;$/;"	v	file:
+code	libsniffdet.h	/^	enum test_code code;$/;"	m	struct:test_info
+custom_info	libsniffdet.h	/^struct custom_info {$/;"	s
+datalink	libsniffdet.h	/^	int datalink; \/\/ datalink type$/;"	m	struct:sndet_device
+default_dest_fake_hw_addr	arptest.c	/^static u_char default_dest_fake_hw_addr[6] = {0xff, 0x00, 0x00, 0x00, 0x00, 0x00};$/;"	v	file:
+default_fake_hw_addr	icmptest.c	/^static u_char default_fake_hw_addr[6] = {0xff, 0x66, 0x66, 0x66, 0x66, 0x66};$/;"	v	file:
+default_fake_hwaddr	dnstest.c	/^static u_char default_fake_hwaddr[6] = {0x44, 0x44, 0x44, 0x44, 0x11, 0xff};$/;"	v	file:
+default_fake_ipaddr	dnstest.c	/^static char *default_fake_ipaddr = "10.0.0.21";$/;"	v	file:
+default_source_fake_hw_addr	arptest.c	/^static u_char default_source_fake_hw_addr[6] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x01};$/;"	v	file:
+dest_ip	libsniffdet.h	/^	ulong dest_ip;$/;"	m	struct:custom_info
+device	arptest.c	/^	struct sndet_device *device;$/;"	m	struct:arp_thread_data	file:
+device	dnstest.c	/^	struct sndet_device *device;$/;"	m	struct:dns_thread_data	file:
+device	icmptest.c	/^	struct sndet_device *device;$/;"	m	struct:icmp_thread_data	file:
+device	latencytests.c	/^	struct sndet_device *device;$/;"	m	struct:thread_data	file:
+device	libsniffdet.h	/^	char *device;$/;"	m	struct:sndet_device
+device	ping.c	/^	struct sndet_device *device;$/;"	m	struct:ping_th_data	file:
+dmac	libsniffdet.h	/^	u_char dmac[6];$/;"	m	struct:custom_info
+dns	libsniffdet.h	/^		struct dnstest_result dns;$/;"	m	union:test_info::<anonymous>
+dns_query_search4host	dnstest.c	/^static int dns_query_search4host(int pkt_offset, u_char *pkt,$/;"	f	file:
+dns_thread_data	dnstest.c	/^struct dns_thread_data {$/;"	s	file:
+dnstest_receiver	dnstest.c	/^static void *dnstest_receiver(void *thread_data)$/;"	f	file:
+dnstest_result	libsniffdet.h	/^struct dnstest_result {$/;"	s
+dnstest_sender	dnstest.c	/^static void *dnstest_sender(void *thread_data)$/;"	f	file:
+dport	dnstest.c	/^	ushort dport;$/;"	m	struct:dns_thread_data	file:
+dport	libsniffdet.h	/^	short dport;$/;"	m	struct:custom_info
+errmsg	ping.c	/^	char *errmsg;$/;"	m	struct:ping_th_data	file:
+exec_prefix	Makefile	/^exec_prefix=${prefix}$/;"	m
+exit_status	arptest.c	/^static volatile unsigned int exit_status;$/;"	v	file:
+exit_status	dnstest.c	/^static volatile unsigned int exit_status;$/;"	v	file:
+exit_status	icmptest.c	/^static volatile unsigned int exit_status;$/;"	v	file:
+exit_status	latencytests.c	/^static volatile unsigned int exit_status = 0;$/;"	v	file:
+fake_hwaddr	dnstest.c	/^	char *fake_hwaddr;$/;"	m	struct:dns_thread_data	file:
+fake_ipaddr	dnstest.c	/^	char *fake_ipaddr;$/;"	m	struct:dns_thread_data	file:
+fakehwaddr	arptest.c	/^	char *fakehwaddr;$/;"	m	struct:arp_thread_data	file:
+fakehwaddr	icmptest.c	/^	char *fakehwaddr;$/;"	m	struct:icmp_thread_data	file:
+finished	latencytests.c	/^static volatile int finished = 0;$/;"	v	file:
+flags	libsniffdet.h	/^	int flags; \/\/ header flags$/;"	m	struct:custom_info
+got_error	arptest.c	/^static volatile unsigned int got_error;$/;"	v	file:
+got_error	dnstest.c	/^static volatile unsigned int got_error;$/;"	v	file:
+got_error	icmptest.c	/^static volatile unsigned int got_error;$/;"	v	file:
+got_error	latencytests.c	/^static volatile int got_error = 0;$/;"	v	file:
+got_suspect	arptest.c	/^static volatile unsigned int got_suspect;$/;"	v	file:
+got_suspect	dnstest.c	/^static volatile unsigned int got_suspect;$/;"	v	file:
+got_suspect	icmptest.c	/^static volatile unsigned int got_suspect;$/;"	v	file:
+handle_in_thread_error	arptest.c	/^static void handle_in_thread_error(user_callback callback, int my_errno,$/;"	f	file:
+handle_in_thread_error	dnstest.c	/^static void handle_in_thread_error(user_callback callback, int my_errno,$/;"	f	file:
+handle_in_thread_error	icmptest.c	/^static void handle_in_thread_error(user_callback callback, int my_errno,$/;"	f	file:
+host	arptest.c	/^	char *host;$/;"	m	struct:arp_thread_data	file:
+host	dnstest.c	/^	char *host;$/;"	m	struct:dns_thread_data	file:
+host	icmptest.c	/^	char *host;$/;"	m	struct:icmp_thread_data	file:
+host	latencytests.c	/^	char *host;$/;"	m	struct:thread_data	file:
+icmp	libsniffdet.h	/^		struct icmptest_result icmp;$/;"	m	union:test_info::<anonymous>
+icmp_thread_data	icmptest.c	/^struct icmp_thread_data {$/;"	s	file:
+icmptest_receiver	icmptest.c	/^static void *icmptest_receiver(void *thread_data)$/;"	f	file:
+icmptest_result	libsniffdet.h	/^struct icmptest_result {$/;"	s
+icmptest_sender	icmptest.c	/^static void *icmptest_sender(void *thread_data)$/;"	f	file:
+id	libsniffdet.h	/^	uint id;$/;"	m	struct:custom_info
+iface_ip	arptest.c	/^	u_long iface_ip;$/;"	m	struct:arp_thread_data	file:
+iface_ip	dnstest.c	/^	u_long iface_ip;$/;"	m	struct:dns_thread_data	file:
+iface_mac	arptest.c	/^	u_char *iface_mac;$/;"	m	struct:arp_thread_data	file:
+iface_mac	dnstest.c	/^	u_char *iface_mac;$/;"	m	struct:dns_thread_data	file:
+includedir	Makefile	/^includedir=${prefix}\/include$/;"	m
+init_ping_filter	ping.c	/^static int init_ping_filter(struct sndet_device *device,$/;"	f	file:
+init_ping_packet	ping.c	/^static unsigned char * init_ping_packet(unsigned long ipsaddr,$/;"	f	file:
+inthread_error	ping.c	/^static unsigned short inthread_error;$/;"	v	file:
+latency	libsniffdet.h	/^		struct latencytest_result latency;$/;"	m	union:test_info::<anonymous>
+latencytest_result	libsniffdet.h	/^struct latencytest_result {$/;"	s
+libdir	Makefile	/^libdir=${exec_prefix}\/lib$/;"	m
+ln_int	libsniffdet.h	/^	struct libnet_link_int *ln_int;$/;"	m	struct:sndet_device
+mandir	Makefile	/^mandir=${prefix}\/man$/;"	m
+max_time	latencytests.c	/^static unsigned int max_time;$/;"	v	file:
+max_time	libsniffdet.h	/^	long max_time;$/;"	m	struct:sndet_ping_result
+max_time	libsniffdet.h	/^	u_int max_time;$/;"	m	struct:latencytest_result
+max_time	ping.c	/^static unsigned long max_time;$/;"	v	file:
+mean_time	latencytests.c	/^static unsigned int mean_time;$/;"	v	file:
+mean_time	libsniffdet.h	/^	u_int mean_time;$/;"	m	struct:latencytest_result
+min_time	latencytests.c	/^static unsigned int min_time;$/;"	v	file:
+min_time	libsniffdet.h	/^	long min_time;$/;"	m	struct:sndet_ping_result
+min_time	libsniffdet.h	/^	u_int min_time;$/;"	m	struct:latencytest_result
+min_time	ping.c	/^static unsigned long min_time;$/;"	v	file:
+my_icmp_id	icmptest.c	/^    unsigned short int my_icmp_id;$/;"	m	struct:icmp_thread_data	file:
+my_icmp_id	ping.c	/^	u_short my_icmp_id;$/;"	m	struct:ping_th_data	file:
+netmask	libsniffdet.h	/^	bpf_u_int32 netmask;$/;"	m	struct:sndet_device
+network	libsniffdet.h	/^	bpf_u_int32 network;$/;"	m	struct:sndet_device
+normal_time	libsniffdet.h	/^	u_int normal_time;$/;"	m	struct:latencytest_result
+payload	dnstest.c	/^	char *payload;$/;"	m	struct:dns_thread_data	file:
+payload	libsniffdet.h	/^	u_char *payload;$/;"	m	struct:custom_info
+payload_len	dnstest.c	/^	ushort payload_len;$/;"	m	struct:dns_thread_data	file:
+payload_len	libsniffdet.h	/^	short payload_len; \/\/ mandatory if payload is used$/;"	m	struct:custom_info
+percent	libsniffdet.h	/^	unsigned short int percent; \/\/ 0% to 100%$/;"	m	struct:test_status
+ping_sub_tv	ping.c	/^static long ping_sub_tv(struct timeval *first, struct timeval *last)$/;"	f	file:
+ping_th_data	ping.c	/^struct ping_th_data {$/;"	s	file:
+ping_thread_catcher	ping.c	/^static void *ping_thread_catcher(void *arg)$/;"	f	file:
+ping_thread_sender	ping.c	/^static void *ping_thread_sender(void *arg)$/;"	f	file:
+pkt	ping.c	/^	u_char *pkt;$/;"	m	struct:ping_th_data	file:
+pkt_offset	libsniffdet.h	/^	int pkt_offset;$/;"	m	struct:sndet_device
+pktdesc	libsniffdet.h	/^	pcap_t *pktdesc;$/;"	m	struct:sndet_device
+pkts_rcvd	libsniffdet.h	/^	long pkts_rcvd;$/;"	m	struct:sndet_ping_result
+pkts_rcvd	ping.c	/^static unsigned long pkts_rcvd;$/;"	v	file:
+pkts_recvd	arptest.c	/^static unsigned int pkts_recvd;$/;"	v	file:
+pkts_recvd	dnstest.c	/^static unsigned int pkts_recvd;$/;"	v	file:
+pkts_recvd	icmptest.c	/^static unsigned int pkts_recvd;$/;"	v	file:
+pkts_recvd	latencytests.c	/^static unsigned int pkts_recvd;$/;"	v	file:
+pkts_recvd	libsniffdet.h	/^	unsigned int pkts_recvd;$/;"	m	struct:test_info
+pkts_sent	arptest.c	/^static unsigned int pkts_sent;$/;"	v	file:
+pkts_sent	dnstest.c	/^static unsigned int pkts_sent;$/;"	v	file:
+pkts_sent	icmptest.c	/^static unsigned int pkts_sent;$/;"	v	file:
+pkts_sent	latencytests.c	/^static unsigned int pkts_sent;$/;"	v	file:
+pkts_sent	libsniffdet.h	/^	long pkts_sent;$/;"	m	struct:sndet_ping_result
+pkts_sent	libsniffdet.h	/^	unsigned int pkts_sent;$/;"	m	struct:test_info
+pkts_sent	ping.c	/^static unsigned long pkts_sent;$/;"	v	file:
+positive	libsniffdet.h	/^	int positive;$/;"	m	struct:arptest_result
+positive	libsniffdet.h	/^	int positive;$/;"	m	struct:dnstest_result
+positive	libsniffdet.h	/^	int positive;$/;"	m	struct:icmptest_result
+prefix	Makefile	/^prefix=\/usr\/local$/;"	m
+probe_interval	latencytests.c	/^	unsigned int probe_interval;$/;"	m	struct:thread_data	file:
+protocol	libsniffdet.h	/^	short protocol; \/\/ udp\/tcp\/icmp$/;"	m	struct:custom_info
+rawsock	libsniffdet.h	/^	int rawsock;$/;"	m	struct:sndet_device
+sbindir	Makefile	/^sbindir=${exec_prefix}\/sbin$/;"	m
+send_interval	arptest.c	/^	unsigned int send_interval; \/\/ time betwen sending loops$/;"	m	struct:arp_thread_data	file:
+send_interval	dnstest.c	/^	unsigned int send_interval; \/\/ time betwen sending loops$/;"	m	struct:dns_thread_data	file:
+send_interval	icmptest.c	/^	unsigned int send_interval; \/\/ time betwen sending loops$/;"	m	struct:icmp_thread_data	file:
+send_interval	ping.c	/^	long send_interval;$/;"	m	struct:ping_th_data	file:
+sender_percent	arptest.c	/^static unsigned int sender_percent; \/\/ 0 to 100%$/;"	v	file:
+sender_percent	dnstest.c	/^static unsigned int sender_percent; \/\/ 0 to 100%$/;"	v	file:
+sender_percent	icmptest.c	/^static unsigned int sender_percent; \/\/ 0 to 100%$/;"	v	file:
+seq	libsniffdet.h	/^	uint seq;$/;"	m	struct:custom_info
+set_status	arptest.c	/^static void set_status(struct test_status *st)$/;"	f	file:
+set_status	dnstest.c	/^static void set_status(struct test_status *st)$/;"	f	file:
+set_status	icmptest.c	/^static void set_status(struct test_status *st)$/;"	f	file:
+set_status	latencytests.c	/^static void set_status(struct test_status *st)$/;"	f	file:
+smac	libsniffdet.h	/^	u_char smac[6];$/;"	m	struct:custom_info
+sndet_arptest	arptest.c	/^int sndet_arptest(char *host,$/;"	f
+sndet_device	libsniffdet.h	/^struct sndet_device {$/;"	s
+sndet_dnstest	dnstest.c	/^int sndet_dnstest(char *host,$/;"	f
+sndet_finish_device	init.c	/^int sndet_finish_device(struct sndet_device *device, char *errbuf)$/;"	f
+sndet_gen_tcp_pkt	helpers.c	/^unsigned char *sndet_gen_tcp_pkt(struct custom_info *custom_pkt,$/;"	f
+sndet_get_iface_ip_addr	helpers.c	/^u_long sndet_get_iface_ip_addr(struct sndet_device *sndet_dev, char *errbuf)$/;"	f
+sndet_get_iface_mac_addr	helpers.c	/^struct ether_addr * sndet_get_iface_mac_addr(struct sndet_device *sndet_dev, char *errbuf)$/;"	f
+sndet_icmptest	icmptest.c	/^int sndet_icmptest($/;"	f
+sndet_init_device	init.c	/^struct sndet_device * sndet_init_device(char *device, int promisc, char *errbuf)$/;"	f
+sndet_latencytest_pktflood	latencytests.c	/^int sndet_latencytest_pktflood($/;"	f
+sndet_ping_host	ping.c	/^int sndet_ping_host($/;"	f
+sndet_ping_result	libsniffdet.h	/^struct sndet_ping_result {$/;"	s
+sndet_random	helpers.c	/^int sndet_random(void)$/;"	f
+sndet_resolve	helpers.c	/^u_long sndet_resolve(char *hostname)$/;"	f
+sndet_sleep	helpers.c	/^void sndet_sleep(long sec, long usec)$/;"	f
+source_ip	libsniffdet.h	/^	ulong source_ip;$/;"	m	struct:custom_info
+sport	dnstest.c	/^	ushort sport;$/;"	m	struct:dns_thread_data	file:
+sport	libsniffdet.h	/^	short sport;$/;"	m	struct:custom_info
+srcdir	Makefile	/^srcdir=.$/;"	m
+string_inversion	dnstest.c	/^static char *string_inversion(char *string)$/;"	f	file:
+target_ip	arptest.c	/^	u_long target_ip;$/;"	m	struct:arp_thread_data	file:
+target_ip	dnstest.c	/^	u_long target_ip;$/;"	m	struct:dns_thread_data	file:
+tdata	latencytests.c	/^static struct thread_data tdata;$/;"	v	file:
+test	libsniffdet.h	/^	} test;$/;"	m	struct:test_info
+test_bogus_pkt_info	latencytests.c	/^static int test_bogus_pkt_info(struct custom_info *bogus_pkt)$/;"	f	file:
+test_code	libsniffdet.h	/^enum test_code {$/;"	g
+test_info	libsniffdet.h	/^struct test_info {$/;"	s
+test_name	libsniffdet.h	/^	char *test_name;$/;"	m	struct:test_info
+test_short_desc	libsniffdet.h	/^	char *test_short_desc;$/;"	m	struct:test_info
+test_status	libsniffdet.h	/^struct test_status {$/;"	s
+thread_data	latencytests.c	/^struct thread_data {$/;"	s	file:
+thread_flooder	latencytests.c	/^static void *thread_flooder(void *td)$/;"	f	file:
+thread_pinger	latencytests.c	/^static void *thread_pinger(void *td)$/;"	f	file:
+thread_timeout	ping.c	/^static unsigned short thread_timeout;$/;"	v	file:
+time_accum	ping.c	/^static unsigned long time_accum;$/;"	v	file:
+time_fini	libsniffdet.h	/^	time_t time_fini;$/;"	m	struct:test_info
+time_start	libsniffdet.h	/^	time_t time_start;$/;"	m	struct:test_info
+timed_out	arptest.c	/^static volatile unsigned int timed_out;$/;"	v	file:
+timed_out	dnstest.c	/^static volatile unsigned int timed_out;$/;"	v	file:
+timed_out	icmptest.c	/^static volatile unsigned int timed_out;$/;"	v	file:
+timeout_handler	arptest.c	/^static void timeout_handler(int signum)$/;"	f	file:
+timeout_handler	dnstest.c	/^static void timeout_handler(int signum)$/;"	f	file:
+timeout_handler	icmptest.c	/^static void timeout_handler(int signum)$/;"	f	file:
+timeout_limit	ping.c	/^	long timeout_limit;$/;"	m	struct:ping_th_data	file:
+timestamp	libsniffdet.h	/^	uint timestamp;$/;"	m	struct:custom_info
+tmout	latencytests.c	/^	unsigned int tmout;$/;"	m	struct:thread_data	file:
+tries	arptest.c	/^	int tries;$/;"	m	struct:arp_thread_data	file:
+tries	dnstest.c	/^	int tries;$/;"	m	struct:dns_thread_data	file:
+tries	icmptest.c	/^	int tries;$/;"	m	struct:icmp_thread_data	file:
+ttl	libsniffdet.h	/^	u_char ttl;$/;"	m	struct:custom_info
+user_callback	libsniffdet.h	/^typedef int (*user_callback)(struct test_status *status, $/;"	t
+valid	libsniffdet.h	/^	int valid;$/;"	m	struct:test_info
+values_set	libsniffdet.h	/^	int values_set; \/\/ defined values ORed$/;"	m	struct:custom_info
+winsize	libsniffdet.h	/^	ushort winsize;$/;"	m	struct:custom_info

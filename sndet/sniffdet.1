@@ -1,0 +1,144 @@
+.\" libsniffdet - A library for network sniffers detection
+.\" Copyright (c) 2002
+.\"   Ademar de Souza Reis Jr. <myself@ademar.org>
+.\"   Milton Soares Filho <eu_mil@yahoo.com>
+.\"
+.\" This is free documentation; you can redistribute it and/or
+.\" modify it under the terms of the GNU General Public License as
+.\" published by the Free Software Foundation; either version 2 of
+.\" the License, or (at your option) any later version.
+.\"
+.\" The GNU General Public License's references to "object code"
+.\" and "executables" are to be interpreted as the output of any
+.\" document formatting or typesetting system, including
+.\" intermediate and printed output.
+.\"
+.\" This manual is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public
+.\" License along with this manual; if not, write to the Free
+.\" Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111,
+.\" USA.
+.\"
+.TH SNIFFDET 1 2002-11-25 "sniffdet manpage" "Remote Sniffer Detection Tool"
+.SH NAME
+sniffdet 0.7 - Remote sniffer detection tool
+.SH SYNOPSIS
+.PP
+sniffdet [options] TARGET
+.PP
+.SH DESCRIPTION
+.PP
+Sniffdet is an OpenSource implementation of a set of tests for remote
+sniffers detection in TCP/IP network environments. It is useful for
+remote sniffer detection or to just discover machines which are running
+in promiscuous mode.
+.PP
+Sniffdet is very flexible and allows you to configure many of its options by
+using the config file /etc/sniffdet.conf. It also has plugins support for
+the result of its tests (currently, XML and stdout output are created).
+.PP
+You can see the full documentation at http://sniffdet.sourceforge.net
+.PP
+.SH OPTIONS
+TARGET is a canonical hostname or a dotted decimal IPv4 address
+.TP
+\fB-i  --iface=DEVICE\fR
+Use network DEVICE interface for tests.
+.br
+Default is eth0 in linux systems.
+.TP
+\fB-l  --log=FILE\fR
+Use FILE for tests log.
+.br
+Default is none
+.TP
+\fB-c  --configfile=FILE\fR
+Use FILE as configuration file for application.
+.br
+Default is /etc/sniffdet.conf
+.TP
+\fB-f  --hostsfile=FILE\fR
+Use FILE as input for tests target. The file must be in ascii with one
+hostname, IP or net address per line. Comments start with '#'
+.TP
+\fB-u  --uid=UID\fR
+Run program with UID (after dropping root).
+.br
+Default is UID 280 (from config file)
+.TP
+\fB-g  --gid=GID\fR
+Run program with GID (after dropping root)
+.br
+Default is GID 280 (from config file)
+.TP
+\fB-t  --test=[testname]\fR
+Perform a specific test(s)
+.br
+Where [testname] is a list composed by at least one of:
+    \fBdns\fR         DNS test
+    \fBarp\fR         ARP response test
+    \fBicmp\fR        ICMP ping response test
+    \fBlatency\fR     ICMP ping latency test
+.br
+.br
+See the full documentation included with the 
+.br
+library for information about all tests
+.TP
+\fB    --pluginsdir=[directory]\fR
+Select a directory where sniffdet will load plugins from
+.TP
+\fB-p  --plugin=[plugin_name]\fR
+Select a plugin to load (xml, stdout, etc).
+.TP
+\fB-f  --targetsfile=[file]\fR
+Scan all targets present in a file with a test.
+.TP
+\fB-v  --verbose\fR
+Run in verbose mode (extra output messages).
+.br
+Default is no.
+.TP
+\fB-s  --silent\fR
+Run in silent mode (no output messages).
+.br
+Default is no.
+.TP
+\fB-h, --help\fR
+Show a help screen and exit
+.TP
+\fB--version\fR
+Show version information and exit
+.PP
+.SH EXAMPLES
+.PP
+# sniffdet -i eth1 -t dns,arp,icmp foo.localdomain
+.PP
+Test the host foo.localdomain with dns, arp and icmp tests using the
+interface eth1
+.PP
+.PP
+# sniffdet -i eth0 -t latency foo.localdomain --plugin=xml
+.PP
+Test the machine foo.localdomain using the latency test through the
+interface eth0. Output results using the xml plugin.
+.SH BUGS
+This program can be considered in beta stage since it was not widely tested.
+Your support is appreciated. :-)
+.br
+.PP
+.PP
+Also see our TODO file.
+.SH COPYRIGHT
+Copyright (c) 2002-2003
+   Ademar de Souza Reis Jr. <myself@ademar.org>
+   Milton Soares Filho <eu_mil@yahoo.com>
+.SH SEE ALSO
+.BR sniffdet.conf (5)
+.BR libsniffdet (3)
+.PP
+.BR http://sniffdet.sourceforge.net

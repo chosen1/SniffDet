@@ -1,0 +1,23 @@
+-----------------------------------------------------------------------
+This file contains some resource links useful for
+the sniffdet development.
+-----------------------------------------------------------------------
+
+Libconfuse (parser for config files)
+http://freshmeat.net/projects/confuse/?topic_id=809
+http://www.e.kth.se/~e97_mhe/confuse.shtml
+
+Shared objects for the object disoriented!
+How to write dynamically loadable libraries
+http://www-106.ibm.com/developerworks/library/l-shobj/
+
+Writing DLLs for Linux apps
+Why write a whole app when you can just write a plugin?
+http://www-106.ibm.com/developerworks/linux/library/l-dll.html?dwzone=linux
+
+Program Library HOWTO
+http://www.tldp.org/HOWTO/Program-Library-HOWTO/index.html
+
+autotut: Using GNU auto{conf,make,header}
+(Includes libtool explanation)
+http://seul.org/docs/autotut/

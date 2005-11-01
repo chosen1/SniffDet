@@ -1,0 +1,73 @@
+-----------------------------------------------------------------------
+Sniffdet - Remote Sniffer Detection Tool/Library
+http://sniffdet.sourceforge.net
+
+Copyright (c) 2002-2003
+     Ademar de Souza Reis Jr. <myself@ademar.org>
+     Milton Soares Filho <eu_mil@terra.com.br>
+
+This program is licensed under the GNU/GPL version 2.
+See file COPYING for details.
+-----------------------------------------------------------------------
+
+ Sniffdet is an OpenSource implementation of a set of tests
+ for remote sniffers detection in TCP/IP network environments.
+ It is useful for remote sniffer detection or to just discover
+ machines which are running in promiscuous mode.
+
+
+BUILDING
+----------------------------------------------------------------------
+
+    ./configure
+    make
+
+    Requirements
+        - Standard compilation tools (gcc, make, etc)
+        - libnet 1.0 - http://www.packetfactory.net/projects/libnet/
+          Please note that libnet 1.1 is not compatible with libnet 1.0
+          and so it won't work.
+        - libpcap - http://www.tcpdump.org/
+
+Note for FreeBSD users:
+    - This program is not well tested on *BSD systems. In order to
+      compile it, you may need some libraries (like GNUgetopt for
+      getopt_lont()) not available on BSD by default (see our external
+      module in the CVS repository).
+
+    - Patches and bug reports with portability issues are really
+      welcome. :-)
+
+
+INSTALLING
+----------------------------------------------------------------------
+    make install (as root)
+
+    There are RPMS and SRPMS available at our website
+
+
+DOWNLOAD
+----------------------------------------------------------------------
+
+Releases, patches and more documentation at our website:
+
+http://sniffdet.sourceforge.net
+
+The development version of this project can be retrieved from
+anonymous CVS:
+
+cvs -d :pserver:anoncvs@abrigo.homelinux.net:/sniffdet co <module>
+Where the available modules are:
+    sndet --> The program/library itself
+    external --> External modules (useful for portability and so on)
+    docs --> Extra documenation
+
+
+CONTRIBUTING
+----------------------------------------------------------------------
+
+Patches, bug reports, fixes and sugestions are welcome. Please see
+our TODO file
+
+# EOF
+# vim: set et tw=74

@@ -1,0 +1,186 @@
+-----------------------------------------------------------------------
+sniffdet - Remote Sniffer Detection Tool/Library
+http://sniffdet.sourceforge.net
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+Explanation and general introduction about sniffers and the techniques
+used to detect them.
+-----------------------------------------------------------------------
+Last revision: 10Jan2003
+
+
+If you can read in brazilian portuguese, there's a full paper covering
+this and much more available at our website: "Implementação de um
+Sistema Para a Detecção Remota de Sniffers em Redes TCP/IP".
+
+----------------------------------------------------------------------
+What's a network sniffer
+----------------------------------------------------------------------
+
+Tipically, any program that runs collecting data from the network over an
+interface is, potentially, a sniffer. Such applications can be used by
+system administrator to detect problems in a network, but also by attacker
+and malicious users to read data wich  doesn't belong to them.
+
+A sniffer is usually a passive interactor, which means it inject packets
+in the network as less as possible. This characteristic makes it difficult
+to find them. We have to explore OS characteristics and use empiric tests
+to accomplish that task. It's like a race: if the sniffer is smart enough,
+it can always bypass our tests by detecting and reacting to them in time,
+and the tests always have to improve in order to make this task more
+dificult.
+
+If the network interface is running in "normal mode", all a sniffer can
+capture is the data being transfered betwen the two hosts comunicating (or
+a broadcast transmission). But if the network card is running in
+"promiscuous mode", all the traffic in the wire can be read, and the
+potential of finding something useful increases (there's a lot of
+discussion about switched networks, wireless networks and
+broadcast/difusion/hub networks, but we will not address these topics
+here... Our paper in portuguese (see above) covers all that, thought.
+
+A sniffer usually runs in promiscuous mode, and that's the main
+characteristic that we try to find with a test: if a machine is running in
+promiscuous mode (but there are several other tests/approaches too).
+
+
+----------------------------------------------------------------------
+Methods of Detection
+----------------------------------------------------------------------
+
+There are, tipically, two ways of finding sniffers: locally and
+remotelly.
+
+Besides the local way being much more deterministic (you just have to test
+the interface for the promiscuous mode setting) it's much harder to
+implement in a network which is very large or contains several kinds of
+operating systems. You also have to trust the machine environment and it
+may require manual intervention from the administrator.  Basically, that's
+why the remote way is preferred.
+
+Also remember that if the machine where the sniffer is potentially running
+is compromissed the invader can do whatever he wants to hide himself and
+the sniffer (use rootkits, kernel modules, etc).
+
+In the remote detecting way, there are two category of tests
+representing the different approachs to detect sniffers in an
+enclosed network.
+
+The passive tests just read packets from network, trying to find
+typical signatures of anomalies usually seen in sniffers behaviours. A
+typical example are those sniffers that pretend they are the local
+router machine, sending its address to machines wich perform the
+who-is-the-router query, usually using ARP.
+
+The active tests, however, try to detect the sniffer by sending altered
+packets to it and waiting for a response related to a host working in a
+promiscuous mode. These tests explore certains caracteristics of sniffers
+and Operational Systems, usually finding network cards running in
+promiscuous mode.
+
+The tests above are the basic idea of the approaches used to detect
+sniffers. Most of them are implemented in someway in sniffet, but there
+are a lot of variations to every test (the goal of libsniffdet is to
+provide a full set of tests, with a lot of customization and variations
+available).
+
+
+ICMP TEST (implemented in sniffdet)
+----------------------------------------------------------------------
+Send a ICMP ECHO REQUEST with a bogus MAC address to the suspicious host
+and await for a reply. If it happens, then the machine is capturing traffic
+that is not destined to it (a good sign that it is in promiscuos mode).
+
+  do {
+     - Build an icmp packet with a bogus mac address (0xff 0x...)
+     - Send the packet
+     - Wait for a ICMP reply
+       Got a response? --> Remote machine is in promiscuous mode
+       No reponse? --> The remote machine is probably not in promiscuous
+                       mode (there's no way to be sure).
+  } while (...timeout, max_tries, found, etc...)
+
+
+ARP TEST (implemented in sniffdet)
+----------------------------------------------------------------------
+The same idea of ICMP test, but using the ARP protocol.
+
+
+DNS TEST (implemented in sniffdet)
+----------------------------------------------------------------------
+Inject a false traffic betwen two machines that don't exist in the network
+and watch the wire looking for DNS requests to resolve these (inexistend)
+addresses. If it happens, the machine were the request was being sent is
+probably running a sniffer (which is interested in reverse resolving the
+IP address it founds in the traffic - something very common).
+
+  do {
+     - Build a dns packet with invalid IP as source/destination
+     - Put the packet in the wire
+     - Sniff the wire looking for dns resolve requests for
+       the invalid IPs
+       Got a request? --> The machine from which the request originated
+                          is probably in promiscuous mode.
+       No reponse? --> Whatever... We just don't know.
+  } while (...timeout, max_tries, found, etc...)
+
+
+LATENCY TEST (implemented in sniffdet)
+----------------------------------------------------------------------
+Flood the network with specially crafted packets that only machines in
+promiscuous mode would capture. By doing some sort of test to measure the
+responsiveness of the machines being tested (like ICMP ECHO
+REQUEST/REPLY), you can detect machines running in promiscuous mode and/or
+with a sniffer.
+
+   - Measure the response time of the remote machine
+   - Start two threads:
+     Thread1: Cause a DoS (flood) in that machine using packets with
+              invalid MAC addresses
+     Thread2: Measure the response time of the remote machine
+   - Interpret the difference between the two response times:
+     Huge difference: The machine is probably in promiscuous mode.
+     Small difference: If the machine is in promiscuous mode, then
+                       either the DoS is not effective or the machine
+
+Notice this test is heavily subjective. It depends on a lot of factors
+(CPU/network power, OS, effectivenes of the DoS attack, etc).
+
+
+HONEYPOT TEST (not - yet at least - implemented in sniffdet)
+----------------------------------------------------------------------
+Just put some bait traffic in the network and await for the attacker to
+use it in any of your severs.
+
+    - Use some sensitive traffic as a bait (passwords, usernames, etc);
+    - sniff the wire looking for use of these baits;
+
+
+Useful resources
+----------------------------------------------------------------------
+
+Sniffing (network wiretap, sniffer) FAQ
+by Robert Graham <sniffing-faq@robertgraham.com>
+http://www.robertgraham.com/pubs/sniffing-faq.html
+
+Sniffer Detection Tools and Countermeasures
+http://rr.sans.org/covertchannels/sniffer.php
+
+Evading Passive Sniffer Detection With IDS Sensors
+http://rr.sans.org/intrusion/IDS_sensors.php
+
+I Can See you Behind Layer 2...
+Overcoming the difficulties of Packet Capturing on a
+Switched Network
+http://rr.sans.org/switchednet/layer2.php
+
+Sniffers: What are they and How to Protect From Them
+http://rr.sans.org/switchednet/sniffers.php
+
+Internetworking with TCP/IP
+Vol.1: Principles, Protocols, and Architecture (4th Edition)
+Douglas E. Comer, ISBN: 0130183806
+
+# EOF
+# vim: set et tw=74:
