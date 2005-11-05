@@ -4,44 +4,31 @@
 # Just to have a little idea of the work in terms of lines...
 # yes, it's useless, I agree :-)
 
-wcc=`find . -name *.c`
+IGNORE="\.svn"
+
+wcc=`find . -name *.c | grep -v $IGNORE`
 echo .c files
 echo ----------------------------------------------------------------
 wc $wcc
 echo
 
-wch=`find . -name *.h`
+wch=`find . -name *.h | grep -v $IGNORE`
 echo .h files
 echo ----------------------------------------------------------------
 wc $wch
 echo
 
-#wchtml="`find . -name *.html`"
-#echo HTML documentation
-#echo ----------------------------------------------------------------
-#wc $wchtml
-#echo
-
-wcTXT="`find . -type f -name '[A-Z][A-Z]*'`"
-wctxt=`find . -name *.txt`
+wctxt="`find . -type f -name '[A-Z][A-Z]*' -o -name *.txt | grep -v $IGNORE`"
 echo Text documentation
 echo ----------------------------------------------------------------
-wc $wcTXT $wctxt
-echo
-
-wcMk=`find . | egrep 'Makefile.in|configure.in'`
-echo Compile scripts
-echo ----------------------------------------------------------------
-wc $wcMk
+wc $wctxt
 echo
 
 echo Totals
 echo ----------------------------------------------------------------
 echo code:
 wc $wcc $wch | grep total
-echo compile scripts:
-wc $wcMk | grep total
 echo docs:
-wc $wchtml $wctxt $wcTXT | grep total
+wc $wctxt | grep total
 echo All:
-wc $wcc $wch $wcMk $wchtml $wctxt | grep total
+wc $wcc $wch $wctxt | grep total
