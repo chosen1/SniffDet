@@ -21,8 +21,6 @@ AC_PROG_INSTALL
 AC_PROG_LIBTOOL
 AC_PROG_CC
 
-dnl Checks for libraries.
-
 dnl Checks for header files.
 AC_CHECK_HEADERS([limits.h netdb.h netinet/in.h stdlib.h string.h sys/time.h unistd.h dlfcn.h syslog.h sys/param.h])
 AC_CHECK_HEADERS([pcap.h])
@@ -36,6 +34,9 @@ AC_FUNC_STRFTIME
 AC_FUNC_VPRINTF
 AC_CHECK_FUNCS([alarm gettimeofday memset strndup inet_ntoa])
 AC_CHECK_FUNCS([strstr select strerror])
+
+
+dnl Checks for libraries.
 
 AC_CHECK_PROG(LIBNETCONFIG, libnet-config, yes, no)
 if test $LIBNETCONFIG = "yes"; then
@@ -88,8 +89,8 @@ dnl "*** libdl not found! You need it to build $PACKAGE_NAME! (plugins support) 
 dnl but linux does...
 AC_CHECK_LIB([dl], [dlopen],,)
 
-dnl FIXME:
-dnl create --uid and --gid
+# FIXME:
+# create --uid and --gid
 sndet_uid=280
 sndet_gid=280
 AC_DEFINE_UNQUOTED(SNDET_DEFAULT_UID, ${sndet_uid}, UID to be used when dropping root privs)
@@ -125,8 +126,8 @@ AC_DEVEL_ABSDIRS
 ## the standard ones defined by autoconf
 AC_DEVEL_DEFINE_INSTALL_DIRS
 
-dnl FIXME:
-dnl create --plugins-dir or something like that
+# FIXME:
+# create --plugins-dir or something like that
 AC_SUBST(SNDET_PLUGINSDIR, "${LIBDIR}/sniffdet/plugins")
 AC_DEFINE_UNQUOTED(SNDET_PLUGINSDIR, "${LIBDIR}/sniffdet/plugins/", plugins directory)
 
