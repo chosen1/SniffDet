@@ -131,5 +131,4 @@ struct snd_tests {
 	short int latencytest;
 };
 
-int drop_root(int uid, int gid);
 int read_config(char *filename);
