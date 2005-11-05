@@ -38,8 +38,6 @@ if LCOV
 LCOVOUT=docs/lcov-reports
 LCOVLOG=docs/lcov_log.txt
 
-# lcov support is a set of hacks... see ticket:24
-#
 # TODO: the first sed regexp is due to a gcov/lcov bug which adds a
 # trailing build/ in the path to source.  This should be better investigated.
 #
