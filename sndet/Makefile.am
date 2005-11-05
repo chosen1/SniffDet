@@ -20,8 +20,13 @@ libsniffdet_la_CPPFLAGS = -I$(csourcedir)/lib/ $(LIBNET_DEFINES)
 
 # sniffdet itself
 bin_PROGRAMS = sniffdet
-sniffdet_SOURCES = $(csourcedir)/sniffdet.c $(csourcedir)/log.c \
-                   $(csourcedir)/config_file.c $(csourcedir)/util.c
+sniffdet_SOURCES = $(csourcedir)/sniffdet.c \
+                   $(csourcedir)/sniffdet.h \
+                   $(csourcedir)/log.c \
+                   $(csourcedir)/log.h \
+                   $(csourcedir)/config_file.c \
+                   $(csourcedir)/util.c \
+                   $(csourcedir)/util.h
 sniffdet_LDADD = libsniffdet.la $(PTHREAD_LIBS)
 sniffdet_CPPFLAGS = $(libsniffdet_la_CPPFLAGS) $(AM_CPPFLAGS)
 
@@ -34,18 +39,18 @@ test_config_CPPFLAGS = $(libsniffdet_la_CPPFLAGS) $(AM_CPPFLAGS)
 
 # unit-tests
 if CHECK
-TESTS = utest_frobnicator
-noinst_PROGRAMS += utest_frobnicator
-utest_frobnicator_SOURCES = $(csourcedir)/sniffdet.c \
-utest_frobnicator_CPPFLAGS = $(CHECK_FLAGS) $(AM_CPPFLAGS) -I$(utestdir)
-utest_frobnicator_LDADD = $(CHECK_LIBS) $(LDADD)
+#TESTS = utest_frobnicator
+#noinst_PROGRAMS += utest_frobnicator
+#utest_frobnicator_SOURCES = $(csourcedir)/sniffdet.c \
+#utest_frobnicator_CPPFLAGS = $(CHECK_FLAGS) $(AM_CPPFLAGS) -I$(utestdir)
+#utest_frobnicator_LDADD = $(CHECK_LIBS) $(LDADD)
 endif
 
 EXTRA_DIST = $(srcdir)/m4/auxdevel.m4 $(srcdir)/m4/check.m4 \
              $(srcdir)/mk/auxdevel.am $(srcdir)/mk/auxdevel-libtool.am
 
-DISTCHECK_CONFIGURE_FLAGS = --enable-efence --enable-lcov --enable-debug \
-                            --enable-check --enable-warnings
+DISTCHECK_CONFIGURE_FLAGS = --enable-efence --enable-debug \
+                            --enable-warnings --enable-lcov --enable-check
 
 # this variable is scanned by autoreconf and needs to be static (no expansion)
 ACLOCAL_AMFLAGS = -I m4
