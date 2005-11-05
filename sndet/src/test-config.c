@@ -9,10 +9,13 @@ struct config_options config;
 
 int main(int argc, char **argv)
 {
+	if (argc != 2)
+		fprintf(stderr, "usage: %s <config_file>\n", argv[0]);
+
 	// read/parse config file
-	if (read_config("../sniffdet.conf")) {
+	if (read_config(argv[1])) {
 		fprintf(stderr, "Error reading config file %s\n",
-				"../sniffdet.conf");
+				argv[1]);
 		fprintf(stderr, "Exiting...\n");
 		exit(1);
 	}
@@ -22,4 +25,3 @@ int main(int argc, char **argv)
 
 	return 0;
 }
-
