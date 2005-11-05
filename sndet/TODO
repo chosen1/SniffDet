@@ -52,8 +52,6 @@ Application
 Library
 ---------------------------------------------------------------------------
 
-    - Build shared library, using libtool (really?)
-
     - The callback should be called more times by the tests.
 
     - init_device() should be changed to something more generic...  like
