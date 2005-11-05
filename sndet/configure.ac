@@ -28,13 +28,10 @@ AC_CHECK_HEADERS([limits.h netdb.h netinet/in.h stdlib.h string.h sys/time.h uni
 AC_CHECK_HEADERS([pcap.h])
 
 dnl Checks for typedefs, structures, and compiler characteristics.
-AC_C_CONST
-AC_C_INLINE
 AC_HEADER_TIME
 AC_TYPE_SIGNAL
 AC_STRUCT_TM
 
-AC_FUNC_MALLOC
 AC_FUNC_STRFTIME
 AC_FUNC_VPRINTF
 AC_CHECK_FUNCS([alarm gettimeofday memset strndup inet_ntoa])
