@@ -20,12 +20,10 @@ AC_PROG_MAKE_SET
 AC_PROG_INSTALL
 AC_PROG_LIBTOOL
 AC_PROG_CC
-AC_LANG_C
 
 dnl Checks for libraries.
 
 dnl Checks for header files.
-AC_HEADER_STDC
 AC_CHECK_HEADERS([limits.h netdb.h netinet/in.h stdlib.h string.h sys/time.h unistd.h dlfcn.h syslog.h sys/param.h])
 AC_CHECK_HEADERS([pcap.h])
 
