@@ -112,6 +112,7 @@ AC_SUBST(csourcedir, $srcdir/src)
 ## if your package install header files, set this to the directory
 ## relative to $srcdir where you keep them
 #AC_SUBST(headerdir, $srcdir/headers)
+AC_SUBST(headerdir, "")
 
 ## set this to the directory for Check unit tests
 AC_SUBST(utestdir, $srcdir/utest)
