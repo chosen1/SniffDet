@@ -51,13 +51,6 @@
  *   all tests.
  */
 
-#ifdef DEBUG
-#warning "************************************************"
-#warning "Disabling DEBUG for config_file module mannually"
-#warning "************************************************"
-#undef DEBUG
-#endif
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -416,11 +409,6 @@ int read_config(char *filename)
 	eof = 0;
 	error_syntax = 0;
 
-	DEBUG_CODE(printf("***\n");)
-	DEBUG_CODE(printf("*** config_options struct size: %d\n",
-				sizeof(struct config_options));)
-	DEBUG_CODE(printf("***\n");)
-
 	status = parse_section();
 
 	return (error_syntax || status);
@@ -440,7 +428,6 @@ static int parse_section(void)
 		i = 0;
 		while ((config_section[i].section_name) != NULL) {
 			if (!strcmp(section, config_section[i].section_name)) {
-				DEBUG_CODE(printf("reading %s\n", section);)
 				read_section(config_section[i].section_id);
 				break;
 			}
@@ -500,7 +487,6 @@ static int read_section(enum section_state section_id)
 		i = 0;
 		while ((config_vars[i].var_name) != NULL) {
 			if (!strcmp(var_name, config_vars[i].var_name)) {
-				DEBUG_CODE(printf("\treading %s\n", var_name);)
 				// it generates a warning... ignore it?
 				config_vars[i].var_handler(&(config_vars[i]), section_id);
 				break;
@@ -586,7 +572,6 @@ static int get_string(struct config_variables_t *self, enum section_state state)
 	}
 
 	string_value[j] = '\0';
-	DEBUG_CODE(printf("\t\tvalue: %s\n", string_value);)
 
 	return 0;
 }
@@ -606,7 +591,6 @@ static int get_int(struct config_variables_t *self, enum section_state state)
 		;
 
 	sscanf((&line_buffer[i]), "%d", var);
-	DEBUG_CODE(printf("\t\tvalue: %d\n", *var);)
 
 	return 0;
 }
@@ -627,7 +611,6 @@ static int get_ushort_int(struct config_variables_t *self,
 		;
 
 	sscanf(&(line_buffer[i]), "%hu", var);
-	DEBUG_CODE(printf("\t\tvalue: %hu\n", *var);)
 
 	return 0;
 }
