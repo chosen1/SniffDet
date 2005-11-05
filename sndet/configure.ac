@@ -81,7 +81,7 @@ fi
 AC_SUBST(PTHREAD_LIBS)
 
 dnl FIXME:
-dnl freeBSD doesn't have libdl...
+dnl FreeBSD may not have libdl...
 dnl AC_CHECK_LIB([dl], [dlopen],, \
 dnl    AC_MSG_ERROR(\
 dnl "*** libdl not found! You need it to build $PACKAGE_NAME! (plugins support) ***"))
