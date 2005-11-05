@@ -14,7 +14,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *  See file COPYING for details.
  *
- * $Id: null.c,v 1.4 2003/01/22 18:42:13 ademar Exp $
+ * $Id$
  */
 
 #include <lib/libsniffdet.h>

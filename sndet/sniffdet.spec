@@ -1,3 +1,5 @@
+# $Id$
+
 %define with_devel 1
 
 Name: sniffdet

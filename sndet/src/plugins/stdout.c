@@ -14,7 +14,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *  See file COPYING for details.
  *
- * $Id: stdout.c,v 1.6 2003/07/03 23:17:57 ademar Exp $
+ * $Id$
  */
 
 #include <stdlib.h>

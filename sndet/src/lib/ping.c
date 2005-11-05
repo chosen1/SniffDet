@@ -14,7 +14,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *  See file COPYING for details.
  *
- *  $Id: ping.c,v 1.30 2003/07/04 03:31:06 ademar Exp $
+ *  $Id$
  */
 
 /* ping module

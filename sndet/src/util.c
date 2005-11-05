@@ -14,7 +14,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *  See file COPYING for details.
  *
- * $Id: util.c,v 1.12 2003/07/03 22:55:04 ademar Exp $
+ * $Id$
  */
 
 #include <stdio.h>

@@ -14,7 +14,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *  See file COPYING for details.
  *
- * $Id: plugins.h,v 1.2 2003/01/22 18:42:13 ademar Exp $
+ * $Id$
  */
 
 int test_output(char *target, struct test_info info[],

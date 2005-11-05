@@ -14,7 +14,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *  See file COPYING for details.
  *
- *  $Id: helpers.c,v 1.38 2003/04/27 06:01:48 ademar Exp $
+ *  $Id$
  */
 
 /* helpers module

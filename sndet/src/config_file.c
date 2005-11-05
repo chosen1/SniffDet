@@ -14,7 +14,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *  See file COPYING for details.
  *
- *  $Id: config_file.c,v 1.15 2003/04/27 19:19:46 mil Exp $
+ *  $Id$
  */
 
 /* HOW IT WORKS:

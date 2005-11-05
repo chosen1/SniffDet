@@ -1,3 +1,5 @@
+$Id$
+
 Contributions are always welcome. You can send patches to
 sniffdet-devel@lists.sourceforge.net or use the sourceforge
 interface, available at http://sourceforge.net/projects/sniffdet
@@ -72,6 +74,7 @@ Documentation
 
     - Improve libsniffdet manpage with a better description about every
       function
+
 
 # EOF
 # vim: set et tw=74

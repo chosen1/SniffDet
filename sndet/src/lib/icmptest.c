@@ -14,7 +14,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *  See file COPYING for details.
  *
- *  $Id: icmptest.c,v 1.42 2003/07/04 03:31:06 ademar Exp $
+ *  $Id$
  */
 
 #include <stdlib.h>

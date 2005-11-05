@@ -9,7 +9,7 @@
  *  as published by the Free Software Foundation; version 2 dated
  *  June, 1991.
  *
- *  $Id: log.h,v 1.9 2003/01/22 18:42:11 ademar Exp $
+ *  $Id$
  */
 
 /* log.h

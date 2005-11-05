@@ -14,7 +14,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *  See file COPYING for details.
  *
- *  $Id: sniffdet.c,v 1.54 2003/07/03 22:55:03 ademar Exp $
+ *  $Id$
  */
 
 #include <stdio.h>

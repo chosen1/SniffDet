@@ -14,7 +14,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *  See file COPYING for details.
  *
- *  $Id: libsniffdet.h,v 1.39 2003/01/22 18:42:12 ademar Exp $
+ *  $Id$
  */
 
 #ifndef __LIBSNIFFDET_H__

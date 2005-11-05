@@ -1,5 +1,5 @@
 /*
- * $Id: test-config.c,v 1.4 2003/01/22 18:42:12 ademar Exp $
+ * $Id$
  */
 #include <stdlib.h>
 #include <stdio.h>

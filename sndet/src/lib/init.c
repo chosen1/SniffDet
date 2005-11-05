@@ -14,7 +14,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *  See file COPYING for details.
  *
- *  $Id: init.c,v 1.18 2003/07/03 22:55:04 ademar Exp $
+ *  $Id$
  */
 
 #include <stdlib.h>

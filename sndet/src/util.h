@@ -9,7 +9,7 @@
  *  as published by the Free Software Foundation; version 2 dated
  *  June, 1991.
  *
- * $Id: util.h,v 1.7 2003/01/22 18:42:12 ademar Exp $
+ * $Id$
  */
 
 /*

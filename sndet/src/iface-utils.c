@@ -14,7 +14,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *  See file COPYING for details.
  *
- *  $Id: iface-utils.c,v 1.3 2003/01/22 18:42:11 ademar Exp $
+ *  $Id$
  */
 
 #include <stdio.h>
