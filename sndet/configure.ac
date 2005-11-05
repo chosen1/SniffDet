@@ -55,13 +55,42 @@ AC_CHECK_LIB(net, libnet_open_link_interface,, \
 AC_CHECK_LIB(pcap, pcap_open_live,, \
     AC_MSG_ERROR("*** libpcap not found! You need it to build $PACKAGE_NAME! ***"))
 
+# borrowed from xmms configure.in:
+PTHREAD_LIBS=error
+AC_MSG_CHECKING(for old style FreeBSD -pthread flag)
+AC_EGREP_CPP(yes,
+    [#if defined(__FreeBSD_cc_version) && __FreeBSD_cc_version <= 500001
+      yes
+    #endif
+    ], AC_MSG_RESULT(yes)
+    CFLAGS="$CFLAGS -D_THREAD_SAFE" PTHREAD_LIBS="-pthread",
+    AC_MSG_RESULT(no))
+if test "x$PTHREAD_LIBS" = xerror; then
+    AC_CHECK_LIB(pthread, pthread_create,
+        PTHREAD_LIBS="-lpthread")
+fi
+if test "x$PTHREAD_LIBS" = xerror; then
+        AC_CHECK_LIB(pthreads, pthread_create,
+        PTHREAD_LIBS="-lpthreads")
+fi
+if test "x$PTHREAD_LIBS" = xerror; then
+        AC_CHECK_LIB(c_r, pthread_create,
+        PTHREAD_LIBS="-lc_r")
+fi
+if test "x$PTHREAD_LIBS" = xerror; then
+    AC_CHECK_FUNC(pthread_create, PTHREAD_LIBS="")
+fi
+if test "x$PTHREAD_LIBS" = xerror; then
+    AC_MSG_ERROR("*** Unable to locate working posix thread library. You need it to build $PACKAGE_NAME! ***")
+fi
+AC_SUBST(PTHREAD_LIBS)
 
+dnl FIXME:
 dnl freeBSD doesn't have libdl...
 dnl AC_CHECK_LIB([dl], [dlopen],, \
 dnl    AC_MSG_ERROR(\
 dnl "*** libdl not found! You need it to build $PACKAGE_NAME! (plugins support) ***"))
 dnl but linux does...
-
 AC_CHECK_LIB([dl], [dlopen],,)
 
 dnl FIXME:
@@ -70,12 +99,6 @@ sndet_uid=280
 sndet_gid=280
 AC_DEFINE_UNQUOTED(SNDET_DEFAULT_UID, ${sndet_uid}, UID to be used when dropping root privs)
 AC_DEFINE_UNQUOTED(SNDET_DEFAULT_GID, ${sndet_gid}, GID to be used when dropping root privs)
-
-
-dnl FIXME:
-dnl create --plugins-dir or something like that
-sndet_pluginsdir="${prefix}/lib/sniffdet/plugins"
-AC_DEFINE_UNQUOTED(SNDET_PLUGINSDIR, "${sndet_pluginsdir}", Plugins directory)
 
 PACKAGE_URL="http://sniffdet.sourceforge.net"
 AC_SUBST(PACKAGE_URL)
@@ -106,10 +129,18 @@ AC_DEVEL_ABSDIRS
 ## the standard ones defined by autoconf
 AC_DEVEL_DEFINE_INSTALL_DIRS
 
+dnl FIXME:
+dnl create --plugins-dir or something like that
+AC_SUBST(SNDET_PLUGINSDIR, "${LIBDIR}/sniffdet/plugins")
+AC_DEFINE_UNQUOTED(SNDET_PLUGINSDIR, "${LIBDIR}/sniffdet/plugins/", plugins directory)
+
 AC_CONFIG_FILES([Makefile
-                 Doxyfile])
+                 Doxyfile
+                 libsniffdet.pc
+                 libsniffdet-uninstalled.pc])
 
 AC_OUTPUT
+
 
 echo "
 $PACKAGE_NAME $PACKAGE_VERSION configuration:
@@ -120,11 +151,11 @@ $PACKAGE_NAME $PACKAGE_VERSION configuration:
   CFLAGS:                     ${CFLAGS}
   Libraries:                  ${LIBS}
   Pthread flag:               ${PTHREAD_LIBS}
-  Install path:               ${prefix}
+  Install path (prefix):      ${prefix}
 
   UID to be used by sniffdet: ${sndet_uid}
   GID to be used by sniffdet: ${sndet_gid}
-  Plugins directory:          ${sndet_pluginsdir}
+  Plugins directory:          ${SNDET_PLUGINSDIR}
 
   Now type 'make' to build $PACKAGE_NAME $PACKAGE_VERSION.
 "

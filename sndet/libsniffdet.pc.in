@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libsniffdet
+Description: Sniffers detection library
+Version: @VERSION@
+Libs: -L${libdir} -lsniffdet @PTHREAD_LIBS@
+Cflags: -I${includedir}

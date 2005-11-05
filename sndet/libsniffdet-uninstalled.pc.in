@@ -1,0 +1,8 @@
+libdir=@ac_devel_abs_builddir@
+includedir=@ac_devel_abs_srcdir@/src/lib/
+
+Name: libsniffdet
+Description: Sniffers detection library
+Version: @VERSION@
+Libs: -L${libdir} -lsniffdet @PTHREAD_LIBS@
+Cflags: -I${includedir}
