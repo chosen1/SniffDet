@@ -60,7 +60,8 @@ static int cancel_tests = 0;
  * - Implement it in a clean, simple and eyecandy way... :-)
  */
 
-static int tests_msg_callback(struct test_status *status, const int msg_type, char *msg)
+static int tests_msg_callback(struct test_status *status,
+		const int msg_type, char *msg)
 {
 #ifdef DEBUG_CALLBACK
 	static char *msgs[7] = {

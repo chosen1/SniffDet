@@ -174,7 +174,7 @@ static int get_payload(struct config_variables_t *self,
 		enum section_state state);
 
 /* this is the structure with section names */
-const static struct config_section_t config_section[] = {
+static const struct config_section_t config_section[] = {
 	{ CFG_SECTION_GLOBAL,		READING_GLOBAL },
 	{ CFG_SECTION_ICMPTEST,		READING_ICMPTEST },
 	{ CFG_SECTION_ARPTEST,		READING_ARPTEST },
@@ -195,7 +195,7 @@ const static struct config_section_t config_section[] = {
  * memory arrangement if trying to read something bigger or smaller than what
  * it really is.
  */
-const static struct config_variables_t config_vars[] = {
+static const struct config_variables_t config_vars[] = {
 	{ CFG_VAR_VERBOSE,			get_int,
 		{ &(config.global.verbose),
 			NULL,
@@ -487,7 +487,7 @@ static int read_section(enum section_state section_id)
 		i = 0;
 		while ((config_vars[i].var_name) != NULL) {
 			if (!strcmp(var_name, config_vars[i].var_name)) {
-				// it generates a warning... ignore it?
+				// XXX: it generates a warning... ignore it?
 				config_vars[i].var_handler(&(config_vars[i]), section_id);
 				break;
 			}
@@ -763,9 +763,9 @@ static int get_tcpflags(struct config_variables_t *self, enum section_state stat
 static int get_payload(struct config_variables_t *self, enum section_state state)
 {
 	fprintf(stderr,
-			"** WARNING The parser for \"payload\" is not implemented yet\n");
-	fprintf(stderr,
-			"** WARNING \t%s:%d\n", f_name, line);
+			"** WARNING The parser for \"payload\" is not implemented yet,"
+			"*ignoring entry*\n");
+
 	return -1;
 }
 

@@ -83,11 +83,7 @@ char **parse_targets_file(FILE *f_hosts)
  */
 char **network_ips(char *netmask, char *network)
 {
-	char **ips;
-
-	// calc ips
-
-	return ips = NULL; // TODO
+	return NULL;
 }
 
 /*	free_stringlist()

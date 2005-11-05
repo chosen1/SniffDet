@@ -43,11 +43,11 @@
 // using same size as in real ping application
 
 // statistic variables
-static unsigned long pkts_sent;
-static unsigned long pkts_rcvd;
-static unsigned long time_accum;
-static unsigned long max_time;
-static unsigned long min_time;
+static ulong pkts_sent;
+static ulong pkts_rcvd;
+static ulong time_accum;
+static ulong max_time;
+static ulong min_time;
 
 // control flag
 static unsigned short inthread_error;
@@ -68,11 +68,11 @@ struct ping_th_data {
 };
 
 /* returns difference in 0.1 msecs */
-static long ping_sub_tv(struct timeval *first, struct timeval *last);
+static ulong ping_sub_tv(struct timeval *first, struct timeval *last);
 
 /* general initializers */
-static unsigned char * init_ping_packet(unsigned long ipsaddr,
-	unsigned long ipdaddr, char *errmsg);
+static unsigned char * init_ping_packet(ulong ipsaddr,
+	ulong ipdaddr, char *errmsg);
 static int init_ping_filter(struct sndet_device *device,
 	unsigned short my_id, char *host, char *errmsg);
 
@@ -197,15 +197,16 @@ int sndet_ping_host(
 
 /* Returns the difference in 0.1 milliseconds between time values
  */
-static long ping_sub_tv(struct timeval *first, struct timeval *last)
+static ulong ping_sub_tv(struct timeval *first, struct timeval *last)
 {
 	if (last->tv_usec < first->tv_usec) {
-		return (last->tv_sec - first->tv_sec - 1)*10000 +
-			(1000000 - (first->tv_usec - last->tv_usec))/100;
+		return (last->tv_sec - first->tv_sec - 1) * 10000 +
+			(1000000 - (first->tv_usec - last->tv_usec)) / 100;
 	} else {
-		return ((last->tv_sec - first->tv_sec)*10000) +
-			((last->tv_usec - first->tv_usec)/100);
+		return ((last->tv_sec - first->tv_sec) * 10000) +
+			((last->tv_usec - first->tv_usec) / 100);
 	}
+
 	/* ALTERNATIVE
 	if ((out->tv_usec -= first->tv_usec) < 0) {
 		--out->tv_sec;
@@ -218,8 +219,8 @@ static long ping_sub_tv(struct timeval *first, struct timeval *last)
 /* Sets the frame for a correct icmp request for the target host
  * return NULL if error
  */
-static unsigned char * init_ping_packet(unsigned long ipsaddr,
-	unsigned long ipdaddr, char *errmsg)
+static unsigned char * init_ping_packet(ulong ipsaddr,
+	ulong ipdaddr, char *errmsg)
 {
 	unsigned char *pkt;
 	
@@ -294,7 +295,7 @@ static void *ping_thread_sender(void *arg)
 	struct ping_th_data *thdata;
 	struct timeval currenttime;
 	unsigned short my_seq = sndet_random() % USHRT_MAX;
-	int i;
+	unsigned int i;
 	
 	DEBUG_CODE(printf("PING SENDER ODD: entering thread\n"));
 
@@ -327,7 +328,7 @@ static void *ping_thread_sender(void *arg)
 			(void *)&currenttime, PKTLEN_PAYLOAD);
 		
 		// loop for burst size
-		for (i=0; i < thdata->burst_size; i++, my_seq++) {
+		for (i = 0; i < thdata->burst_size; i++, my_seq++) {
 			libnet_build_icmp_echo(
 				ICMP_ECHO,
 				0, // request
@@ -351,7 +352,7 @@ static void *ping_thread_sender(void *arg)
 			DEBUG_CODE(printf("PING SENDER: sending burst packet\n"));
 			// put it in the wire
 			if (libnet_write_ip(thdata->device->rawsock, thdata->pkt,
-				PKTLEN_SIZE) < PKTLEN_SIZE)
+				PKTLEN_SIZE) < (int) PKTLEN_SIZE)
 			{
 				snprintf(thdata->errmsg, LIBSNIFFDET_ERR_BUF_LEN,
 					"libnet_write_ip() wrote less bytes than ordered\n");
@@ -381,7 +382,7 @@ static void *ping_thread_catcher(void *arg)
 	const int read_timeout_msec = 500;
 	fd_set fds;
 	int devfd;
-	long difference;
+	ulong diff;
 	int selret;
 	
 	DEBUG_CODE(printf("PING CATCHER: entering thread\n"));
@@ -429,21 +430,20 @@ static void *ping_thread_catcher(void *arg)
 				PKTLEN_PAYLOAD);
 			
 			// calculate statistics (max, min, accum and pkts_rcvd)
-			difference = ping_sub_tv(&senttime, &pcap_h.ts);
+			diff = ping_sub_tv(&senttime, &pcap_h.ts);
 
 			DEBUG_CODE(printf("PING CATCHER: "
 				"sent time(%ldsecs, %ldusecs), recvd time(%ldsecs, %ldusecs),"
 				" difference(%ldx.1 msecs)\n", senttime.tv_sec,
-				senttime.tv_usec, pcap_h.ts.tv_sec, pcap_h.ts.tv_usec,
-				difference));
+				senttime.tv_usec, pcap_h.ts.tv_sec, pcap_h.ts.tv_usec, diff));
 			
-			time_accum += difference;
+			time_accum += diff;
 			pkts_rcvd++;
 			
-			if (difference < min_time)
-				min_time = difference;
-			if (difference > max_time)
-				max_time = difference;
+			if (diff < min_time)
+				min_time = diff;
+			if (diff > max_time)
+				max_time = diff;
 		}
 	} // end of catching main loop
 
