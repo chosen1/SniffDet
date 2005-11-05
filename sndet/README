@@ -32,8 +32,7 @@ BUILDING
 Note for FreeBSD users:
     - This program is not well tested on *BSD systems. In order to
       compile it, you may need some libraries (like GNUgetopt for
-      getopt_lont()) not available on BSD by default (see our external
-      module in the CVS repository).
+      getopt_long()) not available on BSD by default
 
     - Patches and bug reports with portability issues are really
       welcome. :-)
@@ -52,16 +51,6 @@ DOWNLOAD
 Releases, patches and more documentation at our website:
 
 http://sniffdet.sourceforge.net
-
-The development version of this project can be retrieved from
-anonymous CVS:
-
-cvs -d :pserver:anoncvs@abrigo.homelinux.net:/sniffdet co <module>
-Where the available modules are:
-    sndet --> The program/library itself
-    external --> External modules (useful for portability and so on)
-    docs --> Extra documenation
-
 
 CONTRIBUTING
 ----------------------------------------------------------------------
