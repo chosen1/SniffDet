@@ -418,7 +418,7 @@ static void *ping_thread_catcher(void *arg)
 			continue;
 		} else {
 			// here you can read
-			(const u_char *) pkt = pcap_next(th->device->pktdesc, &pcap_h);
+			pkt = pcap_next(th->device->pktdesc, &pcap_h);
 		
 			// check if it's the filtered packet or another one
 			if (!pkt)

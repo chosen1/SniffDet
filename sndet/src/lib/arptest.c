@@ -446,7 +446,7 @@ static void *arptest_receiver(void *thread_data)
 			pthread_mutex_unlock(&callback_mutex);
 			continue;
 		} else {
-			(const u_char *)pkt = pcap_next(td->device->pktdesc, &header);
+			pkt = pcap_next(td->device->pktdesc, &header);
 			
 			// check if it's the filtered packet or another one
 			if (!pkt)
