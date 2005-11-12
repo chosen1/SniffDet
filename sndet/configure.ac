@@ -21,6 +21,7 @@ AC_PROG_INSTALL
 AC_PROG_LIBTOOL
 AC_PROG_CC
 
+
 dnl Checks for header files.
 AC_CHECK_HEADERS([limits.h netdb.h netinet/in.h stdlib.h string.h sys/time.h unistd.h dlfcn.h syslog.h sys/param.h])
 AC_CHECK_HEADERS([pcap.h])
@@ -34,7 +35,6 @@ AC_FUNC_STRFTIME
 AC_FUNC_VPRINTF
 AC_CHECK_FUNCS([alarm gettimeofday memset strndup inet_ntoa])
 AC_CHECK_FUNCS([strstr select strerror])
-
 
 dnl Checks for libraries.
 
@@ -84,44 +84,24 @@ AC_SUBST(PTHREAD_LIBS)
 dnl Configure libltdl
 AC_CHECK_LIB(ltdl, dlopen)
 
-# FIXME:
+# enable configure options and automake conditionals useful for developers
+# look at devel.m4 for detailed documentation
+AC_SUBST(csourcedir, $srcdir/src)
+AC_SUBST(headerdir, "")
+AC_SUBST(utestdir, $srcdir/utest)
+AC_SUBST(docdir, $srcdir/doc)
+AC_DEVEL_MACROS
+AC_DEVEL_ABSDIRS
+AC_DEVEL_DEFINE_INSTALL_DIRS
+
+# XXX
 # create --uid and --gid
 sndet_uid=280
 sndet_gid=280
 AC_DEFINE_UNQUOTED(SNDET_DEFAULT_UID, ${sndet_uid}, UID to be used when dropping root privs)
 AC_DEFINE_UNQUOTED(SNDET_DEFAULT_GID, ${sndet_gid}, GID to be used when dropping root privs)
 
-PACKAGE_URL="http://sniffdet.sourceforge.net"
-AC_SUBST(PACKAGE_URL)
-
-# look at devel.m4 for detailed documentation
-AC_DEVEL_MACROS
-
-## set this to the directory in which actual source files are kept.
-AC_SUBST(csourcedir, $srcdir/src)
-
-## if your package install header files, set this to the directory
-## relative to $srcdir where you keep them
-#AC_SUBST(headerdir, $srcdir/headers)
-AC_SUBST(headerdir, "")
-
-## set this to the directory for Check unit tests
-AC_SUBST(utestdir, $srcdir/utest)
-
-## set this to the directory where static documentation is kept
-AC_SUBST(docdir, $srcdir/doc)
-
-## this generates absolute versions of the above five variables
-## (abs_csourcedir, abs_headerdir, etc.)
-## it's needed for "make lcov"
-AC_DEVEL_ABSDIRS
-
-## this macro adds variables with expanded installation
-## directories. The variables are upper-case versions of
-## the standard ones defined by autoconf
-AC_DEVEL_DEFINE_INSTALL_DIRS
-
-# FIXME:
+# XXX
 # create --plugins-dir or something like that
 AC_SUBST(SNDET_PLUGINSDIR, "${LIBDIR}/sniffdet/plugins")
 AC_DEFINE_UNQUOTED(SNDET_PLUGINSDIR, "${LIBDIR}/sniffdet/plugins/", plugins directory)
