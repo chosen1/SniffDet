@@ -81,7 +81,8 @@ if test "x$PTHREAD_LIBS" = xerror; then
 fi
 AC_SUBST(PTHREAD_LIBS)
 
-AC_LIBTOOL_DLOPEN
+dnl Configure libltdl
+AC_CHECK_LIB(ltdl, dlopen)
 
 # FIXME:
 # create --uid and --gid
