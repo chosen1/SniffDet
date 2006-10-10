@@ -29,7 +29,7 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #include <signal.h>
-#include <libnet.h>
+#include <libnet1.h>
 #include <pcap.h>
 #include "libsniffdet.h"
 

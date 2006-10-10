@@ -18,7 +18,7 @@
  */
 
 #ifndef __LIBNET_H
-#include <libnet.h>
+#include <libnet1.h>
 #endif
 
 /* comand line arguments

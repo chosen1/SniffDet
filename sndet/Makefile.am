@@ -2,8 +2,6 @@
 ## by the included file mk/auxdevel.am.  If you want to use program-specific
 ## flags, do something like frobnicator_CFLAGS = -march=athlon $(AM_CFLAGS)
 
-## $Id$
-
 # libsniffdet
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libsniffdet.pc
@@ -27,7 +25,7 @@ sniffdet_SOURCES = $(csourcedir)/sniffdet.c \
                    $(csourcedir)/config_file.c \
                    $(csourcedir)/util.c \
                    $(csourcedir)/util.h
-sniffdet_LDADD = libsniffdet.la $(PTHREAD_LIBS)
+sniffdet_LDADD = libsniffdet.la $(PTHREAD_LIBS) $(LIBLTDL_LIBS) $(LIBNET_LIBS) $(LIBPCAP_LIBS)
 sniffdet_CPPFLAGS = $(libsniffdet_la_CPPFLAGS) $(AM_CPPFLAGS)
 
 noinst_PROGRAMS = test-config

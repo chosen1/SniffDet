@@ -23,7 +23,7 @@
 #include <time.h>
 #include <netdb.h>
 #include <pcap.h>
-#include <libnet.h>
+#include <libnet1.h>
 #include <pthread.h>
 
 // DEBUG HELPERS

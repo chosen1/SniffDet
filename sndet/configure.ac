@@ -38,18 +38,23 @@ AC_CHECK_FUNCS([strstr select strerror])
 
 dnl Checks for libraries.
 
-AC_CHECK_PROG(LIBNETCONFIG, libnet-config, yes, no)
+AC_CHECK_PROG(LIBNETCONFIG, libnet1-config, yes, no)
 if test $LIBNETCONFIG = "yes"; then
-    LIBNET_DEFINES=`libnet-config --defines`
+    LIBNET_DEFINES=`libnet1-config --defines`
     AC_SUBST(LIBNET_DEFINES)
 else
-    AC_MSG_ERROR("*** libnet-config not found! You need it to build $PACKAGE_NAME! ***")
+    AC_MSG_ERROR("*** libnet1-config not found! You need libnet1 to build $PACKAGE_NAME! ***")
 fi
 
-AC_CHECK_LIB(net, libnet_open_link_interface,, \
-    AC_MSG_ERROR("*** libnet not found! You need it to build $PACKAGE_NAME! ***"))
-AC_CHECK_LIB(pcap, pcap_open_live,, \
+AC_CHECK_LIB(net1, libnet_open_link_interface, [ LIBNET_LIBS="-lnet1" ], \
+    AC_MSG_ERROR("*** libnet1 not found! You need it to build $PACKAGE_NAME! ***"))
+AC_SUBST(LIBNET_LIBS)
+AC_CHECK_LIB(pcap, pcap_open_live, [ LIBPCAP_LIBS="-lpcap" ], \
     AC_MSG_ERROR("*** libpcap not found! You need it to build $PACKAGE_NAME! ***"))
+AC_SUBST(LIBPCAP_LIBS)
+AC_CHECK_LIB(ltdl, dlopen, [ LIBLTDL_LIBS="-lltdl" ], \
+    AC_MSG_ERROR("*** libltd (for dlopen()) not found! You need it to build $PACKAGE_NAME! ***"))
+AC_SUBST(LIBLTDL_LIBS)
 
 # borrowed from xmms configure.in:
 PTHREAD_LIBS=error
@@ -80,9 +85,6 @@ if test "x$PTHREAD_LIBS" = xerror; then
     AC_MSG_ERROR("*** Unable to locate working posix thread library. You need it to build $PACKAGE_NAME! ***")
 fi
 AC_SUBST(PTHREAD_LIBS)
-
-dnl Configure libltdl
-AC_CHECK_LIB(ltdl, dlopen)
 
 # enable configure options and automake conditionals useful for developers
 # look at devel.m4 for detailed documentation

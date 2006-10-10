@@ -18,7 +18,7 @@
  */
 
 #include <stdlib.h>
-#include <libnet.h>
+#include <libnet1.h>
 #include <pcap.h>
 #include <netinet/in.h>
 #include "libsniffdet.h"
