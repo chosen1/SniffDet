@@ -47,44 +47,16 @@ else
 fi
 
 AC_CHECK_LIB(net1, libnet_open_link_interface, [ LIBNET_LIBS="-lnet1" ], \
-    AC_MSG_ERROR("*** libnet1 not found! You need it to build $PACKAGE_NAME! ***"))
+    AC_MSG_ERROR("*** libnet1 not found! You need it to build $PACKAGE_NAME. ***"))
 AC_SUBST(LIBNET_LIBS)
 AC_CHECK_LIB(pcap, pcap_open_live, [ LIBPCAP_LIBS="-lpcap" ], \
-    AC_MSG_ERROR("*** libpcap not found! You need it to build $PACKAGE_NAME! ***"))
+    AC_MSG_ERROR("*** libpcap not found! You need it to build $PACKAGE_NAME. ***"))
 AC_SUBST(LIBPCAP_LIBS)
 AC_CHECK_LIB(ltdl, dlopen, [ LIBLTDL_LIBS="-lltdl" ], \
-    AC_MSG_ERROR("*** libltd (for dlopen()) not found! You need it to build $PACKAGE_NAME! ***"))
+    AC_MSG_ERROR("*** libltd not found! You need it to build $PACKAGE_NAME. ***"))
 AC_SUBST(LIBLTDL_LIBS)
 
-# borrowed from xmms configure.in:
-PTHREAD_LIBS=error
-AC_MSG_CHECKING(for old style FreeBSD -pthread flag)
-AC_EGREP_CPP(yes,
-    [#if defined(__FreeBSD_cc_version) && __FreeBSD_cc_version <= 500001
-      yes
-    #endif
-    ], AC_MSG_RESULT(yes)
-    CFLAGS="$CFLAGS -D_THREAD_SAFE" PTHREAD_LIBS="-pthread",
-    AC_MSG_RESULT(no))
-if test "x$PTHREAD_LIBS" = xerror; then
-    AC_CHECK_LIB(pthread, pthread_create,
-        PTHREAD_LIBS="-lpthread")
-fi
-if test "x$PTHREAD_LIBS" = xerror; then
-        AC_CHECK_LIB(pthreads, pthread_create,
-        PTHREAD_LIBS="-lpthreads")
-fi
-if test "x$PTHREAD_LIBS" = xerror; then
-        AC_CHECK_LIB(c_r, pthread_create,
-        PTHREAD_LIBS="-lc_r")
-fi
-if test "x$PTHREAD_LIBS" = xerror; then
-    AC_CHECK_FUNC(pthread_create, PTHREAD_LIBS="")
-fi
-if test "x$PTHREAD_LIBS" = xerror; then
-    AC_MSG_ERROR("*** Unable to locate working posix thread library. You need it to build $PACKAGE_NAME! ***")
-fi
-AC_SUBST(PTHREAD_LIBS)
+ACX_PTHREAD(, [AC_MSG_ERROR("*** POSIX threads support not found! You need it to build $PACKAGE_NAME ***")])
 
 # enable configure options and automake conditionals useful for developers
 # look at devel.m4 for detailed documentation
@@ -123,8 +95,8 @@ $PACKAGE_NAME $PACKAGE_VERSION configuration:
   Host System Type:           ${host}
   Compiler:                   ${CC}
   CFLAGS:                     ${CFLAGS}
-  Libraries:                  ${LIBS}
-  Pthread flag:               ${PTHREAD_LIBS}
+  Libraries:                  ${LIBPCAP_LIBS} ${LIBNET_LIBS} ${LIBLTDL_LIBS}
+  Pthread support:            ${PTHREAD_CC} ${PTHREAD_LIBS} ${PTHREAD_CFLAGS}
   Install path (prefix):      ${prefix}
 
   UID to be used by sniffdet: ${sndet_uid}

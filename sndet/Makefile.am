@@ -14,7 +14,10 @@ libsniffdet_la_SOURCES = $(csourcedir)/lib/arptest.c \
                          $(csourcedir)/lib/helpers.c \
                          $(csourcedir)/lib/ping.c \
                          $(csourcedir)/lib/init.c
+libsniffdet_la_CC = $(PTHREAD_CC)
 libsniffdet_la_CPPFLAGS = -I$(csourcedir)/lib/ $(LIBNET_DEFINES)
+libsniffdet_la_CFLAGS = $(PTHREAD_CFLAGS) $(AM_CFLAGS)
+libsniffdet_la_LIBADD = $(PTHREAD_CFLAGS) $(PTHREAD_LIBS) $(LIBLTDL_LIBS) $(LIBNET_LIBS) $(LIBPCAP_LIBS)
 
 # sniffdet itself
 bin_PROGRAMS = sniffdet
@@ -25,8 +28,10 @@ sniffdet_SOURCES = $(csourcedir)/sniffdet.c \
                    $(csourcedir)/config_file.c \
                    $(csourcedir)/util.c \
                    $(csourcedir)/util.h
-sniffdet_LDADD = libsniffdet.la $(PTHREAD_LIBS) $(LIBLTDL_LIBS) $(LIBNET_LIBS) $(LIBPCAP_LIBS)
+sniffdet_CC = $(PTHREAD_CC)
+sniffdet_LDADD = libsniffdet.la $(PTHREAD_CFLAGS)
 sniffdet_CPPFLAGS = $(libsniffdet_la_CPPFLAGS) $(AM_CPPFLAGS)
+sniffdet_CFLAGS = $(PTHREAD_CFLAGS) $(AM_CFLAGS)
 
 noinst_PROGRAMS = test-config
 test_config_SOURCES = $(csourcedir)/test-config.c \
