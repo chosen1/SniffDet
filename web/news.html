@@ -43,14 +43,30 @@ Versão em Português do Brasil</a>
 <h1>sniffdet - Remote Sniffer Detection Tool/Library</h1>
 <h2>News</h2>
 
-<h3>2006-10-10: Sniffdet now on SVN</h3>
+<h3>2006-10-10: sniffdet 0.10 release</h3>
+<p>
+This is a bugfix release, intended to fix compilation problems on modern
+Linux distributions. The project has been offline for a long time, but
+it has not been totally forgotten. :-)
+</p>
+
+<p>
+<strong>Changes:</strong>
+</p>
+<ul>
+	<li>new, modern build-system</li>
+	<li>fix get_mac() on config-file (patch from Andrew Lockhart)
+	<li>code cleanups and cosmetics changes</li>
+</ul>
+
+<h3>2006-10-10: sniffdet now on SVN</h3>
 <p>
 After a long time offline, the repository is back: you can access the
 current development version at <a href="http://svn.ademar.org/sniffdet/trunk">http://svn.ademar.org/sniffdet/trunk</a>
 </p>
 
 
-<h3>2003-07-04 - Sniffdet-0.9 released!</h3>
+<h3>2003-07-04: sniffdet-0.9 released!</h3>
 <p>
 This is our latest release of sniffdet, <a
 href="http://prdownloads.sourceforge.net/sniffdet/sniffdet-0.9.tar.gz">sniffdet-0.9</a> <a href="http://prdownloads.sourceforge.net/sniffdet/sniffdet-0.9.tar.gz.asc">[gpg sig]</a>,
@@ -61,16 +77,17 @@ Major changes:
 </p>
 <b>Library:</b>
 <ul>
-<li> Fixed test cancelation using the callback;
-<li> Fixed 'timeout' and 'tries' default values in icmp, dns and arp tests;
-<li> sndet_random() is now more robust;
-<li> Fixed issue #645769 (arp test validity could be checked).
+	<li>Fixed test cancelation using the callback;</li>
+	<li>Fixed 'timeout' and 'tries' default values in icmp, dns and arp
+	tests;</li>
+	<li>sndet_random() is now more robust;</li>
+	<li>Fixed issue #645769 (arp test validity could be checked).</li>
 </ul>
 <b>Application:</b>
 <ul>
-<li> Changes in snprintf() calls to avoid format string bugs;
-<li> Fixed segfault when using a targets file;
-<li> Minor bugfixes and general enhancements.
+	<li>Changes in snprintf() calls to avoid format string bugs;</li>
+	<li>Fixed segfault when using a targets file;</li>
+	<li>Minor bugfixes and general enhancements.</li>
 </ul>
 
 <p>
@@ -88,7 +105,7 @@ SourceForge Interface.</a>
 
 
 
-<h3>2003-01-13 - Sniffdet-0.8 released!</h3>
+<h3>2003-01-13: Sniffdet-0.8 released!</h3>
 <p>
 Our second public release of sniffdet, <a
 href="http://prdownloads.sourceforge.net/sniffdet/sniffdet-0.8.tar.gz">sniffdet-0.8</a> <a href="http://prdownloads.sourceforge.net/sniffdet/sniffdet-0.8.tar.gz.asc">[gpg sig]</a>,
@@ -164,7 +181,7 @@ sniffdet public release, scheduled to December, 5 (2002). Until there,
 contributions are welcome.
 </p>
 
-<h3>2002-10-30 - CVS is open</h3>
+<h3>2002-10-30: CVS is open</h3>
 <p>
 You can download the latest source code (intended for developers only), by
 accessing the CVS repository. You can use the above command to do accomplish
