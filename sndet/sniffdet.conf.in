@@ -10,7 +10,7 @@ global {
 	logtype = FILE;
 	# want a logfilename by default?
 	logfilename = "sniffdet.log";
-	#plugins_dir = "/usr/lib/sniffdet/plugins";
+	plugins_dir = "@SNDET_PLUGINSDIR@"
 	plugin = "stdout.so";
 	# UID to use after dropping root privileges
 	UID = 280;

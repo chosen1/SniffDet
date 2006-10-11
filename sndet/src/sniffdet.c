@@ -444,7 +444,7 @@ static void set_global_defaults(void)
 
 	args.target = NULL;
 	args.targetsfile = NULL;
-	args.configfile = "/etc/sniffdet.conf";
+	args.configfile = SNDET_CONFIG;
 
 	// no tests by default
 	run_tests.dnstest = 0;
@@ -690,7 +690,7 @@ static void show_help(void)
 	printf("Defaults:\n");
 	printf("    Interface: \"eth0\"\n");
 	printf("    Log file: \"sniffdet.log\"\n");
-	printf("    Config file: \"/etc/sniffdet.conf\"\n");
+	printf("    Config file: \"%s\"\n", SNDET_CONFIG);
 	printf("    Plugins Directory: \"%s\"\n", SNDET_PLUGINSDIR);
 	printf("    Plugin: \"stdout.so\"\n");
 	printf("\n");

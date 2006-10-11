@@ -80,10 +80,14 @@ AC_DEFINE_UNQUOTED(SNDET_DEFAULT_GID, ${sndet_gid}, GID to be used when dropping
 AC_SUBST(SNDET_PLUGINSDIR, "${LIBDIR}/sniffdet/plugins")
 AC_DEFINE_UNQUOTED(SNDET_PLUGINSDIR, "${LIBDIR}/sniffdet/plugins/", plugins directory)
 
+AC_SUBST(SNDET_CONFIG, "${SYSCONFDIR}/sniffdet.conf")
+AC_DEFINE_UNQUOTED(SNDET_CONFIG, "${SYSCONFDIR}/sniffdet.conf", default config file location)
+
 AC_CONFIG_FILES([Makefile
                  Doxyfile
                  libsniffdet.pc
                  sniffdet.spec
+                 sniffdet.conf
                  libsniffdet-uninstalled.pc])
 
 AC_OUTPUT

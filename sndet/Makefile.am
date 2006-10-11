@@ -26,6 +26,8 @@ confdir = $(sysconfdir)
 conf_DATA = sniffdet.conf
 sndetmandir = $(mandir)/man1
 sndetman_DATA = sniffdet.1
+sndetconfmandir = $(mandir)/man5
+sndetconfman_DATA = sniffdet.conf.5
 bin_PROGRAMS = sniffdet
 sniffdet_SOURCES = $(csourcedir)/sniffdet.c \
                    $(csourcedir)/sniffdet.h \
@@ -44,7 +46,23 @@ test_config_SOURCES = $(csourcedir)/test-config.c \
                       $(csourcedir)/config_file.c
 test_config_CPPFLAGS = $(libsniffdet_la_CPPFLAGS) $(AM_CPPFLAGS)
 
-# plugins
+
+plugindir = $(libdir)/sniffdet/plugins
+plugin_LTLIBRARIES = null.la
+null_la_SOURCES = $(csourcedir)/plugins/null.c $(csourcedir)/plugins/plugins.h
+null_la_LDFLAGS = -module
+null_la_CPPFLAGS = $(LIBNET_DEFINES)
+
+plugin_LTLIBRARIES += stdout.la
+stdout_la_SOURCES = $(csourcedir)/plugins/stdout.c $(csourcedir)/plugins/plugins.h
+stdout_la_LDFLAGS = -module
+stdout_la_CPPFLAGS = $(LIBNET_DEFINES)
+
+plugin_LTLIBRARIES += xml.la
+xml_la_SOURCES = $(csourcedir)/plugins/xml.c $(csourcedir)/plugins/plugins.h
+xml_la_LDFLAGS = -module
+xml_la_CPPFLAGS = $(LIBNET_DEFINES)
+
 
 # unit-tests
 if CHECK
@@ -66,9 +84,10 @@ EXTRA_DIST = $(srcdir)/m4/auxdevel.m4 $(srcdir)/m4/check.m4 \
              libsniffdet-uninstalled.pc \
              Doxyfile \
              sniffdet.spec \
-             sniffdet.conf \
+             sniffdet.conf.in \
              sniffdet.1 \
-             libsniffdet.3
+             libsniffdet.3 \
+             sniffdet.conf.5
 
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-efence --enable-debug \
