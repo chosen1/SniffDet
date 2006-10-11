@@ -74,7 +74,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc doc/RESOURCES doc/howitworks.txt
-%doc CHANGES README BUGS TODO COPYING
+%doc CHANGES README TODO COPYING
 %{_sbindir}/sniffdet
 %dir %{_libdir}/sniffdet/plugins
 %{_libdir}/sniffdet/plugins/*.so
