@@ -78,14 +78,6 @@ char **parse_targets_file(FILE *f_hosts)
 	return hostnames;
 }
 
-/* TODO:
- * returns a list with all ips from a network/netmask
- */
-char **network_ips(char *netmask, char *network)
-{
-	return NULL;
-}
-
 /*	free_stringlist()
  *		Free a vector of strings, NULL terminated
  */
