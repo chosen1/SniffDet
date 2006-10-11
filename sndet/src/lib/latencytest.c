@@ -55,7 +55,6 @@ struct thread_data {
 
 static struct thread_data tdata;
 
-// prototypes
 static void *thread_flooder(void *td);
 static void *thread_pinger(void *td);
 static inline int bogus_callback(struct test_status *status, int msg_type,
@@ -192,7 +191,7 @@ cleanup:
 
 /* Floods the wire
  */
-static void *thread_flooder(void *td)
+static void *thread_flooder(__attribute__((unused)) void *td)
 {
 	char errbuf[LIBSNIFFDET_ERR_BUF_LEN];
 	unsigned int pktlen;
@@ -243,7 +242,7 @@ static void *thread_flooder(void *td)
 	pthread_exit(0);
 }
 
-static void *thread_pinger(void *td)
+static void *thread_pinger(__attribute__((unused)) void *td)
 {
 	struct test_status status = {0, 0, 0};
 	struct sndet_ping_result ping_result;
@@ -341,8 +340,10 @@ static int test_bogus_pkt_info(struct custom_info *bogus_pkt)
 
 // bogus callback
 // used if the user didn't supply one (NULL)
-static inline int bogus_callback(struct test_status *status, int msg_type,
-	char *msg)
+static inline int bogus_callback(
+		__attribute__((unused)) struct test_status *status,
+		__attribute__((unused)) int msg_type,
+		__attribute__((unused)) char *msg)
 {
 	// do nothing
 	return 0;

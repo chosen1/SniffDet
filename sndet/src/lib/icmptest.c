@@ -294,7 +294,7 @@ cleanup:
 }
 
 // timeout called when we receive a SIGALRM
-static void timeout_handler(int signum)
+static void timeout_handler(__attribute__((unused)) int signum)
 {
 	timed_out = 1;
 	DEBUG_CODE(printf("DEBUG: Time out ALARM - %s \n", __FILE__););
@@ -510,8 +510,10 @@ static void *icmptest_receiver(void *thread_data)
 
 // bogus callback
 // used if the user didn't supply one (NULL)
-static inline int bogus_callback(struct test_status *status, int msg_type,
-	char *msg)
+static inline int bogus_callback(
+		__attribute__((unused)) struct test_status *status,
+		__attribute__((unused)) int msg_type,
+		__attribute__((unused)) char *msg)
 {
 	// do nothing
 	return 0;

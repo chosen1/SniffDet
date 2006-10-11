@@ -759,7 +759,9 @@ static int get_tcpflags(struct config_variables_t *self, enum section_state stat
  * This one would be interesting to have. We could allow a config file with
  * a payload to be pointed, or just a string.
  */
-static int get_payload(struct config_variables_t *self, enum section_state state)
+static int get_payload(
+		__attribute__((unused)) struct config_variables_t *self,
+		__attribute__((unused)) enum section_state state)
 {
 	fprintf(stderr,
 			"** WARNING The parser for \"payload\" is not implemented yet,"
