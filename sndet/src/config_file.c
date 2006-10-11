@@ -49,6 +49,10 @@
  * - We could change the application to accept individual interfaces in a
  *   per test basis. The way it works now, we can use only one interface for
  *   all tests.
+ *
+ * FIXME:
+ * - This is a braindamaged parser, it should be totally rewritten ;-)
+ *
  */
 
 #include <stdio.h>
