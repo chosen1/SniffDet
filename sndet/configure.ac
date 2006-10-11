@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(SniffDet, 0.9, sniffdet-devel@lists.sourceforge.net, sniffdet)
+AC_INIT(sniffdet, 0.10, sniffdet-devel@lists.sourceforge.net, sniffdet)
 AC_PREREQ(2.58)
 
 AC_CONFIG_SRCDIR([src/sniffdet.c])
@@ -83,6 +83,7 @@ AC_DEFINE_UNQUOTED(SNDET_PLUGINSDIR, "${LIBDIR}/sniffdet/plugins/", plugins dire
 AC_CONFIG_FILES([Makefile
                  Doxyfile
                  libsniffdet.pc
+                 sniffdet.spec
                  libsniffdet-uninstalled.pc])
 
 AC_OUTPUT

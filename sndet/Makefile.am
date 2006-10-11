@@ -5,6 +5,8 @@
 # libsniffdet
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libsniffdet.pc
+libmandir = $(mandir)/man3
+libman_DATA = libsniffdet.3
 lib_LTLIBRARIES = libsniffdet.la
 include_HEADERS = $(csourcedir)/lib/libsniffdet.h
 libsniffdet_la_SOURCES = $(csourcedir)/lib/arptest.c \
@@ -20,6 +22,10 @@ libsniffdet_la_CFLAGS = $(PTHREAD_CFLAGS) $(AM_CFLAGS)
 libsniffdet_la_LIBADD = $(PTHREAD_CFLAGS) $(PTHREAD_LIBS) $(LIBLTDL_LIBS) $(LIBNET_LIBS) $(LIBPCAP_LIBS)
 
 # sniffdet itself
+confdir = $(sysconfdir)
+conf_DATA = sniffdet.conf
+sndetmandir = $(mandir)/man1
+sndetman_DATA = sniffdet.1
 bin_PROGRAMS = sniffdet
 sniffdet_SOURCES = $(csourcedir)/sniffdet.c \
                    $(csourcedir)/sniffdet.h \
@@ -50,10 +56,20 @@ if CHECK
 endif
 
 EXTRA_DIST = $(srcdir)/m4/auxdevel.m4 $(srcdir)/m4/check.m4 \
-             $(srcdir)/mk/auxdevel.am $(srcdir)/mk/auxdevel-libtool.am
+             $(srcdir)/m4/acx_pthread.m4 \
+             $(srcdir)/mk/auxdevel.am $(srcdir)/mk/auxdevel-libtool.am \
+             $(srcdir)/README \
+             $(srcdir)/TODO \
+             libsniffdet-uninstalled.pc \
+             Doxyfile \
+             sniffdet.spec \
+             sniffdet.conf \
+             sniffdet.1 \
+             libsniffdet.3
+
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-efence --enable-debug \
-                            --enable-warnings --enable-lcov --enable-check
+                            --enable-warnings --enable-check
 
 # this variable is scanned by autoreconf and needs to be static (no expansion)
 ACLOCAL_AMFLAGS = -I m4

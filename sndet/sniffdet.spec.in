@@ -2,10 +2,10 @@
 
 %define with_devel 1
 
-Name: sniffdet
+Name: @PACKAGE_NAME@
 Summary: Remote sniffers detector for TCP/IP networks
 Summary(pt_BR): Detector de sniffers remoto para redes TCP/IP
-Version: 0.9
+Version: @PACKAGE_VERSION@
 Release: 1ade
 License: GPL
 Group: Networking
@@ -14,7 +14,7 @@ Group(es): Red
 URL: http://sniffdet.sourceforge.net
 Source0: sniffdet-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
-BuildRequires: libpcap-devel libnet-devel
+BuildRequires: libpcap-devel libnet1-devel
 
 %description
 Sniffdet is an OpenSource implementation of a set of tests for
