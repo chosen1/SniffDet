@@ -60,6 +60,9 @@ EXTRA_DIST = $(srcdir)/m4/auxdevel.m4 $(srcdir)/m4/check.m4 \
              $(srcdir)/mk/auxdevel.am $(srcdir)/mk/auxdevel-libtool.am \
              $(srcdir)/README \
              $(srcdir)/TODO \
+             $(srcdir)/doc/RESOURCES \
+             $(srcdir)/doc/howitworks.txt \
+             $(srcdir)/doc/*.c \
              libsniffdet-uninstalled.pc \
              Doxyfile \
              sniffdet.spec \
