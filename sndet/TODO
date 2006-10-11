@@ -1,49 +1,24 @@
 $Id$
 
-Contributions are always welcome. You can send patches to
-sniffdet-devel@lists.sourceforge.net or use the sourceforge
-interface, available at http://sourceforge.net/projects/sniffdet
+Contributions are always welcome. You can send patches
+to the main authors or the the mailing list.
 
 See our home page for more details:
     http://sniffdet.sourceforge.net
 
-And our bug database:
-    http://sourceforge.net/tracker/?group_id=55730&atid=478046
-
-
-autoconf
----------------------------------------------------------------------------
-
-    - use config.h to pass definitons to source files instead of using
-      -D in gcc. We also need configure to handle PLUGINSDIR and other
-      variables (like SNDET_DEFAULT_{UID,GID} in a better way.
-
-    - it must stop when something mandatory is not found, like some
-      header. Optionally, we can use values from config.h to supply
-      alternatives. (partially implemented)
-
-    - We need to compile cleanly in FreeBSD and other OSes (Where we don't
-      have getopt_long for example). We could add an internal module to be
-      used in that situations (I added a getopt module to our "external"
-      repository).
-
-
 Application
 ---------------------------------------------------------------------------
 
-    - Maybe use ncurses to implement a better interface (with callback,
-      results, warnings and so in different windows) or just cleanup the
-      current callback/log interface.
-
-    - Call log more times (?)
+    - Be more interactive
 
     - Allow multiple network interfaces to be used (in a per-tests basis)
 
     - Improve target's file (allow ranges of IPs to be used)
 
+	- Config file parser is sort of brain-damaged. :-)
+
     - Config file new options (add parser for payload, for example).
-      Specially the options for the latency test. Actually, I would like to
-      rewrite the config file parser... maybe use some library for that job.
+      Specially the options for the latency test.
 
     - The options for the latency_test must be passed in bogus_pkt, which
       must be filled entirely by the application.
@@ -68,7 +43,7 @@ Library
 Documentation
 ---------------------------------------------------------------------------
 
-    - Improve HowItWorks document (in english)
+    - Improve how-it-works document (in english)
 
     - Translate images used in our pt_BR paper to english
 
