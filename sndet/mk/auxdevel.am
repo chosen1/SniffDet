@@ -8,12 +8,11 @@
 # This file set some flags in AM_CFLAGS and LDADD.  Be careful that these global
 # variables will be overwritten by target-specific _CFLAGS and _LDADD/_LIBADD.
 
+
 # Global flags
 AM_CFLAGS += -I$(csourcedir) $(if $(headerdir), -I$(headerdir),)
-
-if WARNINGS
 AM_CFLAGS += $(ac_devel_default_warnings)
-endif
+
 if LCOV
 AM_CFLAGS += -fprofile-arcs -ftest-coverage
 MOSTLYCLEANFILES += *.bb *.bbg *.gcno

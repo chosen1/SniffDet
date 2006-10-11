@@ -183,12 +183,15 @@ m4_ifdef([AM_PATH_CHECK],
      ac_lcov_enabled=$enableval])
  ])
 
-
+# XXX: -Wno-pointer-sign is being used because it's hard to code
+# on libnet + libpcap without ignoring (char *) signedness
 if test "$ac_warnings_enabled" = yes; then
   AC_SUBST(ac_devel_default_warnings, ["-Wall -W \
-  -Wmissing-declarations -Wmissing-prototypes \
-  -Wredundant-decls -Wshadow -Wbad-function-cast \
-  -Wcast-qual"])
+-Wmissing-declarations -Wmissing-prototypes \
+-Wredundant-decls -Wshadow -Wbad-function-cast \
+-Wcast-qual"])
+else
+  AC_SUBST(ac_devel_default_warnings, ["-Wno-pointer-sign"])
 fi
 
 if test "$ac_efence_enabled" = yes; then

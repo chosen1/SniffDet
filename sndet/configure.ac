@@ -95,7 +95,7 @@ $PACKAGE_NAME $PACKAGE_VERSION configuration:
   Source code location:       ${srcdir}
   Host System Type:           ${host}
   Compiler:                   ${CC}
-  CFLAGS:                     ${CFLAGS}
+  CFLAGS:                     ${CFLAGS} ${ac_devel_default_warnings}
   Libraries:                  ${LIBPCAP_LIBS} ${LIBNET_LIBS} ${LIBLTDL_LIBS}
   Pthread support:            ${PTHREAD_CC} ${PTHREAD_LIBS} ${PTHREAD_CFLAGS}
   Install path (prefix):      ${prefix}
