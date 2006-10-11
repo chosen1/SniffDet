@@ -59,8 +59,8 @@ struct config_options {
 		int UID;
 		int GID;
 		char iface[MAX_CFG_VAR_SIZE];
-		char fake_hwaddr[6];
-		char fake_ipaddr[MAX_CFG_VAR_SIZE];
+		u_char fake_hwaddr[6];
+		u_char fake_ipaddr[MAX_CFG_VAR_SIZE];
 	} global;
 
 	// icmptest options
@@ -69,7 +69,7 @@ struct config_options {
 		int timeout;
 		int tries;
 		int interval;
-		char fake_hwaddr[6];
+		u_char fake_hwaddr[6];
 	} icmptest;
 
 	// arptest options
@@ -78,7 +78,7 @@ struct config_options {
 		int timeout;
 		int tries;
 		int interval;
-		char fake_hwaddr[6];
+		u_char fake_hwaddr[6];
 	} arptest;
 
 	// dnstest options
@@ -89,8 +89,8 @@ struct config_options {
 		int interval;
 		unsigned short int dport;
 		unsigned short int sport;
-		char fake_hwaddr[6];
-		char fake_ipaddr[MAX_CFG_VAR_SIZE];
+		u_char fake_hwaddr[6];
+		u_char fake_ipaddr[MAX_CFG_VAR_SIZE];
 		unsigned char *payload;
 		unsigned short int payload_len;
 	} dnstest;

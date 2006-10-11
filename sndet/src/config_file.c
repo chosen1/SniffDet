@@ -195,7 +195,7 @@ static const struct config_section_t config_section[] = {
  * memory arrangement if trying to read something bigger or smaller than what
  * it really is.
  */
-static const struct config_variables_t config_vars[] = {
+static struct config_variables_t config_vars[] = {
 	{ CFG_VAR_VERBOSE,			get_int,
 		{ &(config.global.verbose),
 			NULL,
@@ -487,7 +487,6 @@ static int read_section(enum section_state section_id)
 		i = 0;
 		while ((config_vars[i].var_name) != NULL) {
 			if (!strcmp(var_name, config_vars[i].var_name)) {
-				// XXX: it generates a warning... ignore it?
 				config_vars[i].var_handler(&(config_vars[i]), section_id);
 				break;
 			}

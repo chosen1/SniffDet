@@ -375,7 +375,7 @@ static void *ping_thread_sender(void *arg)
  */
 static void *ping_thread_catcher(void *arg)
 {
-	unsigned char *pkt;
+	const u_char *pkt;
 	struct pcap_pkthdr pcap_h;
 	struct ping_th_data *th;
 	struct timeval senttime, read_timeout;
@@ -425,8 +425,8 @@ static void *ping_thread_catcher(void *arg)
 				continue;
 			
 			// extracts senttime
-			memcpy((void *)&senttime,
-				(void *)(pkt + th->device->pkt_offset + PKTLEN_HEADER),
+			memcpy(&senttime,
+				(pkt + th->device->pkt_offset + PKTLEN_HEADER),
 				PKTLEN_PAYLOAD);
 			
 			// calculate statistics (max, min, accum and pkts_rcvd)

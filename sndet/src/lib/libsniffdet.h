@@ -151,8 +151,8 @@ struct custom_info {
 	ushort winsize;
 	short dport;
 	short sport;
-	u_char *payload;
-	short payload_len; // mandatory if payload is used
+	char *payload;
+	short int payload_len; // mandatory if payload is used
 };
 
 
@@ -265,7 +265,7 @@ int sndet_icmptest(char *host,
 		unsigned int send_interval, // msec
 		user_callback callback,
 		struct test_info *result,
-		char *fakehwaddr // optional
+		u_char *fakehwaddr // optional
 		);
 
 
@@ -286,7 +286,7 @@ int sndet_arptest(char *host,
 		unsigned int send_interval, // msec
 		user_callback callback,
 		struct test_info *result,
-		char *fakehwaddr // optional
+		u_char *fakehwaddr // optional
 		);
 
 
@@ -311,10 +311,10 @@ int sndet_dnstest(char *host,
 		struct test_info *info,
 
 		// bogus pkt information, optional
-		char *fake_ipaddr, // pkt destination
-		char *fake_hwaddr, // pkt destination
+		u_char *fake_ipaddr, // pkt destination
+		u_char *fake_hwaddr, // pkt destination
 		ushort dport, ushort sport,
-		char *payload,
+		u_char *payload,
 		short int payload_len
 		);
 

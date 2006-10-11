@@ -59,7 +59,7 @@ struct icmp_thread_data {
 	char *host;
 	int tries;
     unsigned short int my_icmp_id;
-	char *fakehwaddr;
+	u_char *fakehwaddr;
 	user_callback callback;
 	struct sndet_device *device;
 	unsigned int send_interval; // time betwen sending loops
@@ -90,7 +90,7 @@ int sndet_icmptest(
 	unsigned int send_interval, // msec
 	user_callback callback,
 	struct test_info *info,
-	char *fakehwaddr)
+	u_char *fakehwaddr)
 {
 	struct sigaction sa;
 	pthread_t sender_th, receiver_th;
@@ -442,7 +442,7 @@ static void *icmptest_receiver(void *thread_data)
 	struct icmp_thread_data *td;
 	struct test_status status = {0, 0, 0};
 	struct pcap_pkthdr header;
-	unsigned char *pkt;
+	const u_char *pkt;
 	// reading poll structures
 	struct timeval read_timeout;
 	const int read_timeout_msec = 500;
@@ -481,7 +481,7 @@ static void *icmptest_receiver(void *thread_data)
 			continue;
 		} else {
 			pkt = pcap_next(td->device->pktdesc, &header);
-			
+
 			// check if it's the filtered packet or another one
 			if (!pkt)
 				continue;

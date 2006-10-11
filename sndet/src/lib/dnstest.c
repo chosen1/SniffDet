@@ -60,8 +60,8 @@ struct dns_thread_data {
 	int tries;
 	unsigned int send_interval; // time betwen sending loops
 	user_callback callback;
-	char *fake_hwaddr;
-	char *fake_ipaddr;
+	u_char *fake_hwaddr;
+	u_char *fake_ipaddr;
 	ushort sport;
 	ushort dport;
 	char *payload;
@@ -83,7 +83,7 @@ static inline int bogus_callback(struct test_status *status, int msg_type,
 static void set_status(struct test_status *st);
 static void handle_in_thread_error(user_callback callback, int my_errno,
 		char *msg);
-static int dns_query_search4host(int pkt_offset, u_char *pkt,
+static int dns_query_search4host(int pkt_offset, const u_char *pkt,
 		char *hostdotdecimal, int pkt_len);
 static char *string_inversion(char *host);
 	
@@ -97,11 +97,11 @@ int sndet_dnstest(char *host,
 		struct test_info *info,
 
 		// bogus pkt information, optional
-		char *fake_ipaddr, // pkt destination
-		char *fake_hwaddr, // pkt destination
+		u_char *fake_ipaddr, // pkt destination
+		u_char *fake_hwaddr, // pkt destination
 		ushort dport,
 		ushort sport,
-		char *payload,
+		u_char *payload,
 		short int payload_len)
 {
 	struct in_addr temp_in_addr;
@@ -359,7 +359,7 @@ cleanup:
 }
 
 // timeout called when we receive a SIGALRM
-static void timeout_handler(int signum)
+static void timeout_handler(__attribute__((unused)) int signum)
 {
 	timed_out = 1;
 	DEBUG_CODE(printf("DEBUG: Time out ALARM - %s \n", __FILE__););
@@ -369,7 +369,7 @@ static void *dnstest_sender(void *thread_data)
 {
 	int i, j;
 	struct custom_info bogus_pkt;
-	unsigned char *pkt[DNS_TEST_PKTS_PER_BURST];
+	u_char *pkt[DNS_TEST_PKTS_PER_BURST];
 	unsigned int pkt_size[DNS_TEST_PKTS_PER_BURST];
 	struct dns_thread_data *td;
 	struct test_status status = {0, 0, 0};
@@ -489,7 +489,7 @@ static void *dnstest_receiver(void *thread_data)
 	struct dns_thread_data *td;
 	struct test_status status = {0, 0, 0};
 	struct pcap_pkthdr header;
-	unsigned char *pkt;
+	const u_char *pkt;
 	// reading poll structures
 	struct timeval read_timeout;
 	const int read_timeout_msec = 500;
@@ -564,10 +564,12 @@ static void *dnstest_receiver(void *thread_data)
 
 // bogus callback
 // used if the user didn't supply one (NULL)
-static inline int bogus_callback(struct test_status *status, int msg_type,
-	char *msg)
+static inline int bogus_callback(
+		__attribute__((unused)) struct test_status *status, 
+		__attribute__((unused)) int msg_type,
+		__attribute__((unused)) char *msg)
 {
-	// do nothing
+	// do nothing :)
 	return 0;
 }
 
@@ -601,23 +603,24 @@ static void handle_in_thread_error(user_callback callback, int my_errno,
 }
 
 // search for a host query inside a dns query packet
-static int dns_query_search4host(int pkt_offset, u_char *pkt,
+static int dns_query_search4host(int pkt_offset, const u_char *pkt,
 		char *host_dotdecimal, int pkt_len)
 {
-	struct libnet_ip_hdr *ip;
-	struct libnet_udp_hdr *udp;
-	struct libnet_dns_hdr *dns;
-	char *data, names[512];
+	const struct libnet_ip_hdr *ip;
+	const struct libnet_udp_hdr *udp;
+	const struct libnet_dns_hdr *dns;
+	const char *data;
+	char names[512];
 	char *inverted_host;
 	char buffer[MAX_HOSTNAME_LEN];
 	int left_bytes = pkt_len;
 	int cnt;
 
-	ip  = (struct libnet_ip_hdr *) (pkt + pkt_offset);
-	udp = (struct libnet_udp_hdr *) (pkt + pkt_offset + LIBNET_IP_H);
-	dns = (struct libnet_dns_hdr *) (pkt + pkt_offset + LIBNET_IP_H + 
+	ip  = (const struct libnet_ip_hdr *) (pkt + pkt_offset);
+	udp = (const struct libnet_udp_hdr *) (pkt + pkt_offset + LIBNET_IP_H);
+	dns = (const struct libnet_dns_hdr *) (pkt + pkt_offset + LIBNET_IP_H + 
 			LIBNET_UDP_H);
-	data = (char *) (pkt + pkt_offset + LIBNET_IP_H + LIBNET_UDP_H +
+	data = (const char *) (pkt + pkt_offset + LIBNET_IP_H + LIBNET_UDP_H +
 			LIBNET_DNS_H);
 	left_bytes -= (pkt_offset + LIBNET_IP_H + LIBNET_UDP_H + LIBNET_DNS_H);
 
@@ -635,8 +638,8 @@ static int dns_query_search4host(int pkt_offset, u_char *pkt,
 	}
 
 	while (cnt) {
-		(char *) data++;
-		strncat(names, (char *) data, cnt);
+		data++;
+		strncat(names, data, cnt);
 		data += cnt;
 		cnt = (char) *data;
 		strncat(names, ".", sizeof(names) - strlen(names));
