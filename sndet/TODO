@@ -10,19 +10,13 @@ Application
 ---------------------------------------------------------------------------
 
     - Be more interactive
-
     - Allow multiple network interfaces to be used (in a per-tests basis)
-
     - Improve target's file (allow ranges of IPs to be used)
-
-	- Config file parser is sort of brain-damaged. :-)
-
+    - Config file parser is sort of brain-damaged. :-)
     - Config file new options (add parser for payload, for example).
       Specially the options for the latency test.
-
     - The options for the latency_test must be passed in bogus_pkt, which
       must be filled entirely by the application.
-
     - Improve output plugins interface
 
 
@@ -30,13 +24,10 @@ Library
 ---------------------------------------------------------------------------
 
     - The callback should be called more times by the tests.
-
     - init_device() should be changed to something more generic...  like
-      init(). We need a raw socket to some operations, and having one
-      open for every interface doesn't sound like a good idea.
-
+      init(). We need a raw socket to some operations, and having one open
+      for every interface doesn't sound like a good idea.
     - Add more debug code and verbose code
-
     - Add variation of every test (like multiple hosts tests)
 
 
@@ -44,12 +35,10 @@ Documentation
 ---------------------------------------------------------------------------
 
     - Improve how-it-works document (in english)
-
     - Translate images used in our pt_BR paper to english
-
     - Improve libsniffdet manpage with a better description about every
       function
 
 
 # EOF
-# vim: set et tw=74
+# vim:et tw=74:
