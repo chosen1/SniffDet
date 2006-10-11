@@ -19,7 +19,7 @@
 
 #include <stdlib.h>
 #include <limits.h>
-#include <libnet1.h>
+#include <libnet.h>
 #include <signal.h>
 #include <time.h>
 #include <errno.h>

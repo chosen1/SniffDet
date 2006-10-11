@@ -26,7 +26,7 @@
 #undef __USE_GNU
 
 #include <pcap.h>
-#include <libnet1.h>
+#include <libnet.h>
 #include "libsniffdet.h"
 
 /* initialize an interface

@@ -17,7 +17,7 @@
  *  $Id$
  */
 
-#include <libnet1.h>
+#include <libnet.h>
 #include <pcap.h>
 #include <netinet/in.h>
 #include "libsniffdet.h"

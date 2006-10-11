@@ -19,7 +19,7 @@
 
 #include <stdlib.h>
 #include <limits.h>
-#include <libnet1.h>
+#include <libnet.h>
 #include <pcap.h>
 #include "libsniffdet.h"
 
