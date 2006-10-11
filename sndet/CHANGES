@@ -1,77 +1,65 @@
-$Id$
+$Id:$
 
-sniffdet current
+sniffdet 0.10
 ----------------------------------------------------------------------------
+
+This is a bugfix release, intended to fix compilation problems on modern
+Linux distributions. The project has been offline for a long time, but
+it has not been forgotten. :-)
+
+- new build-system, using state-of-the-art autootols techniques and
+  compiling with latest linux distributions :-)
+- patch from Andrew Lockhart <andrew [ at ] ingsoc.net>, fixing get_mac()
+  which was totally b0rken
 
 sniffdet 0.9
 ----------------------------------------------------------------------------
 
 2003 Jul 04
-- [Ademar] Fixed test cancelation using the callback (it was not working in
-  many cases).
-- [Ademar] Fixed test status report to the callback.
-- [Ademar] Created '/doc' directory. By now, this directory will contain
+- Fixed test cancelation using the callback (it was not working in many cases).
+- Fixed test status report to the callback.
+- Created '/doc' directory. By now, this directory will contain
   only technical documentation (in english).
-- [Ademar] Added libsniffdet-usage-example.c to /doc (guess what is it) :)
-
-2003 Jul 03
-- [Ademar] Fixed segfault when using a targets file.
-- [Ademar] Fixed tmout and tries default values in icmp, dns and arp
+- Added libsniffdet-usage-example.c to /doc (guess what is it) :)
+- Fixed segfault when using a targets file.
+- Fixed tmout and tries default values in icmp, dns and arp
   tests.
-
-2003 Jun 30
-- [Ademar] Changes in snprintf() calls to avoid format string bugs -
+- Changes in snprintf() calls to avoid format string bugs -
   scan_args(), exploitable only if sniffdet is suid (not standard,
   strongly not recommended).
-
-2003 Apr 27
-- [Ademar] sndet_random() is now more robust. 
-- [Ademar] Fixed issue #645769 (arp test validity could be checked).
+- sndet_random() is now more robust. 
+- Fixed issue #645769 (arp test validity could be checked).
   Actually, I'm not just checking the validity, but eliminating
   the false positives possibility that existed before. :)
-- [Ademar] Misc cosmetic changes...
-
-2003 Jan 22
-- [Ademar] Added RCS tags to all .{c,h} files
+- Added RCS tags to all .{c,h} files
 
 sniffdet 0.8
 ----------------------------------------------------------------------------
 
-2003 Jan 12
-- [Ademar] 0.8 release
-- [Ademar] Minor code cleanups and interface cosmetic changes
-
-2003 Jan 10
-- [Ademar] Fixed bug #645773 (cmdline args and conf_file options mixed)
+- Minor code cleanups and interface cosmetic changes
+- Fixed bug #645773 (cmdline args and conf_file options mixed)
   The approach I took is a little nasty IMHO (I call scan_args() twice), but
   it works... :-)
-- [Ademar] -p/--plugin was not working... fixed.
-- [Ademar] Renamed plugins/plugin.h to plugins/plugins.h
-- [Ademar] Added a new section to configuration file: plugins{}, with an
+- -p/--plugin was not working... fixed.
+- Renamed plugins/plugin.h to plugins/plugins.h
+- Added a new section to configuration file: plugins{}, with an
   option to set the filename for the xml plugin. In order to do that, I
   changed the plugins API to accept the config structure as one of the
   parameters.
-
-2003 Jan 09
-- [Ademar] Fixed bug #662856 (Segmentation fault with CIDR notation
+- Fixed bug #662856 (Segmentation fault with CIDR notation
   addresses), reported by Janis Putrams:
   sniffdet was getting sig11 when supplied with a bogus hostname target
   (or something it doesn't understand, like a CIDR network address). The
   problem was in two places: 1) the tests were returning with error without
   setting the info structure. 2) the tests were not returning in all errors,
   specially the latency_test.
-- [Ademar] Added sniffdet.conf-debug, with configuration options for debug
+- Added sniffdet.conf-debug, with configuration options for debug
   purposes
-
-2003 Jan 03
-- [Ademar] Implemented parser for tcp_flags option in latency_test.
-- [Ademar] Code cleanups
-
-2002 Nov 30
-- [Ademar] Parallel make doesn't work for sniffdet, so removing it from
+- Implemented parser for tcp_flags option in latency_test.
+- Parallel make doesn't work for sniffdet, so removing it from
   RPM specfile.
 
-sniffdet 0.7
+sniffdet 0.7 (first public release)
 ----------------------------------------------------------------------------
 
 2002 Nov 29
