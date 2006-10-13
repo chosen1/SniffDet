@@ -41,7 +41,7 @@ static void show_usage(void);
 static void show_help(void);
 
 /* static data */
-// FIXME: use a global structure to hold that? 
+// XXX: use a global structure to hold that? 
 //        I don't think so
 static struct arguments args;
 static struct snd_tests run_tests;
@@ -200,7 +200,7 @@ int main(int argc, char **argv)
 	}
 
 	mylog(config.global.logtype, logfd,
-			"%s", "--- SniffDet session started ---");
+			"%s", "--- sniffdet session started ---");
 
 	// bump some network info to the log
 	{
@@ -413,7 +413,7 @@ int main(int argc, char **argv)
 				"Error: %s", errbuf);
 
 	mylog(config.global.logtype, logfd,
-			"%s", "--- SniffDet session ended ---\n");
+			"%s", "--- sniffdet session ended ---\n");
 
 	// close log file
 	if (config.global.logfilename[0] != '\0')
