@@ -2,11 +2,9 @@
 Sniffdet - Remote Sniffer Detection Tool/Library
 http://sniffdet.sourceforge.net
 
-$Id$
-
 Copyright (c) 2002-2003
-     Ademar de Souza Reis Jr. <myself@ademar.org>
-     Milton Soares Filho <eu_mil@terra.com.br>
+     Ademar de Souza Reis Jr. <ademar@ademar.org>
+     Milton Soares Filho <milton.soares.filho@gmail.com>
 
 This program is licensed under the GNU/GPL version 2.
 See file COPYING for details.
