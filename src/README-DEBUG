@@ -8,6 +8,4 @@ plugindir if you didn't installed it yet:
 Of course, remember to compile it with debug activated (pass
 --enable-debug to configure)
 
-$Id$
-
-# vim: set et tw=74:
+# vim:et tw=74:
