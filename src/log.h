@@ -17,6 +17,9 @@
  */
 
 
+#ifndef __LOG_H__
+#define __LOG_H__
+
 /*
  * Multiple outputs can be used
  * by ORing these values
@@ -29,3 +32,5 @@
 
 #define MAX_LOG_MSG_LEN 512
 int mylog(unsigned int ltype, int fd, const char *format, ...);
+
+#endif
