@@ -18,8 +18,9 @@
  */
 
 #ifndef __PLUGINS_H__
+#define __PLUGINS_H__
 
 int test_output(char *target, struct test_info info[],
 		struct config_options config, char *errbuf);
 
-#define __PLUGINS_H__
+#endif
