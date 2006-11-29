@@ -50,17 +50,17 @@ test_config_CPPFLAGS = $(libsniffdet_la_CPPFLAGS) $(AM_CPPFLAGS)
 plugindir = $(libdir)/sniffdet/plugins
 plugin_LTLIBRARIES = null.la
 null_la_SOURCES = $(csourcedir)/plugins/null.c $(csourcedir)/plugins/plugins.h
-null_la_LDFLAGS = -module
+null_la_LDFLAGS = -avoid-version -export-dynamic -module
 null_la_CPPFLAGS = $(LIBNET_DEFINES)
 
 plugin_LTLIBRARIES += stdout.la
 stdout_la_SOURCES = $(csourcedir)/plugins/stdout.c $(csourcedir)/plugins/plugins.h
-stdout_la_LDFLAGS = -module
+stdout_la_LDFLAGS = -avoid-version -export-dynamic -module
 stdout_la_CPPFLAGS = $(LIBNET_DEFINES)
 
 plugin_LTLIBRARIES += xml.la
 xml_la_SOURCES = $(csourcedir)/plugins/xml.c $(csourcedir)/plugins/plugins.h
-xml_la_LDFLAGS = -module
+xml_la_LDFLAGS = -avoid-version -export-dynamic -module
 xml_la_CPPFLAGS = $(LIBNET_DEFINES)
 
 

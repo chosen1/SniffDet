@@ -21,6 +21,7 @@ AC_PROG_INSTALL
 AC_PROG_LIBTOOL
 AC_PROG_CC
 
+AC_LIBTOOL_DLOPEN
 
 dnl Checks for header files.
 AC_CHECK_HEADERS([limits.h netdb.h netinet/in.h stdlib.h string.h sys/time.h unistd.h dlfcn.h syslog.h sys/param.h])
