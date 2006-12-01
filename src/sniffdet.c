@@ -535,16 +535,12 @@ static void scan_args(int argc, char **argv)
 			case 'c':
 				if (pass)
 					break;
-				string_len = sizeof(char) * (strlen(optarg) + 1);
-				args.configfile = malloc(string_len);
-				strncpy(args.configfile, optarg, string_len);
+				args.configfile = strdup(optarg);
 				break;
 			case 'f':
 				if (pass)
 					break;
-				string_len = sizeof(char) * (strlen(optarg) + 1);
-				args.targetsfile = malloc(string_len);
-				strncpy(args.targetsfile, optarg, string_len);
+				args.targetsfile = strdup(optarg);
 				break;
 			case 't':
 				if (pass)
@@ -577,9 +573,7 @@ static void scan_args(int argc, char **argv)
 
 	/* get target */
 	if (optind < argc) {
-		string_len = sizeof(char) * (strlen(argv[optind]) + 1);
-		args.target = (char *) malloc(string_len);
-		strncpy(args.target, argv[optind], string_len);
+		args.target = strdup(argv[optind]);
 	} 
 	else {
 		if (args.targetsfile == NULL) { // not using a targetsfile destination
