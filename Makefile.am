@@ -73,9 +73,12 @@ if CHECK
 #utest_frobnicator_LDADD = $(CHECK_LIBS) $(LDADD)
 endif
 
-EXTRA_DIST = $(srcdir)/m4/auxdevel.m4 $(srcdir)/m4/check.m4 \
+EXTRA_DIST = $(srcdir)/m4/auxdevel.m4 \
+             $(srcdir)/m4/define_dirs.m4 \
+             $(srcdir)/m4/check.m4 \
              $(srcdir)/m4/acx_pthread.m4 \
-             $(srcdir)/mk/auxdevel.am $(srcdir)/mk/auxdevel-libtool.am \
+             $(srcdir)/mk/auxdevel.am \
+             $(srcdir)/mk/libtool-fix.am \
              $(srcdir)/README \
              $(srcdir)/TODO \
              $(srcdir)/doc/RESOURCES \
@@ -91,9 +94,13 @@ EXTRA_DIST = $(srcdir)/m4/auxdevel.m4 $(srcdir)/m4/check.m4 \
 
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-efence --enable-debug \
-                            --enable-warnings --enable-check
+                            --enable-warnings
+#--enable-check
 
 # this variable is scanned by autoreconf and needs to be static (no expansion)
 ACLOCAL_AMFLAGS = -I m4
 
 include $(srcdir)/mk/auxdevel.am
+include $(srcdir)/mk/libtool-fix.am
+
+# vim: set et tw=74:

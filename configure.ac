@@ -60,7 +60,7 @@ AC_SUBST(LIBLTDL_LIBS)
 ACX_PTHREAD(, [AC_MSG_ERROR("*** POSIX threads support not found! You need it to build $PACKAGE_NAME ***")])
 
 # enable configure options and automake conditionals useful for developers
-# look at devel.m4 for detailed documentation
+# look at auxdevel.m4 for detailed documentation
 AC_SUBST(csourcedir, $srcdir/src)
 AC_SUBST(headerdir, "")
 AC_SUBST(utestdir, $srcdir/utest)
