@@ -2,6 +2,8 @@
 ## by the included file mk/auxdevel.am.  If you want to use program-specific
 ## flags, do something like frobnicator_CFLAGS = -march=athlon $(AM_CFLAGS)
 
+AUTOMAKE_OPTIONS = foreign
+
 # libsniffdet
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libsniffdet.pc

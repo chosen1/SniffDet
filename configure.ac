@@ -7,21 +7,19 @@ AC_CONFIG_SRCDIR([src/sniffdet.c])
 AC_CONFIG_AUX_DIR([aux])
 AC_CONFIG_MACRO_DIR([m4])
 
-AM_INIT_AUTOMAKE([1.7.9 foreign])
+AM_INIT_AUTOMAKE([1.7.9])
+AM_MAINTAINER_MODE
 
 AC_CONFIG_HEADERS([config.h])
-
-AC_GNU_SOURCE
 
 AC_CANONICAL_HOST
 
 dnl Checks for programs.
 AC_PROG_MAKE_SET
 AC_PROG_INSTALL
+AC_LIBTOOL_DLOPEN
 AC_PROG_LIBTOOL
 AC_PROG_CC
-
-AC_LIBTOOL_DLOPEN
 
 dnl Checks for header files.
 AC_CHECK_HEADERS([limits.h netdb.h netinet/in.h stdlib.h string.h sys/time.h unistd.h dlfcn.h syslog.h sys/param.h])
