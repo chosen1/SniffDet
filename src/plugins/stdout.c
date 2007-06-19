@@ -58,7 +58,7 @@ int test_output(char *target, struct test_info info[],
 		if (info[i].valid)
 			valids++;
 		printf("Started on: %s\n", timeString(info[i].time_start));
-		printf("Finished on: %s\n", timeString(info[i].time_fini)); 
+		printf("Finished on: %s\n", timeString(info[i].time_fini));
 		printf("Bytes Sent: %d\n", info[i].b_sent);
 		printf("Bytes Received: %d\n", info[i].b_recvd);
 		printf("Packets Sent: %d\n", info[i].pkts_sent);
@@ -121,7 +121,7 @@ static int print_latencytest_results(struct test_info info, int verbose)
 }
 
 
-/* 
+/*
  * timeString()
  * converts a time to a particular representation:
  * "The preferred date and time representation for the current locale"
@@ -129,7 +129,7 @@ static int print_latencytest_results(struct test_info info, int verbose)
 static char *timeString(time_t t)
 {
 	static char buffer[64];
-	static char timestr[64]; 
+	static char timestr[64];
     struct tm *local;
 
     local = localtime(&t);

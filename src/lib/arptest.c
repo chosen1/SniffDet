@@ -80,7 +80,7 @@ static inline int bogus_callback(struct test_status *status, int msg_type,
 static void set_status(struct test_status *st);
 static void handle_in_thread_error(user_callback callback, int my_errno,
 	char *msg);
-	
+
 // Main test thread
 int sndet_arptest(char *host,
 		struct sndet_device *device,
@@ -124,12 +124,12 @@ int sndet_arptest(char *host,
 	// mandatory
 	if (!host || !device) {
 		exit_status = errno ? errno : EINVAL;
-		callback(&status, ERROR, 
+		callback(&status, ERROR,
 				"Error: invalid args provided to test function [internal error]");
 
 		goto cleanup;
 	}
-	
+
 	// init internals
 	timed_out = 0;
 	got_suspect = 0;
@@ -142,11 +142,11 @@ int sndet_arptest(char *host,
 	pkts_recvd = 0;
 
 	pthread_mutex_init(&callback_mutex, NULL);
-	
+
 	// fill threads argument structure
 	thdata.host = host;
 	thdata.device = device;
-	
+
 	if (!tries)
 		thdata.tries = DEFAULT_NUMBER_OF_TRIES;
 	else
@@ -155,7 +155,7 @@ int sndet_arptest(char *host,
 	if (!send_interval)
 		thdata.send_interval = DEFAULT_SEND_INTERVAL;
 	else
-		thdata.send_interval = send_interval; 
+		thdata.send_interval = send_interval;
 
 
 	if (!fakehwaddr)
@@ -177,7 +177,7 @@ int sndet_arptest(char *host,
 	// Note this is possible because a ARP response is a copy of the request
 	// packet with the sender/target fields swaped.
 	thdata.iface_mac = default_source_fake_hw_addr;
-	
+
 	// get ip address from interface
 	temp_in_addr.s_addr = sndet_get_iface_ip_addr(device, NULL);
 	thdata.iface_ip = temp_in_addr.s_addr;
@@ -206,7 +206,7 @@ int sndet_arptest(char *host,
 	{
 		// check for meaningful value in errno
 		exit_status = errno ? errno : EAGAIN;
-		
+
 		set_status(&status);
 		callback(&status, ERROR, "Error compiling pcap filter");
 
@@ -216,10 +216,10 @@ int sndet_arptest(char *host,
 	if (pcap_setfilter(device->pktdesc, &bpf) < 0) {
 		// check for meaningful value in errno
 		exit_status = errno ? errno : EAGAIN;
-		
+
 		set_status(&status);
 		callback(&status, ERROR, "Error setting pcap filter");
-		
+
 		pcap_freecode(&bpf);
 		goto cleanup;
 	}
@@ -249,16 +249,16 @@ int sndet_arptest(char *host,
 		// signal sender
 		got_error = 1;
 		pthread_join(sender_th, NULL);
-		
+
 		callback(&status, ERROR, "Error launching receiver thread");
 		goto cleanup;
 	}
-	
+
 	// Setting timeout alarm
 	if (tmout) {
 		// setting interval
 		alarm(tmout);
-		
+
 		// setting handler
 		sa.sa_handler = timeout_handler;
 		sa.sa_flags = SA_RESETHAND;
@@ -273,21 +273,21 @@ int sndet_arptest(char *host,
 			pthread_mutex_unlock(&callback_mutex);
 			pthread_join(sender_th, NULL);
 			pthread_join(receiver_th, NULL);
-			
+
 			callback(&status, ERROR, "Error setting timeout handler");
 			goto cleanup;
 		}
 	}
-	
+
 	pthread_join(sender_th, NULL);
-	
+
 	// avoid having a receiver running forever if the callback can't
 	// stop it
 	if (!tmout && !callback) {
 		sndet_sleep(DEFAULT_RECEIVER_HOLD_TO_CANCEL, 0);
 		pthread_cancel(receiver_th);
 	}
-	
+
 	pthread_join(receiver_th, NULL);
 
 cleanup:
@@ -315,7 +315,7 @@ cleanup:
 				exit_status);
 		callback(&status, ENDING, buff);
 	}
-	else 
+	else
 		callback(&status, ENDING, "Test finished [OK]");
 
 	return exit_status;
@@ -376,11 +376,11 @@ static void *arptest_sender(void *thread_data)
 		if (libnet_write_link_layer(td->device->ln_int,
 			td->device->device, pkt, pkt_size) < 0)
 		{
-			handle_in_thread_error(td->callback, errno, 
+			handle_in_thread_error(td->callback, errno,
 					"Error sending packet");
 			break;
 		}
-		
+
 		// signs running information
 		pthread_mutex_lock(&callback_mutex);
 		sender_percent = (i*100)/td->tries;
@@ -424,7 +424,7 @@ static void *arptest_receiver(void *thread_data)
 	// keep looping 'til find something or timeouts or the callback
 	// signals cancelation or forever...
 	while (!got_suspect && !cancel_test && !timed_out && !got_error) {
-		
+
 		FD_ZERO(&fds);
 		FD_SET(devfd, &fds);
 
@@ -433,7 +433,7 @@ static void *arptest_receiver(void *thread_data)
 
 		// polls the interface
 		selret = select(devfd + 1, &fds, NULL, NULL, &read_timeout);
-	
+
 		if (selret < 0) {
 			//handle_in_thread_error(td->callback, errno,
 			//	"Error polling interface");
@@ -447,13 +447,13 @@ static void *arptest_receiver(void *thread_data)
 			continue;
 		} else {
 			pkt = pcap_next(td->device->pktdesc, &header);
-			
+
 			// check if it's the filtered packet or another one
 			if (!pkt)
 				continue;
-			
+
 			pthread_mutex_lock(&callback_mutex);
-			
+
 			if (pkt) {
 				got_suspect = 1;
 				bytes_recvd = header.len;
@@ -467,18 +467,18 @@ static void *arptest_receiver(void *thread_data)
 				set_status(&status);
 				cancel_test = td->callback(&status, RUNNING, "Waiting for reply");
 			}
-			
+
 			pthread_mutex_unlock(&callback_mutex);
 		}
 	}
-	
+
 	pthread_exit(0);
 }
 
 // bogus callback
 // used if the user didn't supply one (NULL)
 static inline int bogus_callback(
-		__attribute__((unused)) struct test_status *status, 
+		__attribute__((unused)) struct test_status *status,
 		__attribute__((unused)) int msg_type,
 		__attribute__((unused)) char *msg)
 {

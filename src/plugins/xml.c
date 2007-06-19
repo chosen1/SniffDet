@@ -22,7 +22,7 @@
 #include "../sniffdet.h"
 #include "plugins.h"
 
-static int xml_output(char *target, char *file, struct test_info info[], 
+static int xml_output(char *target, char *file, struct test_info info[],
 		int verbose, char *errbuf);
 static int print_icmptest_results(struct test_info info, int verbose);
 static int print_arptest_results(struct test_info info, int verbose);
@@ -52,7 +52,7 @@ int test_output(char *target, struct test_info info[],
 			config.global.verbose, errbuf);
 }
 
-static int xml_output(char *target, char *filename, 
+static int xml_output(char *target, char *filename,
 		struct test_info info[], int verbose, char *errbuf)
 {
 
@@ -87,7 +87,7 @@ static int print_info_header(struct test_info info, char *errbuf)
 		info.test_short_desc);
 	fprintf(xmlfile, "\t<validation>%s</validation>\n",
 		info.valid ? "VALID" : "INVALID");
-	fprintf(xmlfile, "\t<start-time>%s</start-time>\n", 
+	fprintf(xmlfile, "\t<start-time>%s</start-time>\n",
 		timeString(info.time_start));
 	fprintf(xmlfile, "\t<finish-time>%s</finish-time>\n",
 		timeString(info.time_fini));
@@ -109,7 +109,7 @@ static int print_icmptest_results(struct test_info info, int verbose)
 {
 	fprintf(xmlfile, "\t<result>%s</result>\n",
 			info.test.icmp.positive ? "POSITIVE" : "NEGATIVE");
-		
+
 	return info.test.icmp.positive;
 }
 
@@ -147,7 +147,7 @@ static int print_latencytest_results(struct test_info info, int verbose)
 	return 0;
 }
 
-/* 
+/*
  * timeString()
  * converts a time to a particular representation:
  * "The preferred date and time representation for the current locale"
@@ -155,7 +155,7 @@ static int print_latencytest_results(struct test_info info, int verbose)
 static char *timeString(time_t t)
 {
 	static char buffer[64];
-	static char timestr[64]; 
+	static char timestr[64];
     struct tm *local;
 
     local = localtime(&t);

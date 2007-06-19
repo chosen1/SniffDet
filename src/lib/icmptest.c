@@ -80,7 +80,7 @@ static void set_status(struct test_status *st);
 
 static void handle_in_thread_error(user_callback callback, int my_errno,
 	char *msg);
-	
+
 // Main test thread
 int sndet_icmptest(
 	char *host,
@@ -104,12 +104,12 @@ int sndet_icmptest(
 
 	if (info)
 		memset(info, 0, sizeof(struct test_info));
-	
+
 	// set basic information
     if (info) {
         info->test_name = "ICMP Test";
         info->code = ICMP_TEST;
-        info->test_short_desc = 
+        info->test_short_desc =
 			"Check if target replies a bogus ICMP request (wrong MAC)";
         info->time_start = time(NULL);
     }
@@ -124,7 +124,7 @@ int sndet_icmptest(
 	// mandatory
 	if (!host || !device) {
 		exit_status = errno ? errno : EINVAL;
-		callback(&status, ERROR, 
+		callback(&status, ERROR,
 				"Error: invalid args provided to test function [internal error]");
 
 		goto cleanup;
@@ -142,7 +142,7 @@ int sndet_icmptest(
 	pkts_recvd = 0;
 
 	pthread_mutex_init(&callback_mutex, NULL);
-	
+
 	// fill threads argument structure
 	thdata.host = host;
 	thdata.device = device;
@@ -154,11 +154,11 @@ int sndet_icmptest(
 		thdata.tries = DEFAULT_NUMBER_OF_TRIES;
 	else
 	    thdata.tries = tries;
-	
+
 	if (!send_interval)
 		thdata.send_interval = DEFAULT_SEND_INTERVAL;
 	else
-		thdata.send_interval = send_interval; 
+		thdata.send_interval = send_interval;
 
 
 	thdata.my_icmp_id = sndet_random() % SHRT_MAX;
@@ -172,13 +172,13 @@ int sndet_icmptest(
 	memset(filter, 0, sizeof(filter));
 	snprintf(filter, sizeof(filter), "%s %d %s %s",
 		"icmp[0] = 0 and icmp[4:2] =", thdata.my_icmp_id, "and src host", host);
-	
+
 	if (pcap_compile(device->pktdesc, &bpf, filter, 0,
 		device->netmask) < 0)
 	{
 		// check for meaningful value in errno
 		exit_status = errno ? errno : EAGAIN;
-		
+
 		set_status(&status);
 		callback(&status, ERROR, "Error compiling pcap filter");
 
@@ -188,10 +188,10 @@ int sndet_icmptest(
 	if (pcap_setfilter(device->pktdesc, &bpf) < 0) {
 		// check for meaningful value in errno
 		exit_status = errno ? errno : EAGAIN;
-		
+
 		set_status(&status);
 		callback(&status, ERROR, "Error setting pcap filter");
-		
+
 		pcap_freecode(&bpf);
 		goto cleanup;
 	}
@@ -221,16 +221,16 @@ int sndet_icmptest(
 		// signal sender
 		got_error = 1;
 		pthread_join(sender_th, NULL);
-		
+
 		callback(&status, ERROR, "Error launching receiver thread [internal]");
 		goto cleanup;
 	}
-	
+
 	// Setting timeout alarm
 	if (tmout) {
 		// setting interval
 		alarm(tmout);
-		
+
 		// setting handler
 		sa.sa_handler = timeout_handler;
 		sa.sa_flags = SA_RESETHAND;
@@ -245,21 +245,21 @@ int sndet_icmptest(
 			pthread_mutex_unlock(&callback_mutex);
 			pthread_join(sender_th, NULL);
 			pthread_join(receiver_th, NULL);
-			
+
 			callback(&status, ERROR, "Error setting timeout handler [internal]");
 			goto cleanup;
 		}
 	}
-	
+
 	pthread_join(sender_th, NULL);
-	
+
 	// avoid having a receiver running forever if the callback can't
 	// stop it
 	if (!tmout && !callback) {
 		sndet_sleep(DEFAULT_RECEIVER_HOLD_TO_CANCEL, 0);
 		pthread_cancel(receiver_th);
 	}
-	
+
 	pthread_join(receiver_th, NULL);
 
 cleanup:
@@ -276,7 +276,7 @@ cleanup:
         info->pkts_recvd = pkts_recvd;
 		info->test.icmp.positive = got_suspect;
 	}
-	
+
 	sender_percent = 100;
 	set_status(&status);
 	if (timed_out)
@@ -287,7 +287,7 @@ cleanup:
 				exit_status);
 		callback(&status, ENDING, buff);
 	}
-	else 
+	else
 		callback(&status, ENDING, "Test finished [OK]");
 
 	return exit_status;
@@ -309,19 +309,19 @@ static void *icmptest_sender(void *thread_data)
 		LIBNET_ETH_H + 56; // using same payload lenght as in a real ping
 	struct icmp_thread_data *td;
 	struct test_status status = {0, 0, 0};
-	
+
 	td = (struct icmp_thread_data *)thread_data;
-	
+
 	// starts at an aleatory sequency number
 	my_seq = sndet_random() % SHRT_MAX;
 
 	// initialize packet
 	if (libnet_init_packet(pkt_size, &pkt) < 0) {
-		handle_in_thread_error(td->callback, errno, 
+		handle_in_thread_error(td->callback, errno,
 				"Error allocating package [internal]");
 		pthread_exit(0);
 	}
-	
+
 	// filling in the packet
 	// TODO - check return values and MAC address
 
@@ -353,7 +353,7 @@ static void *icmptest_sender(void *thread_data)
 		0,
 		pkt + LIBNET_ETH_H);
 
-   
+
 	/*int libnet_build_icmp_echo(u_char type, u_char code, u_short id,
 		u_short seq, const u_char *payload, int payload_s, u_char *buf);
 	*/
@@ -365,15 +365,15 @@ static void *icmptest_sender(void *thread_data)
 			NULL,
 			0,
 			pkt + LIBNET_IP_H + LIBNET_ETH_H);
-	   
+
 	if (libnet_do_checksum(pkt + LIBNET_ETH_H, IPPROTO_IP,
 		LIBNET_IP_H) < 0)
 	{
-		handle_in_thread_error(td->callback, errno, 
+		handle_in_thread_error(td->callback, errno,
 				"Error calculating checksum");
 		goto sender_cleanup;
 	}
-	
+
 	if (libnet_do_checksum(pkt + LIBNET_ETH_H, IPPROTO_ICMP,
 		pkt_size - LIBNET_ETH_H - LIBNET_IP_H) < 0)
 	{
@@ -381,7 +381,7 @@ static void *icmptest_sender(void *thread_data)
 				"Error calculating checksum");
 		goto sender_cleanup;
 	}
-	
+
 	// start sending
 	for (i=0; i < td->tries; i++) {
 
@@ -389,11 +389,11 @@ static void *icmptest_sender(void *thread_data)
 		if (libnet_write_link_layer(td->device->ln_int,
 			td->device->device, pkt, pkt_size) < 0)
 		{
-			handle_in_thread_error(td->callback, errno, 
+			handle_in_thread_error(td->callback, errno,
 					"Error sending packet");
 			break;
 		}
-		
+
 		// signs running information
 		pthread_mutex_lock(&callback_mutex);
 		sender_percent = (i*100)/td->tries;
@@ -410,7 +410,7 @@ static void *icmptest_sender(void *thread_data)
 		// increment seq
 		libnet_build_icmp_echo(ICMP_ECHO, 0, td->my_icmp_id, ++my_seq,
 			NULL, 0, pkt + LIBNET_IP_H + LIBNET_ETH_H);
-		   
+
 		if (libnet_do_checksum(pkt + LIBNET_ETH_H, IPPROTO_IP,
 			LIBNET_IP_H) < 0)
 		{
@@ -418,7 +418,7 @@ static void *icmptest_sender(void *thread_data)
 				"Error calculating checksum");
 			break;
 		}
-		
+
 		if (libnet_do_checksum(pkt + LIBNET_ETH_H, IPPROTO_ICMP,
 			LIBNET_ICMP_ECHO_H) < 0)
 		{
@@ -453,7 +453,7 @@ static void *icmptest_receiver(void *thread_data)
 	td = (struct icmp_thread_data *)thread_data;
 
 	devfd = pcap_fileno(td->device->pktdesc);
-	
+
 	// keep looping 'til find something or timeouts or the callback
 	// signals cancelation or forever...
 	while (!got_suspect && !cancel_test && !timed_out && !got_error) {
@@ -485,9 +485,9 @@ static void *icmptest_receiver(void *thread_data)
 			// check if it's the filtered packet or another one
 			if (!pkt)
 				continue;
-			
+
 			pthread_mutex_lock(&callback_mutex);
-			
+
 			if (pkt) {
 				got_suspect = 1;
 				bytes_recvd = header.len;
@@ -500,11 +500,11 @@ static void *icmptest_receiver(void *thread_data)
 				set_status(&status);
 				cancel_test = td->callback(&status, RUNNING, "Waiting for reply");
 			}
-			
+
 			pthread_mutex_unlock(&callback_mutex);
 		}
 	}
-	
+
 	pthread_exit(0);
 }
 

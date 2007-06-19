@@ -41,7 +41,7 @@ static void show_usage(void);
 static void show_help(void);
 
 /* static data */
-// XXX: use a global structure to hold that? 
+// XXX: use a global structure to hold that?
 //        I don't think so
 static struct arguments args;
 static struct snd_tests run_tests;
@@ -110,7 +110,7 @@ static int tests_msg_callback(struct test_status *status,
 	return cancel_tests ? 1 : 0;
 }
 
-/* TODO: 
+/* TODO:
  * Our main function is big... We could split it in several little
  * static functions and call them (like the handling of config file,
  * plugins, etc).
@@ -236,7 +236,7 @@ int main(int argc, char **argv)
 			DABORT();
 
 		fclose(f_hosts);
-	} 
+	}
 	else {
 		targets = malloc(sizeof (char *) * 2);
 		targets[0] = args.target;
@@ -252,7 +252,7 @@ int main(int argc, char **argv)
 	}
 	else {
 		if (config.global.verbose) {
-			mylog(config.global.logtype, logfd, 
+			mylog(config.global.logtype, logfd,
 					"Dropping root privileges UID: %d, GID: %d",
 					config.global.UID, config.global.GID);
 		}
@@ -268,7 +268,7 @@ int main(int argc, char **argv)
 	// open output plugin
 	snprintf(plugin_path, PATH_MAX, "%s/%s", config.global.plugins_dir, config.global.plugin);
 	if (config.global.verbose) {
-		mylog(config.global.logtype,  logfd, 
+		mylog(config.global.logtype,  logfd,
 			"Opening plugin: %s\n", plugin_path);
 	}
 	o_plugin = dlopen(plugin_path, RTLD_LAZY);
@@ -380,7 +380,7 @@ int main(int argc, char **argv)
 					device,
 					config.latencytest.timeout, // timeout (sec)
 					// interval between measures (msec)
-					config.latencytest.probe_interval, 
+					config.latencytest.probe_interval,
 					tests_msg_callback,
 					&t_info[test++],
 					NULL); // bogus_pkt
@@ -398,7 +398,7 @@ int main(int argc, char **argv)
 		if ((*test_output)(targets[i], t_info, config, errbuf))
 			mylog(config.global.logtype | LOG_USE_STDERR, logfd,
 					"Error: %s", errbuf);
-	
+
 	} // end targets loop
 
 	// close plugin
@@ -460,7 +460,7 @@ static void set_global_defaults(void)
 
 
 /* scan_args()
- * call getopt*() to process the command line arguments 
+ * call getopt*() to process the command line arguments
  * passed. Fills a global struct with some info.
  *
  * Notice we call this function a second time after we read the config file
@@ -574,7 +574,7 @@ static void scan_args(int argc, char **argv)
 	/* get target */
 	if (optind < argc) {
 		args.target = strdup(argv[optind]);
-	} 
+	}
 	else {
 		if (args.targetsfile == NULL) { // not using a targetsfile destination
 			fprintf(stderr, "Error: No destination target!\n");
@@ -616,7 +616,7 @@ static int parse_testnames(char *names)
 		run_tests.latencytest = 1;
 		count++;
 	}
-	
+
 	return count;
 }
 

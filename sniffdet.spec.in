@@ -24,8 +24,8 @@ an application to run the tests.
 
 %description -l pt_BR
 Sniffdet é uma implementação aberta de um conjunto de testes
-para detecção remota de sniffers em redes TCP/IP. O Pacote é 
-composto por uma biblioteca flexível e simples de usar além 
+para detecção remota de sniffers em redes TCP/IP. O Pacote é
+composto por uma biblioteca flexível e simples de usar além
 de uma aplicação para execução dos testes.
 
 %if %{with_devel}

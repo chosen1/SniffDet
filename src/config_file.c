@@ -121,7 +121,7 @@ struct config_section_t {
 // structure to handle sections variables
 struct config_variables_t {
 	char *var_name;
-	int (*var_handler)(struct config_variables_t *self, 
+	int (*var_handler)(struct config_variables_t *self,
 			enum section_state state);
 	void *var[CFG_NUMBER_OF_SECTIONS];
 };
@@ -206,7 +206,7 @@ static struct config_variables_t config_vars[] = {
 			NULL,
 			NULL,
 			NULL,
-			NULL 
+			NULL
 		}
 	},
 	{ CFG_VAR_LOGTYPE, 			get_logtype,
@@ -233,7 +233,7 @@ static struct config_variables_t config_vars[] = {
 			NULL,
 			NULL,
 			NULL,
-			NULL 
+			NULL
 		}
 	},
 	{ CFG_VAR_PLUGIN,			get_string,
@@ -243,7 +243,7 @@ static struct config_variables_t config_vars[] = {
 			NULL,
 			NULL,
 			NULL
-		}	
+		}
 	},
 	{ CFG_VAR_UID,				get_int,
 		{ &(config.global.UID),
@@ -531,7 +531,7 @@ static char *get_var_name(void)
 		i++;
 		j++;
 	}
-	
+
 	var_name[j] = '\0';
 
 	return var_name;
@@ -562,14 +562,14 @@ static int get_string(struct config_variables_t *self, enum section_state state)
 	while (line_buffer[i++] != '"')
 		;
 
-	// copy name until a '"' 
+	// copy name until a '"'
 	while (line_buffer[i] != '"') {
 		string_value[j] = line_buffer[i];
 		i++;
 		j++;
 		// we reached the end of the buffer... Ops
 		if (i - 2 == MAX_CFG_VAR_SIZE) {
-			syntax_error("variable value to big to fit in buffer\n"); 
+			syntax_error("variable value to big to fit in buffer\n");
 			return -1;
 		}
 	}
@@ -649,14 +649,14 @@ static int get_mac(struct config_variables_t *self, enum section_state state)
 		else
 			buf_ptr = end_ptr + 1;
 	}
-	
+
 	if (*end_ptr != '}')
 		syntax_error("Expected '}' instead of %c.\n", *end_ptr);
 
 	return 0;
 }
 
-// TODO: 
+// TODO:
 // We may improve that in the future...
 static int get_ip(struct config_variables_t *self, enum section_state state)
 {
@@ -777,7 +777,7 @@ static int get_payload(
 static void syntax_error(const char *format, ...)
 {
 	va_list ap;
-	
+
 	va_start(ap, format);
 	fprintf(stderr, "*** Syntax error in \"%s\" at line %d:\n", f_name, line);
 	fprintf(stderr, "    ");

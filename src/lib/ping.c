@@ -85,7 +85,7 @@ static void *ping_thread_catcher(void *arg);
  * returns non zero if failed
  */
 int sndet_ping_host(
-	char *host,	
+	char *host,
 	struct sndet_device *device,
 	long tmout, // secs
 	long send_interval, // msecs
@@ -96,17 +96,17 @@ int sndet_ping_host(
 	struct ping_th_data thdata;
 	struct timeval current;
 	pthread_t sender, catcher;
-	
+
 	// mandatory
 	if (!host || !device) {
 		snprintf(errmsg, LIBSNIFFDET_ERR_BUF_LEN,
 			"Missing mandatory args");
 		return EINVAL;
 	}
-		
+
 	DEBUG_CODE(printf("sndet_ping_host()\n"));
 	DEBUG_CODE(printf("Args: host(%s), tmout(%ld)\n", host, tmout));
-	
+
 	// set optional values
 	if (tmout <= 0)
 		tmout = DEFAULT_TIMEOUT;
@@ -116,7 +116,7 @@ int sndet_ping_host(
 		burst_size = DEFAULT_BURST_SIZE;
 	else
 		burst_size = burst_size % MAX_BURST_SIZE;
-	
+
 	// reset statistics
 	pkts_sent = 0;
 	pkts_rcvd = 0;
@@ -136,21 +136,21 @@ int sndet_ping_host(
 
 	// prepare threads
 	DEBUG_CODE(printf("Preparing threads\n"));
-	
+
 	if (init_ping_filter(device, thdata.my_icmp_id, host, errmsg))
 		return 1;
-	
+
 	thdata.device = device;
 
 	thdata.pkt = init_ping_packet(sndet_get_iface_ip_addr(device, errmsg),
 		sndet_resolve(host), errmsg);
-	
+
 	if (thdata.pkt == NULL) {
 		snprintf(errmsg, LIBSNIFFDET_ERR_BUF_LEN,
 			"Couldn't initialize ping packet");
 		return 1;
 	}
-	
+
 	// start threads
 	DEBUG_CODE(printf("Starting threads\n"));
 
@@ -159,7 +159,7 @@ int sndet_ping_host(
 
 	gettimeofday(&current, NULL);
 	thdata.timeout_limit = current.tv_sec + tmout;
-	
+
 	DEBUG_CODE(printf("MAIN THREAD: limit %ld\n", thdata.timeout_limit));
 
 	pthread_create(&catcher, NULL, ping_thread_catcher, (void *)&thdata);
@@ -170,11 +170,11 @@ int sndet_ping_host(
 	DEBUG_CODE(printf("PING SENDER: finished\n"));
 	pthread_join(catcher, NULL); // PTHREAD_CANCELED value
 	DEBUG_CODE(printf("PING CATCHER: finished\n"));
-	
+
 	// clearing
 	// free pkt, flush device ??? etc...
 	libnet_destroy_packet(&thdata.pkt);
-	
+
 	// sanity check
 	if (result) {
 		result->pkts_sent = pkts_sent;
@@ -223,14 +223,14 @@ static unsigned char * init_ping_packet(ulong ipsaddr,
 	ulong ipdaddr, char *errmsg)
 {
 	unsigned char *pkt;
-	
+
 	// allocate the packet
 	if (libnet_init_packet(PKTLEN_SIZE , &pkt) < 0) {
 		snprintf(errmsg, LIBSNIFFDET_ERR_BUF_LEN,
 			"Error allocating memory to create packet [internal]");
 		return NULL;
 	}
-	
+
 	// setting network layer
 	if (libnet_build_ip(
 		LIBNET_ICMP_ECHO_H,
@@ -281,7 +281,7 @@ static int init_ping_filter(struct sndet_device *device,
 		pcap_freecode(&bpf);
 		return -1;
 	}
-	
+
 	// no need to keep it
 	pcap_freecode(&bpf);
 
@@ -296,21 +296,21 @@ static void *ping_thread_sender(void *arg)
 	struct timeval currenttime;
 	unsigned short my_seq = sndet_random() % USHRT_MAX;
 	unsigned int i;
-	
+
 	DEBUG_CODE(printf("PING SENDER ODD: entering thread\n"));
 
 	thdata = (struct ping_th_data *)arg;
-	
+
 	// bypass timeout test in first loop
 	currenttime.tv_sec = 0;
-	
+
 	/* FIXME: there is a possibility of an administrator changing the system
 	 * clock while executing this code */
 	while (currenttime.tv_sec <= thdata->timeout_limit) {
 
 		DEBUG_CODE(printf("PING SENDER: time %ld, limit %ld.\n",
 			currenttime.tv_sec, thdata->timeout_limit));
-		
+
 		// insert timestamp
 		DEBUG_CODE(printf("PING SENDER: getting current time\n"));
 		if (gettimeofday(&currenttime, NULL) < 0) {
@@ -320,13 +320,13 @@ static void *ping_thread_sender(void *arg)
 			inthread_error = 1;
 			pthread_exit(0);
 		}
-		
+
 		DEBUG_CODE(printf("PING SENDER: Sending request time: %ldsec.%ldusec\n",
 			currenttime.tv_sec, currenttime.tv_usec));
-		
+
 		memcpy((void *)(thdata->pkt + PKTLEN_HEADER),
 			(void *)&currenttime, PKTLEN_PAYLOAD);
-		
+
 		// loop for burst size
 		for (i = 0; i < thdata->burst_size; i++, my_seq++) {
 			libnet_build_icmp_echo(
@@ -360,7 +360,7 @@ static void *ping_thread_sender(void *arg)
 				pthread_exit(0);
 			}
 		} // end burst loop
-		
+
 		DEBUG_CODE(printf("PING SENDER: waiting burst interval\n"));
 		sndet_sleep(0, thdata->send_interval * 1000);
 		pkts_sent++;
@@ -384,15 +384,15 @@ static void *ping_thread_catcher(void *arg)
 	int devfd;
 	ulong diff;
 	int selret;
-	
+
 	DEBUG_CODE(printf("PING CATCHER: entering thread\n"));
-	
+
 	th = (struct ping_th_data *)arg;
-	
+
 	devfd = pcap_fileno(th->device->pktdesc);
-	
+
 	DEBUG_CODE(printf("PING CATCHER: starting loop\n"));
-	
+
 	// this thread runs 'til the main thread requests a cancelation
 	while (!inthread_error && !thread_timeout) {
 		FD_ZERO(&fds);
@@ -403,7 +403,7 @@ static void *ping_thread_catcher(void *arg)
 
 		// polls the interface
 		selret = select(devfd + 1, &fds, NULL, NULL, &read_timeout);
-		
+
 		if (selret < 0) {
 			// error
 			snprintf(th->errmsg, LIBSNIFFDET_ERR_BUF_LEN,
@@ -411,24 +411,24 @@ static void *ping_thread_catcher(void *arg)
 				strerror(errno));
 			inthread_error = 1;
 			pthread_exit(0);
-			
+
 		} else if (!selret) {
 			// timed out
-			DEBUG_CODE(printf("PING CATCHER: timed out polling interface\n")); 
+			DEBUG_CODE(printf("PING CATCHER: timed out polling interface\n"));
 			continue;
 		} else {
 			// here you can read
 			pkt = pcap_next(th->device->pktdesc, &pcap_h);
-		
+
 			// check if it's the filtered packet or another one
 			if (!pkt)
 				continue;
-			
+
 			// extracts senttime
 			memcpy(&senttime,
 				(pkt + th->device->pkt_offset + PKTLEN_HEADER),
 				PKTLEN_PAYLOAD);
-			
+
 			// calculate statistics (max, min, accum and pkts_rcvd)
 			diff = ping_sub_tv(&senttime, &pcap_h.ts);
 
@@ -436,10 +436,10 @@ static void *ping_thread_catcher(void *arg)
 				"sent time(%ldsecs, %ldusecs), recvd time(%ldsecs, %ldusecs),"
 				" difference(%ldx.1 msecs)\n", senttime.tv_sec,
 				senttime.tv_usec, pcap_h.ts.tv_sec, pcap_h.ts.tv_usec, diff));
-			
+
 			time_accum += diff;
 			pkts_rcvd++;
-			
+
 			if (diff < min_time)
 				min_time = diff;
 			if (diff > max_time)

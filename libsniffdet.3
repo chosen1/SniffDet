@@ -27,7 +27,7 @@
 .SH NAME
 libsniffdet - Sniffer detection library
 .SH DESCRIPTION
-This library is useful for remote sniffer detection or to 
+This library is useful for remote sniffer detection or to
 discover machines which are running in promiscuous mode.
 You can see the full documentation at http://sniffdet.sourceforge.net
 .SH SYNOPSIS
@@ -92,7 +92,7 @@ struct sndet_device * sndet_init_device(
 int sndet_finish_device(
 .br
 	struct sndet_device *device,
-.br	
+.br
 	char *errbuf);
 \fR
 
@@ -100,13 +100,13 @@ Where struct sndet_device has the following layout.
 
 struct sndet_device {
 .br
-	char *device;			
+	char *device;
 .br
-	int datalink; 			
+	int datalink;
 .br
-	int pkt_offset;		
+	int pkt_offset;
 .br
-	struct libnet_link_int *ln_int; 
+	struct libnet_link_int *ln_int;
 .br
 	pcap_t *pktdesc;
 .br
@@ -114,7 +114,7 @@ struct sndet_device {
 .br
 	bpf_u_int32 netmask;
 .br
-	int rawsock;		
+	int rawsock;
 .br
 };
 .br
@@ -129,21 +129,21 @@ struct test_info {
 .br
 	enum test_code code;
 .br
-	int valid;				
+	int valid;
 .br
-	char *test_name;		
+	char *test_name;
 .br
-	char *test_short_desc;	
+	char *test_short_desc;
 .br
-	time_t time_start;	  	
+	time_t time_start;	
 .br
-	time_t time_fini;		
+	time_t time_fini;
 .br
-	unsigned int b_sent;	
+	unsigned int b_sent;
 .br
-	unsigned int b_recvd;	
+	unsigned int b_recvd;
 .br
-	unsigned int pkts_sent;	
+	unsigned int pkts_sent;
 .br
 	unsigned int pkts_recvd;
 .br
@@ -157,12 +157,12 @@ struct test_info {
 .br
 		struct latencytest_result latency;
 .br
-	} test;					
+	} test;
 .br
 };
 .br
 
-// detection test enumeration - see libsniffdet.h	
+// detection test enumeration - see libsniffdet.h
 // wether it was valid or not
 // name of the test
 // test short description
@@ -192,7 +192,7 @@ Returns a pseudo random integer
 .br
 .B		struct sndet_device *device,
 .br
-.B		long tmout, 
+.B		long tmout,
 .br
 .B		long send_interval,
 .br
@@ -259,22 +259,22 @@ returned by the callback functions.
 .br
 int sndet_icmptest(
 .br
-	char *host,	
-.br	
+	char *host,
+.br
 	struct sndet_device *device,
-.br	
-	unsigned int tmout, 
-.br	
-	unsigned int tries,	
-.br	
-	unsigned int send_interval, 
-.br	
+.br
+	unsigned int tmout,
+.br
+	unsigned int tries,
+.br
+	unsigned int send_interval,
+.br
 	user_callback callback,
-.br	
+.br
 	struct test_info *result,
-.br	
-	char *fakehwaddr 
-.br	
+.br
+	char *fakehwaddr
+.br
 );
 \fR
 
@@ -295,15 +295,15 @@ int sndet_arptest(
 .br
 	unsigned int tmout,
 .br
-	unsigned int tries, 
+	unsigned int tries,
 .br
-	unsigned int send_interval, 
+	unsigned int send_interval,
 .br
 	user_callback callback,
 .br
 	struct test_info *result,
 .br
-	char *fakehwaddr 
+	char *fakehwaddr
 .br
 );
 \fR
@@ -323,11 +323,11 @@ int sndet_dnstest(
 .br
 	struct sndet_device *device,
 .br
-	unsigned int tmout, 
+	unsigned int tmout,
 .br
 	unsigned int tries,
 .br
-	unsigned int send_interval, 
+	unsigned int send_interval,
 .br
 	user_callback callback,
 .br
@@ -337,13 +337,13 @@ int sndet_dnstest(
 .br
 	char *fake_ipaddr,
 .br
-	char *fake_hwaddr, 
+	char *fake_hwaddr,
 .br
-	ushort dport, ushort sport, 
+	ushort dport, ushort sport,
 .br
-	char *payload,	
+	char *payload,
 .br
-	short int payload_len	
+	short int payload_len
 .br
 );
 \fR
@@ -359,19 +359,19 @@ int sndet_dnstest(
 .br
 int sndet_latencytest_pktflood(
 .br
-	char *host, 
+	char *host,
 .br
 	struct sndet_device *device,
 .br
-	unsigned int tmout, 
+	unsigned int tmout,
 .br
-	unsigned int probe_interval, 
+	unsigned int probe_interval,
 .br
 	user_callback callback,
 .br
 	struct test_info *info,
 .br
-	struct custom_info *bogus_pkt 
+	struct custom_info *bogus_pkt
 .br
 );
 \fR

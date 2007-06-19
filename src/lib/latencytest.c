@@ -71,7 +71,7 @@ static void set_status(struct test_status *st);
  * tmout - time (in seconds) to stay flooding
  * probe_interval - time (in milliseconds) between samples with ping
  * Results are given in usec (max resolution)
- */ 
+ */
 int sndet_latencytest_pktflood(
 		char *host,
 		struct sndet_device *device,
@@ -111,11 +111,11 @@ int sndet_latencytest_pktflood(
 	// assertions and like
 	if (callback == NULL)
 		callback = bogus_callback;
-	
+
 	// mandatory
 	if (!host || !device) {
 		exit_status = errno ? errno : EINVAL;
-		callback(&status, ERROR, 
+		callback(&status, ERROR,
 				"Error: invalid args provided to test function [internal error]");
 
 		goto cleanup;
@@ -126,7 +126,7 @@ int sndet_latencytest_pktflood(
 
 	if (!probe_interval)
 		probe_interval = DEFAULT_PROBE_INTERVAL_TIME;
-	
+
 	/* initialize thread data */
 	tdata.host = host;
 	tdata.device = device;
@@ -152,7 +152,7 @@ int sndet_latencytest_pktflood(
 
 	/* launch the periodic ping measurer */
 	pthread_create(&pinger_th, NULL, thread_pinger, NULL);
-	
+
 	/* wait for execution */
 	pthread_join(flooder_th, NULL);
 	pthread_cancel(pinger_th);
@@ -183,7 +183,7 @@ cleanup:
 				exit_status);
 		callback(&status, ENDING, buff);
 	}
-	else 
+	else
 		callback(&status, ENDING, "Test finished [OK]");
 
 	return exit_status;
@@ -197,26 +197,26 @@ static void *thread_flooder(__attribute__((unused)) void *td)
 	unsigned int pktlen;
 	struct test_status status = {0, 0, 0};
 	u_char *pkt;
-	
+
 	// check if a full package was provided
 	if (test_bogus_pkt_info(tdata.bogus_pkt)) {
 		pkt = sndet_gen_tcp_pkt(tdata.bogus_pkt, 0, &pktlen, errbuf);
 	} else {
 		pthread_mutex_lock(&callback_mutex);
 		// TODO - set status
-		tdata.callback(&status, NOTIFICATION, 
+		tdata.callback(&status, NOTIFICATION,
 				"Using default packet to flood network");
 		pthread_mutex_unlock(&callback_mutex);
 		tdata.bogus_pkt = build_default_pkt(tdata.device);
 		pktlen = LIBNET_TCP_H + LIBNET_IP_H	+ LIBNET_ETH_H +
 			tdata.bogus_pkt->payload_len;
 		pkt = sndet_gen_tcp_pkt(tdata.bogus_pkt, tdata.bogus_pkt->flags, &pktlen, errbuf);
-		
+
 		// no need to keep this
 		SNDET_FREE(tdata.bogus_pkt->payload);
 		SNDET_FREE(tdata.bogus_pkt);
 	}
-	
+
 	if (!pkt) {
 		pthread_mutex_lock(&callback_mutex);
 		// TODO - set status
@@ -225,7 +225,7 @@ static void *thread_flooder(__attribute__((unused)) void *td)
 		pthread_mutex_unlock(&callback_mutex);
 		pthread_exit(0);
 	}
-		
+
 	// flooding loop
 	while (1) {
 		bytes_sent += libnet_write_link_layer(tdata.device->ln_int,
@@ -235,7 +235,7 @@ static void *thread_flooder(__attribute__((unused)) void *td)
 		if (cancel_test || got_error || finished)
 			break;
 	}
-	
+
 	// free resources
 	libnet_destroy_packet(&pkt);
 
@@ -247,7 +247,7 @@ static void *thread_pinger(__attribute__((unused)) void *td)
 	struct test_status status = {0, 0, 0};
 	struct sndet_ping_result ping_result;
 	char errbuf[LIBSNIFFDET_ERR_BUF_LEN];
-	
+
 	// FIXME - hardcoded args and correct timeout
 	if (sndet_ping_host(tdata.host, tdata.device, tdata.tmout, // XXX FIXME
 		tdata.probe_interval, 1, &ping_result, errbuf))
@@ -255,7 +255,7 @@ static void *thread_pinger(__attribute__((unused)) void *td)
 		pthread_mutex_lock(&callback_mutex);
 		got_error = 1;
 		// TODO set status
-		tdata.callback(&status, ERROR, errbuf);		
+		tdata.callback(&status, ERROR, errbuf);
 		pthread_mutex_unlock(&callback_mutex);
 		pthread_exit(0);
 	}
@@ -269,7 +269,7 @@ static void *thread_pinger(__attribute__((unused)) void *td)
 	// TODO set status
 	tdata.callback(&status, NOTIFICATION, "Finished icmp echo evaluation");
 	pthread_mutex_unlock(&callback_mutex);
-	
+
 	mean_time = ping_result.avg_time;
 
 	finished = 1;
@@ -290,7 +290,7 @@ static struct custom_info *build_default_pkt(struct sndet_device *device)
 		CUSTOM_TTL | CUSTOM_SRC_IP | CUSTOM_DEST_IP | CUSTOM_SEQ |
 		CUSTOM_ACK | CUSTOM_FLAGS | CUSTOM_WINSIZE | CUSTOM_DPORT |
 		CUSTOM_SPORT | CUSTOM_PAYLOAD;
-	
+
 	memcpy(bogus_pkt->dmac, fake_hw_addr, 6);
 	memcpy(bogus_pkt->smac, fake_hw_addr, 6);
 
@@ -327,8 +327,8 @@ static int test_bogus_pkt_info(struct custom_info *bogus_pkt)
 	CUSTOM_TTL | CUSTOM_SRC_IP | CUSTOM_DEST_IP | CUSTOM_SEQ |
 	CUSTOM_ACK | CUSTOM_FLAGS | CUSTOM_WINSIZE | CUSTOM_DPORT |
 	CUSTOM_SPORT | CUSTOM_PAYLOAD;
-	
-	if (!(bogus_pkt->values_set & mandatory_fields) || 
+
+	if (!(bogus_pkt->values_set & mandatory_fields) ||
 		(bogus_pkt->protocol != SNDET_PROTOCOL_TCP))
 	{
 		return 0;

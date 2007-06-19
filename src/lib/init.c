@@ -60,7 +60,7 @@ struct sndet_device * sndet_init_device(char *device, int promisc, char *errbuf)
 			return NULL;
 		}
 		sndet_dev->device = strndup(temp, MAX_DEVICE_NAME_LEN);
-	} 
+	}
 	else
 		sndet_dev->device = strndup(device, MAX_DEVICE_NAME_LEN);
 

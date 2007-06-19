@@ -27,7 +27,7 @@ sniffdet 0.9
 - Changes in snprintf() calls to avoid format string bugs -
   scan_args(), exploitable only if sniffdet is suid (not standard,
   strongly not recommended).
-- sndet_random() is now more robust. 
+- sndet_random() is now more robust.
 - Fixed issue #645769 (arp test validity could be checked).
   Actually, I'm not just checking the validity, but eliminating
   the false positives possibility that existed before. :)
@@ -239,7 +239,7 @@ sniffdet 0.7 (first public release)
 
 2002 May 19
 - API and DETECTION_METHODS improvements (very little)
-- Lot's of improvements in test.c (it's becoming our real final 
+- Lot's of improvements in test.c (it's becoming our real final
   application)
 - helpers.ping_time() improvements (current time inside payload now)
 

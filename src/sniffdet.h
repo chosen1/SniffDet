@@ -25,7 +25,7 @@
 #endif
 
 /* comand line arguments
- * Notice that some comand line arguments are part of 
+ * Notice that some comand line arguments are part of
  * global_options structure. The ones here are not
  * configuration options.
  */

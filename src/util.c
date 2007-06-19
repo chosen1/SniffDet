@@ -54,7 +54,7 @@ char **parse_targets_file(FILE *f_hosts)
 
 	while (fgets(buffer, sizeof buffer, f_hosts) != NULL) {
 		if (i >= MAX_HOSTS) {
-			fprintf(stderr, 
+			fprintf(stderr,
 					"Warning: Stopped reading hostnames from file after %d entries\n",
 					MAX_HOSTS);
 			break;

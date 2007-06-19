@@ -86,7 +86,7 @@ static void handle_in_thread_error(user_callback callback, int my_errno,
 static int dns_query_search4host(int pkt_offset, const u_char *pkt,
 		char *hostdotdecimal, int pkt_len);
 static char *string_inversion(char *host);
-	
+
 // Main test thread
 int sndet_dnstest(char *host,
 		struct sndet_device *device,
@@ -137,7 +137,7 @@ int sndet_dnstest(char *host,
 	// mandatory
 	if (!host || !device) {
 		exit_status = errno ? errno : EINVAL;
-		callback(&status, ERROR, 
+		callback(&status, ERROR,
 				"Error: invalid args provided to test function [internal error]");
 
 		goto cleanup;
@@ -155,11 +155,11 @@ int sndet_dnstest(char *host,
 	pkts_recvd = 0;
 
 	pthread_mutex_init(&callback_mutex, NULL);
-	
+
 	// fill threads argument structure
 	thdata.host = host;
 	thdata.device = device;
-	
+
 	/* optional/default data */
 
 	// timeout
@@ -171,19 +171,19 @@ int sndet_dnstest(char *host,
 		thdata.tries = DEFAULT_NUMBER_OF_TRIES;
 	else
 	    thdata.tries = tries;
-	
+
 	// send interval
 	if (!send_interval)
 		thdata.send_interval = DEFAULT_SEND_INTERVAL;
 	else
-		thdata.send_interval = send_interval; 
+		thdata.send_interval = send_interval;
 
 	// fake_hwaddr
 	if (fake_hwaddr)
 		thdata.fake_hwaddr = fake_hwaddr;
 	else
 		thdata.fake_hwaddr = default_fake_hwaddr;
-	
+
 	// fake_ipaddr
 	if (fake_ipaddr)
 		thdata.fake_ipaddr = fake_ipaddr;
@@ -214,7 +214,7 @@ int sndet_dnstest(char *host,
 
 	// get mac address from interface
 	thdata.iface_mac = (u_char *) sndet_get_iface_mac_addr(device, NULL);
-	
+
 	// get ip address from interface
 	temp_in_addr.s_addr = sndet_get_iface_ip_addr(device, NULL);
 	thdata.iface_ip = temp_in_addr.s_addr;
@@ -223,7 +223,7 @@ int sndet_dnstest(char *host,
 	if ((thdata.target_ip = sndet_resolve(host)) == 0) {
 		// check for meaningful value in errno
 		exit_status = errno ? errno : EAGAIN;
-		
+
 		set_status(&status);
 		callback(&status, ERROR, "Error resolving target hostname");
 
@@ -244,7 +244,7 @@ int sndet_dnstest(char *host,
 	{
 		// check for meaningful value in errno
 		exit_status = errno ? errno : EAGAIN;
-		
+
 		set_status(&status);
 		callback(&status, ERROR, "Error compiling pcap filter");
 
@@ -254,10 +254,10 @@ int sndet_dnstest(char *host,
 	if (pcap_setfilter(device->pktdesc, &bpf) < 0) {
 		// check for meaningful value in errno
 		exit_status = errno ? errno : EAGAIN;
-		
+
 		set_status(&status);
 		callback(&status, ERROR, "Error setting pcap filter [internal]");
-		
+
 		pcap_freecode(&bpf);
 		goto cleanup;
 	}
@@ -287,16 +287,16 @@ int sndet_dnstest(char *host,
 		// signal sender
 		got_error = 1;
 		pthread_join(sender_th, NULL);
-		
+
 		callback(&status, ERROR, "Error launching receiver thread [internal]");
 		goto cleanup;
 	}
-	
+
 	// Setting timeout alarm
 	if (tmout) {
 		// setting interval
 		alarm(tmout);
-		
+
 		// setting handler
 		sa.sa_handler = timeout_handler;
 		sa.sa_flags = SA_RESETHAND;
@@ -315,16 +315,16 @@ int sndet_dnstest(char *host,
 			goto cleanup;
 		}
 	}
-	
+
 	pthread_join(sender_th, NULL);
-	
+
 	// avoid having a receiver running forever if the callback can't
 	// stop it
 	if (!tmout && !callback) {
 		sndet_sleep(DEFAULT_RECEIVER_HOLD_TO_CANCEL, 0);
 		pthread_cancel(receiver_th);
 	}
-	
+
 	pthread_join(receiver_th, NULL);
 
 cleanup:
@@ -340,7 +340,7 @@ cleanup:
         info->pkts_recvd = pkts_recvd;
 		info->test.dns.positive = got_suspect;
     }
-	
+
 	sender_percent = 100;
 	set_status(&status);
 
@@ -352,7 +352,7 @@ cleanup:
 				exit_status);
 		callback(&status, ENDING, buff);
 	}
-	else 
+	else
 		callback(&status, ENDING, "Test finished [OK]");
 
 	return exit_status;
@@ -388,7 +388,7 @@ static void *dnstest_sender(void *thread_data)
 	tcp_id_seq = (unsigned short) sndet_random() % SHRT_MAX;
 	tcp_id_ack = (unsigned short) sndet_random() % SHRT_MAX;
 
-	bogus_pkt.protocol = SNDET_PROTOCOL_TCP; 
+	bogus_pkt.protocol = SNDET_PROTOCOL_TCP;
 	memcpy(bogus_pkt.dmac, td->fake_hwaddr, 6);
 	memcpy(bogus_pkt.smac, td->iface_mac, 6);
 
@@ -396,7 +396,7 @@ static void *dnstest_sender(void *thread_data)
 	bogus_pkt.ttl = 64;
 	bogus_pkt.dest_ip = inet_addr(td->fake_ipaddr);
 	bogus_pkt.source_ip = td->iface_ip;
-	
+
 	bogus_pkt.sport = td->sport;
 	bogus_pkt.dport = td->dport;
 	bogus_pkt.winsize = 0;
@@ -409,7 +409,7 @@ static void *dnstest_sender(void *thread_data)
 		CUSTOM_DEST_IP | CUSTOM_WINSIZE | CUSTOM_DPORT | CUSTOM_SPORT;
 
 	// build packets
-	
+
 	// SYN
 	bogus_pkt.seq = tcp_id_seq;
 	bogus_pkt.ack = 0;
@@ -429,7 +429,7 @@ static void *dnstest_sender(void *thread_data)
 	bogus_pkt.source_ip = aux_source_ip; // return original value
 	bogus_pkt.seq = tcp_id_seq + 1;
 	bogus_pkt.ack = tcp_id_ack + 1;
-	pkt[2] = sndet_gen_tcp_pkt(&bogus_pkt, TH_ACK, 
+	pkt[2] = sndet_gen_tcp_pkt(&bogus_pkt, TH_ACK,
 			&pkt_size[2], errbuf);
 	bogus_pkt.seq = tcp_id_seq + 1;
 	bogus_pkt.ack = tcp_id_ack + 1;
@@ -443,7 +443,7 @@ static void *dnstest_sender(void *thread_data)
 	bogus_pkt.payload_len = 0;
 	pkt[4] = sndet_gen_tcp_pkt(&bogus_pkt, TH_RST,
 			&pkt_size[4], errbuf);
-	
+
 	// start sending
 	for (i = 0; i < td->tries; i++) {
 
@@ -460,7 +460,7 @@ static void *dnstest_sender(void *thread_data)
 			bytes_sent += pkt_size[j];
 			pkts_sent++;
 		}
-			
+
 		// signs running information
 		pthread_mutex_lock(&callback_mutex);
 		sender_percent = (i * 100) / td->tries;
@@ -500,11 +500,11 @@ static void *dnstest_receiver(void *thread_data)
 	td = (struct dns_thread_data *) thread_data;
 
 	devfd = pcap_fileno(td->device->pktdesc);
-	
+
 	// keep looping 'til find something or timeouts or the callback
 	// signals cancelation (or work forever)
 	while (!got_suspect && !cancel_test && !timed_out && !got_error) {
-		
+
 		FD_ZERO(&fds);
 		FD_SET(devfd, &fds);
 
@@ -513,7 +513,7 @@ static void *dnstest_receiver(void *thread_data)
 
 		// polls the interface
 		selret = select(devfd + 1, &fds, NULL, NULL, &read_timeout);
-	
+
 		if (selret < 0) {
 			//handle_in_thread_error(td->callback, errno,
 			//	"Error polling interface");
@@ -528,13 +528,13 @@ static void *dnstest_receiver(void *thread_data)
 			continue;
 		} else {
 			pkt = pcap_next(td->device->pktdesc, &header);
-			
+
 			// check if it's the filtered packet or another one
 			if (!pkt)
 				continue;
-			
+
 			pthread_mutex_lock(&callback_mutex);
-			
+
 			if (pkt) {
 				// is that a query for our bogus host?
 				if (dns_query_search4host(td->device->pkt_offset, pkt,
@@ -554,18 +554,18 @@ static void *dnstest_receiver(void *thread_data)
 				set_status(&status);
 				cancel_test = td->callback(&status, RUNNING, "Waiting for reply");
 			}
-			
+
 			pthread_mutex_unlock(&callback_mutex);
 		}
 	}
-	
+
 	pthread_exit(0);
 }
 
 // bogus callback
 // used if the user didn't supply one (NULL)
 static inline int bogus_callback(
-		__attribute__((unused)) struct test_status *status, 
+		__attribute__((unused)) struct test_status *status,
 		__attribute__((unused)) int msg_type,
 		__attribute__((unused)) char *msg)
 {
@@ -618,7 +618,7 @@ static int dns_query_search4host(int pkt_offset, const u_char *pkt,
 
 	ip  = (const struct libnet_ip_hdr *) (pkt + pkt_offset);
 	udp = (const struct libnet_udp_hdr *) (pkt + pkt_offset + LIBNET_IP_H);
-	dns = (const struct libnet_dns_hdr *) (pkt + pkt_offset + LIBNET_IP_H + 
+	dns = (const struct libnet_dns_hdr *) (pkt + pkt_offset + LIBNET_IP_H +
 			LIBNET_UDP_H);
 	data = (const char *) (pkt + pkt_offset + LIBNET_IP_H + LIBNET_UDP_H +
 			LIBNET_DNS_H);

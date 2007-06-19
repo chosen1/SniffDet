@@ -57,7 +57,7 @@
 	}
 
 
-/* 
+/*
  * CALLBACK DEFINITIONS
  */
 
@@ -79,7 +79,7 @@ struct test_status {
  * It's responsible for messages, warnings, errors and is a mecanism used to
  * cancel the test. If it returns anything != 0, we cancel the test
  */
-typedef int (*user_callback)(struct test_status *status, 
+typedef int (*user_callback)(struct test_status *status,
 	int msg_type, char *msg);
 
 
@@ -131,11 +131,11 @@ typedef int (*user_callback)(struct test_status *status,
 
 struct custom_info {
 	int values_set; // defined values ORed
-	
+
 	// ETH
 	u_char dmac[6];
 	u_char smac[6];
-	
+
 	// IP
 	uint id;
 	uint timestamp;
@@ -187,7 +187,7 @@ int sndet_finish_device(struct sndet_device *device, char *errbuf);
  * STRUCTURES AND DEFINITIONS FOR TESTS
  */
 
-/* 
+/*
  * Tests enum
  */
 enum test_code {
@@ -290,7 +290,7 @@ int sndet_arptest(char *host,
 		);
 
 
-/* 
+/*
  * DNSTEST:
  * tests whether a suspicious host tries to resolve an
  * abnormal name.
@@ -373,7 +373,7 @@ int sndet_latencytest_telnetflood(char *host,
 
 
 /* resolve hostname, returns binary representation
- * in network-ordered represenation. Hostname is 
+ * in network-ordered represenation. Hostname is
  * an ASCII string representing an IPv4 address (canonical
  * hostname or doted decimal representation).
  */
@@ -396,7 +396,7 @@ struct sndet_ping_result {
 };
 
 int sndet_ping_host(
-	char *host,	
+	char *host,
 	struct sndet_device *device,
 	long tmout, // secs
 	long send_interval, // x 0.1 msecs

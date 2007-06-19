@@ -41,7 +41,7 @@ static char *timeString(time_t t);
  *		Open filedescriptor to write.
  *		Ignored when using something different than USE_FILE
  *		Ignored if its value is -1;
- */		
+ */
 int mylog(unsigned int ltype, int log_fd, const char *format, ...)
 {
 	va_list ap;
@@ -93,7 +93,7 @@ int mylog(unsigned int ltype, int log_fd, const char *format, ...)
 	return 0;
 }
 
-/* 
+/*
  * timeString()
  * converts a time to a particular representation:
  * "The preferred date and time representation for the current locale"
@@ -101,7 +101,7 @@ int mylog(unsigned int ltype, int log_fd, const char *format, ...)
 static char *timeString(time_t t)
 {
 	static char buffer[64];
-	static char timestr[64]; 
+	static char timestr[64];
     struct tm *local;
 
     local = localtime(&t);
