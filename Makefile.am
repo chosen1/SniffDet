@@ -105,4 +105,4 @@ ACLOCAL_AMFLAGS = -I m4
 include $(srcdir)/mk/auxdevel.am
 include $(srcdir)/mk/libtool-fix.am
 
-# vim: set et tw=74:
+# vim: set noet tw=74:
