@@ -67,20 +67,39 @@ AC_DEVEL_MACROS
 AC_DEVEL_ABSDIRS
 AC_DEVEL_DEFINE_INSTALL_DIRS
 
-# XXX
-# create --uid and --gid
-sndet_uid=280
-sndet_gid=280
-AC_DEFINE_UNQUOTED(SNDET_DEFAULT_UID, ${sndet_uid}, UID to be used when dropping root privs)
-AC_DEFINE_UNQUOTED(SNDET_DEFAULT_GID, ${sndet_gid}, GID to be used when dropping root privs)
+AC_ARG_WITH(uid, AS_HELP_STRING([--with-uid=UID],
+			[UID to use when dropping root privs (default: 280)]),
+			[SNDET_DEFAULT_UID=$withval], [SNDET_DEFAULT_UID=280])
+if ! test "$SNDET_DEFAULT_UID" -gt "0" 2> /dev/null; then
+	AC_MSG_ERROR([invalid UID: ${SNDET_DEFAULT_UID}])
+fi
 
-# XXX
-# create --plugins-dir or something like that
-AC_SUBST(SNDET_PLUGINSDIR, "${LIBDIR}/sniffdet/plugins")
-AC_DEFINE_UNQUOTED(SNDET_PLUGINSDIR, "${LIBDIR}/sniffdet/plugins/", plugins directory)
+AC_ARG_WITH(gid, AS_HELP_STRING([--with-gid=GID],
+			[GID to use when dropping root privs (default: 280)]),
+			[SNDET_DEFAULT_GID=$withval], [SNDET_DEFAULT_GID=280])
+if ! test "$SNDET_DEFAULT_GID" -gt "0" 2> /dev/null; then
+	AC_MSG_ERROR([invalid GID: ${SNDET_DEFAULT_GID} (must be an integer)])
+fi
 
+AC_DEFINE_UNQUOTED([SNDET_DEFAULT_UID], [${SNDET_DEFAULT_UID}],
+				   "UID to be used when dropping root privs")
+AC_DEFINE_UNQUOTED([SNDET_DEFAULT_GID], [${SNDET_DEFAULT_GID}],
+				   "GID to be used when dropping root privs")
+
+AC_ARG_WITH(pluginsdir, AS_HELP_STRING([--with-pluginsdir=PATH],
+			[Directory to store sniffdet plugins (default:
+			 ${LIBDIR}/sniffdet/plugins)]),
+			 [SNDET_PLUGINSDIR="$withval"],
+			 [SNDET_PLUGINSDIR="${LIBDIR}/sniffdet/plugins"])
+
+AC_SUBST(SNDET_PLUGINSDIR)
+AC_DEFINE_UNQUOTED(SNDET_PLUGINSDIR, ["${SNDET_PLUGINSDIR}"],
+				   [sniffdet plugins directory])
+
+# not configurable, at least by now
 AC_SUBST(SNDET_CONFIG, "${SYSCONFDIR}/sniffdet.conf")
-AC_DEFINE_UNQUOTED(SNDET_CONFIG, "${SYSCONFDIR}/sniffdet.conf", default config file location)
+AC_DEFINE_UNQUOTED(SNDET_CONFIG, ["${SYSCONFDIR}/sniffdet.conf"],
+				   [default config file location])
 
 AC_CONFIG_FILES([Makefile
                  Doxyfile
@@ -103,8 +122,8 @@ $PACKAGE_NAME $PACKAGE_VERSION configuration:
   Pthread support:            ${PTHREAD_CC} ${PTHREAD_LIBS} ${PTHREAD_CFLAGS}
   Install path (prefix):      ${prefix}
 
-  UID to be used by sniffdet: ${sndet_uid}
-  GID to be used by sniffdet: ${sndet_gid}
+  UID to be used by sniffdet: ${SNDET_DEFAULT_UID}
+  GID to be used by sniffdet: ${SNDET_DEFAULT_GID}
   Plugins directory:          ${SNDET_PLUGINSDIR}
 
   Now type 'make' to build $PACKAGE_NAME $PACKAGE_VERSION.
