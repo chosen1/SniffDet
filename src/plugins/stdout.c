@@ -45,6 +45,9 @@ int test_output(char *target, struct test_info info[],
 	int positives = 0;
 	int valids = 0;
 
+	// avoid warnings
+	(void) errbuf;
+
 	printf("------------------------------------------------------------\n");
 	printf("Sniffdet Report\n");
 	printf("Generated on: %s\n",  timeString(time(NULL)));
@@ -82,6 +85,9 @@ int test_output(char *target, struct test_info info[],
 
 static int print_icmptest_results(struct test_info info, int verbose)
 {
+	// avoid warnings
+	(void) verbose;
+
 	printf("RESULT: %s\n",
 			info.test.icmp.positive ? "POSITIVE" : "NEGATIVE");
 	return info.test.icmp.positive;
@@ -89,6 +95,9 @@ static int print_icmptest_results(struct test_info info, int verbose)
 
 static int print_arptest_results(struct test_info info, int verbose)
 {
+	// avoid warnings
+	(void) verbose;
+
 	printf("RESULT: %s\n",
 			info.test.arp.positive ? "POSITIVE" : "NEGATIVE");
 	return info.test.icmp.positive;
@@ -96,6 +105,9 @@ static int print_arptest_results(struct test_info info, int verbose)
 
 static int print_dnstest_results(struct test_info info, int verbose)
 {
+	// avoid warnings
+	(void) verbose;
+
 	printf("RESULT: %s\n",
 			info.test.dns.positive ? "POSITIVE" : "NEGATIVE");
 	return info.test.icmp.positive;
@@ -103,6 +115,9 @@ static int print_dnstest_results(struct test_info info, int verbose)
 
 static int print_latencytest_results(struct test_info info, int verbose)
 {
+	// avoid warnings
+	(void) verbose;
+
 	printf("RESULT:\n");
 	printf("Normal time: %u.%u\n",
 			info.test.latency.normal_time / 10,
@@ -130,12 +145,12 @@ static char *timeString(time_t t)
 {
 	static char buffer[64];
 	static char timestr[64];
-    struct tm *local;
+	struct tm *local;
 
-    local = localtime(&t);
-    strftime(buffer, 64, "%c", local);
+	local = localtime(&t);
+	strftime(buffer, 64, "%c", local);
 
 	strncpy(timestr, buffer, 64);
 
-    return timestr;
+	return timestr;
 }

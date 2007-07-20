@@ -166,6 +166,9 @@ unsigned char *sndet_gen_tcp_pkt(struct custom_info *custom_pkt,
 	}
 #endif
 
+	// to avoid warnings
+	(void) errbuf;
+
 	// init packet
 	pkt_size = LIBNET_ETH_H + LIBNET_IP_H + LIBNET_TCP_H +
 		custom_pkt->payload_len;

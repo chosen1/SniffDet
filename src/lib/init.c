@@ -130,13 +130,15 @@ struct sndet_device * sndet_init_device(char *device, int promisc, char *errbuf)
  * free structure sndet_device
  * close raw socket
  */
-// TODO: check for errors and fill errbuf
 int sndet_finish_device(struct sndet_device *device, char *errbuf)
 {
 	// assertion
 	if (!device) {
 		DABORT();
 	}
+
+	// TODO: check for errors and fill errbuf
+	(void) errbuf;
 
 	// close pcap channel
 	pcap_close(device->pktdesc);

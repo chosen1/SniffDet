@@ -24,5 +24,11 @@
 int test_output(char *target, struct test_info info[],
 		struct config_options config, char *errbuf)
 {
+	// avoid warnings
+	(void) target;
+	(void) info;
+	(void) config;
+	(void) errbuf;
+
 	return 0;
 }

@@ -82,6 +82,9 @@ static int tests_msg_callback(struct test_status *status,
 	printf("-CB- Bytes Recvd: %d\n", status->bytes_recvd);
 #endif
 
+	// avoid warning
+	(void) status;
+
 	// just return if we're not using a log
 	if (config.global.logtype == LOG_NOLOG)
 		return cancel_tests ? 1 : 0;
@@ -473,7 +476,6 @@ static void scan_args(int argc, char **argv)
 	static int pass = 0; // 1 if this function was already called
 	int i;
 	int mandatory_testname_option = 0;
-	int string_len;
 	int option_index;
 	static struct option long_options[] = {
 		{"help", 0, NULL, 'h'},
