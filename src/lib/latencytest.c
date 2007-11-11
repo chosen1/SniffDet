@@ -103,7 +103,7 @@ int sndet_latencytest_pktflood(
 
 	if (info) {
 		info->test_name = "Latency test";
-        info->code = LATENCY_TEST;
+		info->code = LATENCY_TEST;
 		info->test_short_desc = "Ping response with custom packet flood";
 		info->time_start = time(NULL);
 	}

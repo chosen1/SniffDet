@@ -120,11 +120,11 @@ int sndet_dnstest(char *host,
 
 	// set test_result information if available
     if (info) {
-        info->test_name = "DNS Test";
-        info->code = DNS_TEST;
-        info->test_short_desc =
+		info->test_name = "DNS Test";
+		info->code = DNS_TEST;
+		info->test_short_desc =
 			"Watch for DNS queries for hostnames who don't exist";
-        info->time_start = time(NULL);
+		info->time_start = time(NULL);
     }
 
 	if (callback)
@@ -170,7 +170,7 @@ int sndet_dnstest(char *host,
 	if (!tries)
 		thdata.tries = DEFAULT_NUMBER_OF_TRIES;
 	else
-	    thdata.tries = tries;
+		thdata.tries = tries;
 
 	// send interval
 	if (!send_interval)
@@ -333,11 +333,11 @@ cleanup:
 	// calculate final status, result, error code, etc...
     if (info) {
 		info->valid = exit_status ? 0 : 1;
-        info->time_fini = time(NULL);
-        info->b_sent = bytes_sent;
-        info->b_recvd = bytes_recvd;
-        info->pkts_sent = pkts_sent;
-        info->pkts_recvd = pkts_recvd;
+		info->time_fini = time(NULL);
+		info->b_sent = bytes_sent;
+		info->b_recvd = bytes_recvd;
+		info->pkts_sent = pkts_sent;
+		info->pkts_recvd = pkts_recvd;
 		info->test.dns.positive = got_suspect;
     }
 

@@ -103,9 +103,9 @@ struct ether_addr * sndet_get_iface_mac_addr(struct sndet_device *sndet_dev, cha
 			ext_errbuf);
 
 	if (tmp_mac) {
-        mac = (struct ether_addr *) malloc(sizeof(struct ether_addr));
+		mac = (struct ether_addr *) malloc(sizeof(struct ether_addr));
 		memcpy(mac, tmp_mac, sizeof(struct ether_addr));
-    } else {
+	} else {
 		snprintf(errbuf, LIBSNIFFDET_ERR_BUF_LEN,
 			"Cannot get HW addres from device \"%s\"\n%s",
 			sndet_dev->device, ext_errbuf);

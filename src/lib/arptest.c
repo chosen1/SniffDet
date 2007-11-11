@@ -107,12 +107,12 @@ int sndet_arptest(char *host,
 
 	// set test result information if available
     if (info) {
-        info->test_name = "ARP Test (single host)";
-        info->code = ARP_TEST;
-        info->test_short_desc =
+		info->test_name = "ARP Test (single host)";
+		info->code = ARP_TEST;
+		info->test_short_desc =
 			"Check if target replies a bogus ARP request (with wrong MAC)";
-        info->time_start = time(NULL);
-    }
+		info->time_start = time(NULL);
+	}
 
 	if (callback)
 		thdata.callback = callback;
@@ -150,7 +150,7 @@ int sndet_arptest(char *host,
 	if (!tries)
 		thdata.tries = DEFAULT_NUMBER_OF_TRIES;
 	else
-	    thdata.tries = tries;
+		thdata.tries = tries;
 
 	if (!send_interval)
 		thdata.send_interval = DEFAULT_SEND_INTERVAL;
@@ -296,11 +296,11 @@ cleanup:
 	// calculate final status, result, error code, etc...
     if (info) {
 		info->valid = exit_status ? 0 : 1;
-        info->time_fini = time(NULL);
-        info->b_sent = bytes_sent;
-        info->b_recvd = bytes_recvd;
-        info->pkts_sent = pkts_sent;
-        info->pkts_recvd = pkts_recvd;
+		info->time_fini = time(NULL);
+		info->b_sent = bytes_sent;
+		info->b_recvd = bytes_recvd;
+		info->pkts_sent = pkts_sent;
+		info->pkts_recvd = pkts_recvd;
 		info->test.arp.positive = got_suspect;
     }
 

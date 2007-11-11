@@ -42,7 +42,7 @@ static void show_help(void);
 
 /* static data */
 // XXX: use a global structure to hold that?
-//        I don't think so
+// XXX: I don't think it's a good idea
 static struct arguments args;
 static struct snd_tests run_tests;
 static int logfd;
@@ -96,17 +96,17 @@ static int tests_msg_callback(struct test_status *status,
 	switch (msg_type) {
 		case RUNNING:
 			if (config.global.verbose)
-				mylog(config.global.logtype,  logfd, "%s", msg);
+				mylog(config.global.logtype, logfd, "%s", msg);
 			break;
 		case NOTIFICATION:
 		case ENDING:
-			mylog(config.global.logtype,  logfd, "%s", msg);
+			mylog(config.global.logtype, logfd, "%s", msg);
 			break;
 		case ERROR:
-			mylog(config.global.logtype,  logfd, "Error: %s", msg);
+			mylog(config.global.logtype, logfd, "Error: %s", msg);
 			break;
 		case WARNING:
-			mylog(config.global.logtype,  logfd, "Warning: %s", msg);
+			mylog(config.global.logtype, logfd, "Warning: %s", msg);
 			break;
 	}
 
@@ -120,7 +120,7 @@ static int tests_msg_callback(struct test_status *status,
  */
 int main(int argc, char **argv)
 {
-	struct test_info t_info[5];  // 4 tests + ending
+	struct test_info t_info[5]; // 4 tests + ending
 	struct sndet_device *device;
 	char errbuf[LIBSNIFFDET_ERR_BUF_LEN];
 	char plugin_path[PATH_MAX];
@@ -271,7 +271,7 @@ int main(int argc, char **argv)
 	// open output plugin
 	snprintf(plugin_path, PATH_MAX, "%s/%s", config.global.plugins_dir, config.global.plugin);
 	if (config.global.verbose) {
-		mylog(config.global.logtype,  logfd,
+		mylog(config.global.logtype, logfd,
 			"Opening plugin: %s\n", plugin_path);
 	}
 	o_plugin = dlopen(plugin_path, RTLD_LAZY);
@@ -310,31 +310,31 @@ int main(int argc, char **argv)
 
 		// ICMP test
 		if (run_tests.icmptest && !cancel_tests) {
-			mylog(config.global.logtype,  logfd,
+			mylog(config.global.logtype, logfd,
 					"Calling ICMP Test for %s on %s",
 					targets[i], device->device);
 			status = sndet_icmptest(targets[i],
 					device,
-					config.icmptest.timeout,  // timeout (secs)
-					config.icmptest.tries,  // tries
+					config.icmptest.timeout, // timeout (secs)
+					config.icmptest.tries, // tries
 					config.icmptest.interval, // interval (msecs)
 					tests_msg_callback,
 					&t_info[test++],
 					config.icmptest.fake_hwaddr); // fake mac address
-			mylog(config.global.logtype,  logfd,
+			mylog(config.global.logtype, logfd,
 					"%s: %s (%d)", "ICMP Test done",
 					(status ? "failure" : "sucess"), status);
 		}
 
 		// DNS
 		if (run_tests.dnstest && !cancel_tests) {
-			mylog(config.global.logtype,  logfd,
+			mylog(config.global.logtype, logfd,
 					"Calling DNS Test for %s on %s",
 					targets[i], device->device);
 			status = sndet_dnstest(targets[i],
 					device,
-					config.dnstest.timeout,  // timeout (secs)
-					config.dnstest.tries,  // tries
+					config.dnstest.timeout, // timeout (secs)
+					config.dnstest.tries, // tries
 					config.dnstest.interval, // interval (msecs)
 					tests_msg_callback,
 					&t_info[test++],
@@ -345,25 +345,25 @@ int main(int argc, char **argv)
 					config.dnstest.sport, // source port
 					config.dnstest.payload, // payload
 					config.dnstest.payload_len); // payload len
-			mylog(config.global.logtype,  logfd,
+			mylog(config.global.logtype, logfd,
 					"%s: %s (%d)", "DNS Test done",
 					(status ? "failure" : "sucess"), status);
 		}
 
 		// ARP
 		if (run_tests.arptest && !cancel_tests) {
-			mylog(config.global.logtype,  logfd,
+			mylog(config.global.logtype, logfd,
 					"Calling ARP Test for %s on %s",
 					targets[i], device->device);
 			status = sndet_arptest(targets[i],
 					device,
-					config.arptest.timeout,  // timeout (secs)
-					config.arptest.tries,  // tries
-					config.arptest.interval,  // interval (msecs)
+					config.arptest.timeout, // timeout (secs)
+					config.arptest.tries, // tries
+					config.arptest.interval, // interval (msecs)
 					tests_msg_callback,
 					&t_info[test++],
 					config.arptest.fake_hwaddr); // fake mac address
-			mylog(config.global.logtype,  logfd,
+			mylog(config.global.logtype, logfd,
 					"%s: %s (%d)", "ARP Test done",
 					(status ? "failure" : "sucess"), status);
 		}
@@ -408,7 +408,7 @@ int main(int argc, char **argv)
 	dlclose(o_plugin);
 
 	// finish/close our device(s)
-	mylog(config.global.logtype,  logfd,
+	mylog(config.global.logtype, logfd,
 			"Closing device %s", device->device);
 
 	if (sndet_finish_device(device, errbuf))

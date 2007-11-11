@@ -50,7 +50,7 @@ int test_output(char *target, struct test_info info[],
 
 	printf("------------------------------------------------------------\n");
 	printf("Sniffdet Report\n");
-	printf("Generated on: %s\n",  timeString(time(NULL)));
+	printf("Generated on: %s\n", timeString(time(NULL)));
 	printf("------------------------------------------------------------\n");
 	printf("Tests Results for target %s\n", target);
 	printf("------------------------------------------------------------\n");

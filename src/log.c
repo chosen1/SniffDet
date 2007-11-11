@@ -102,12 +102,12 @@ static char *timeString(time_t t)
 {
 	static char buffer[64];
 	static char timestr[64];
-    struct tm *local;
+	struct tm *local;
 
-    local = localtime(&t);
-    strftime(buffer, 64, "%b %e %H:%M", local);
+	local = localtime(&t);
+	strftime(buffer, 64, "%b %e %H:%M", local);
 
 	strncpy(timestr, buffer, 64);
 
-    return timestr;
+	return timestr;
 }

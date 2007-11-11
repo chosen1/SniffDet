@@ -130,9 +130,9 @@ int sndet_ping_host(
 	thdata.burst_size = burst_size;
 	/*
 	thdata.ipdaddr = sndet_resolve(host);
-    thdata.ipsaddr = sndet_get_iface_ip_addr(device, errmsg);
+	thdata.ipsaddr = sndet_get_iface_ip_addr(device, errmsg);
 	*/
-    thdata.errmsg = errmsg;
+	thdata.errmsg = errmsg;
 
 	// prepare threads
 	DEBUG_CODE(printf("Preparing threads\n"));

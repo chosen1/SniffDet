@@ -58,7 +58,7 @@ static unsigned int pkts_recvd;
 struct icmp_thread_data {
 	char *host;
 	int tries;
-    unsigned short int my_icmp_id;
+	unsigned short int my_icmp_id;
 	u_char *fakehwaddr;
 	user_callback callback;
 	struct sndet_device *device;
@@ -106,13 +106,13 @@ int sndet_icmptest(
 		memset(info, 0, sizeof(struct test_info));
 
 	// set basic information
-    if (info) {
-        info->test_name = "ICMP Test";
-        info->code = ICMP_TEST;
-        info->test_short_desc =
+	if (info) {
+		info->test_name = "ICMP Test";
+		info->code = ICMP_TEST;
+		info->test_short_desc =
 			"Check if target replies a bogus ICMP request (wrong MAC)";
-        info->time_start = time(NULL);
-    }
+		info->time_start = time(NULL);
+	}
 
 	if (callback)
 		thdata.callback = callback;
@@ -153,7 +153,7 @@ int sndet_icmptest(
 	if (!tries)
 		thdata.tries = DEFAULT_NUMBER_OF_TRIES;
 	else
-	    thdata.tries = tries;
+		thdata.tries = tries;
 
 	if (!send_interval)
 		thdata.send_interval = DEFAULT_SEND_INTERVAL;
@@ -267,13 +267,13 @@ cleanup:
 	pthread_mutex_destroy(&callback_mutex);
 
 	// calculate final status, result, error code, etc...
-    if (info) {
+	if (info) {
 		info->valid = exit_status ? 0 : 1;
-        info->time_fini = time(NULL);
-        info->b_sent = bytes_sent;
-        info->b_recvd = bytes_recvd;
-        info->pkts_sent = pkts_sent;
-        info->pkts_recvd = pkts_recvd;
+		info->time_fini = time(NULL);
+		info->b_sent = bytes_sent;
+		info->b_recvd = bytes_recvd;
+		info->pkts_sent = pkts_sent;
+		info->pkts_recvd = pkts_recvd;
 		info->test.icmp.positive = got_suspect;
 	}
 

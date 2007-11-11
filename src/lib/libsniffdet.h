@@ -32,7 +32,7 @@
 #define DABORT() \
 	{ \
 		fprintf(stderr, "Aborting at line %d in source file %s\n",\
-		        __LINE__, __FILE__);\
+				__LINE__, __FILE__);\
 		abort();\
 	}
 #else
@@ -41,7 +41,7 @@
 #define DABORT() \
 	{ \
 		fprintf(stderr, "There's a bug at line %d in source file %s\n",\
-		        __LINE__, __FILE__);\
+				__LINE__, __FILE__);\
 		fprintf(stderr, "Please report it to sniffdet-devel@lists.sourceforge.net\n");\
 		abort();\
 	}
