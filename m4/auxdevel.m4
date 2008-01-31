@@ -189,7 +189,7 @@ if test "$ac_warnings_enabled" = yes; then
   AC_SUBST(ac_devel_default_warnings, ["-Wall -W \
 -Wmissing-declarations -Wmissing-prototypes \
 -Wredundant-decls -Wshadow -Wbad-function-cast \
--Wcast-qual"])
+-Wcast-qual -Wno-pointer-sign"])
 else
   AC_SUBST(ac_devel_default_warnings, ["-Wall -W -Wno-pointer-sign"])
 fi
