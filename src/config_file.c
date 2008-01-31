@@ -729,7 +729,6 @@ static int get_tcpflags(struct config_variables_t *self, enum section_state stat
 		found++;
 	}
 
-
 	if (strstr(line_buffer, "RST")) {
 		*type |= TCP_FLAG__RST;
 		found++;

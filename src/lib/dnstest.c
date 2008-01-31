@@ -119,13 +119,13 @@ int sndet_dnstest(char *host,
 		memset(info, 0, sizeof(struct test_info));
 
 	// set test_result information if available
-    if (info) {
+	if (info) {
 		info->test_name = "DNS Test";
 		info->code = DNS_TEST;
 		info->test_short_desc =
 			"Watch for DNS queries for hostnames who don't exist";
 		info->time_start = time(NULL);
-    }
+	}
 
 	if (callback)
 		thdata.callback = callback;
@@ -234,10 +234,6 @@ int sndet_dnstest(char *host,
 	memset(filter, 0, sizeof(filter));
 	snprintf(filter, sizeof(filter),
 			"udp dst port 53");
-//FIXME (debug only):
-#if 0
-			"udp dst port 53 and src host %s", host);
-#endif
 
 	if (pcap_compile(device->pktdesc, &bpf, filter, 0,
 		device->netmask) < 0)
@@ -331,7 +327,7 @@ cleanup:
 	pthread_mutex_destroy(&callback_mutex);
 
 	// calculate final status, result, error code, etc...
-    if (info) {
+	if (info) {
 		info->valid = exit_status ? 0 : 1;
 		info->time_fini = time(NULL);
 		info->b_sent = bytes_sent;
@@ -339,7 +335,7 @@ cleanup:
 		info->pkts_sent = pkts_sent;
 		info->pkts_recvd = pkts_recvd;
 		info->test.dns.positive = got_suspect;
-    }
+	}
 
 	sender_percent = 100;
 	set_status(&status);

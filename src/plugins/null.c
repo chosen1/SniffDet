@@ -21,14 +21,10 @@
 #include "../sniffdet.h"
 #include "plugins.h"
 
-int test_output(char *target, struct test_info info[],
-		struct config_options config, char *errbuf)
+int test_output(__attribute__((unused)) char *target,
+		__attribute__((unused)) struct test_info info[],
+		__attribute__((unused)) struct config_options config,
+		__attribute__((unused)) char *errbuf)
 {
-	// avoid warnings
-	(void) target;
-	(void) info;
-	(void) config;
-	(void) errbuf;
-
 	return 0;
 }

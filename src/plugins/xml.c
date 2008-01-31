@@ -52,13 +52,12 @@ int test_output(char *target, struct test_info info[],
 			config.global.verbose, errbuf);
 }
 
-static int xml_output(char *target, char *filename,
-		struct test_info info[], int verbose, char *errbuf)
+static int xml_output(__attribute__((unused)) char *target,
+		char *filename,
+		struct test_info info[],
+		__attribute__((unused)) int verbose,
+		__attribute__((unused)) char *errbuf)
 {
-	// avoid warnings
-	(void) verbose;
-	(void) target;
-
 	int i = 0;
 
 	xmlfile = fopen(filename, "w+");
@@ -83,11 +82,9 @@ static int xml_output(char *target, char *filename,
 	return 0;
 }
 
-static int print_info_header(struct test_info info, char *errbuf)
+static int print_info_header(struct test_info info,
+		__attribute__((unused)) char *errbuf)
 {
-	// avoid warnings
-	(void) errbuf;
-
 	fprintf(xmlfile, "\t<name>%s</name>\n", info.test_name);
 	fprintf(xmlfile, "\t<description>%s</description>\n",
 		info.test_short_desc);
@@ -106,50 +103,40 @@ static int print_info_header(struct test_info info, char *errbuf)
 	return 0;
 }
 
-static int print_info_result(struct test_info info, char *errbuf)
+static int print_info_result(struct test_info info,
+		__attribute__((unused)) char *errbuf)
 {
-	// avoid warnings
-	(void) errbuf;
-
 	return print_tests_results[info.code](info, 0);
 }
 
-static int print_icmptest_results(struct test_info info, int verbose)
+static int print_icmptest_results(struct test_info info,
+		__attribute__((unused)) int verbose)
 {
-	// avoid warnings
-	(void) verbose;
-
 	fprintf(xmlfile, "\t<result>%s</result>\n",
 			info.test.icmp.positive ? "POSITIVE" : "NEGATIVE");
 
 	return info.test.icmp.positive;
 }
 
-static int print_arptest_results(struct test_info info, int verbose)
+static int print_arptest_results(struct test_info info,
+		__attribute__((unused)) int verbose)
 {
-	// avoid warnings
-	(void) verbose;
-
 	fprintf(xmlfile, "\t<result>%s</result>\n",
 			info.test.arp.positive ? "POSITIVE" : "NEGATIVE");
 	return info.test.icmp.positive;
 }
 
-static int print_dnstest_results(struct test_info info, int verbose)
+static int print_dnstest_results(struct test_info info,
+		__attribute__((unused)) int verbose)
 {
-	// avoid warnings
-	(void) verbose;
-
 	fprintf(xmlfile, "\t<result>%s</result>\n",
 			info.test.dns.positive ? "POSITIVE" : "NEGATIVE");
 	return info.test.icmp.positive;
 }
 
-static int print_latencytest_results(struct test_info info, int verbose)
+static int print_latencytest_results(struct test_info info,
+		__attribute__((unused)) int verbose)
 {
-	// avoid warnings
-	(void) verbose;
-
 	// this functions is non-deterministic
 	fprintf(xmlfile, "\t<results unit=\"msecs\">\n");
 	fprintf(xmlfile, "\t\t<normal>%d.%d</normal>\n",

@@ -39,14 +39,12 @@ static int (*print_tests_results[MAX_TESTS + 1]) (
 			NULL };
 
 int test_output(char *target, struct test_info info[],
-		struct config_options config, char *errbuf)
+		struct config_options config,
+		__attribute__((unused)) char *errbuf)
 {
 	int i = 0;
 	int positives = 0;
 	int valids = 0;
-
-	// avoid warnings
-	(void) errbuf;
 
 	printf("------------------------------------------------------------\n");
 	printf("Sniffdet Report\n");
@@ -83,41 +81,33 @@ int test_output(char *target, struct test_info info[],
 	return 0;
 }
 
-static int print_icmptest_results(struct test_info info, int verbose)
+static int print_icmptest_results(struct test_info info,
+		__attribute__((unused)) int verbose)
 {
-	// avoid warnings
-	(void) verbose;
-
 	printf("RESULT: %s\n",
 			info.test.icmp.positive ? "POSITIVE" : "NEGATIVE");
 	return info.test.icmp.positive;
 }
 
-static int print_arptest_results(struct test_info info, int verbose)
+static int print_arptest_results(struct test_info info,
+		__attribute__((unused)) int verbose)
 {
-	// avoid warnings
-	(void) verbose;
-
 	printf("RESULT: %s\n",
 			info.test.arp.positive ? "POSITIVE" : "NEGATIVE");
 	return info.test.icmp.positive;
 }
 
-static int print_dnstest_results(struct test_info info, int verbose)
+static int print_dnstest_results(struct test_info info,
+		__attribute__((unused)) int verbose)
 {
-	// avoid warnings
-	(void) verbose;
-
 	printf("RESULT: %s\n",
 			info.test.dns.positive ? "POSITIVE" : "NEGATIVE");
 	return info.test.icmp.positive;
 }
 
-static int print_latencytest_results(struct test_info info, int verbose)
+static int print_latencytest_results(struct test_info info,
+		__attribute__((unused)) int verbose)
 {
-	// avoid warnings
-	(void) verbose;
-
 	printf("RESULT:\n");
 	printf("Normal time: %u.%u\n",
 			info.test.latency.normal_time / 10,

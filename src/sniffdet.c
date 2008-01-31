@@ -134,12 +134,6 @@ int main(int argc, char **argv)
 	void *o_plugin;
 	int (*test_output)(char *, struct test_info *, struct config_options, char *);
 
-#if 0
-	// just a test
-	// sigint handler
-	signal(SIGINT, (void *) sighandler_sigint);
-#endif
-
 	// set everything in config struct to NULL (zero)
 	memset(&config, 0, sizeof(struct config_options));
 
@@ -173,7 +167,6 @@ int main(int argc, char **argv)
 			config.global.logfilename[0] = '\0';
 		}
 	}
-
 
 	/* TODO:
 	 * check geteuid() and warn the user if the file is suid,
@@ -620,16 +613,6 @@ static int parse_testnames(char *names)
 	}
 
 	return count;
-}
-
-/* Signal handler for the SIGINT signal
- * set the flag "cancel_tests" to 1
- *
- * It's not used... maybe in the future... (TODO)
- */
-void sighandler_sigint(void)
-{
-	cancel_tests = 1;
 }
 
 /* Copyrigth notice and release

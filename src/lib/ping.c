@@ -21,8 +21,6 @@
  * This file contains ping main routine and subroutines
  */
 
-#undef DEBUG
-
 #include <sys/time.h>
 #include <sys/poll.h>
 #include <sys/types.h>
