@@ -30,7 +30,7 @@ sndetmandir = $(mandir)/man1
 sndetman_DATA = sniffdet.1
 sndetconfmandir = $(mandir)/man5
 sndetconfman_DATA = sniffdet.conf.5
-bin_PROGRAMS = sniffdet
+sbin_PROGRAMS = sniffdet
 sniffdet_SOURCES = $(csourcedir)/sniffdet.c \
                    $(csourcedir)/sniffdet.h \
                    $(csourcedir)/log.c \
