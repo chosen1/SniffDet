@@ -1,18 +1,19 @@
 # $Id$
 
 %define with_devel 1
+%define pluginsdir %{_libdir}/sniffdet/plugins/
 
 Name: @PACKAGE_NAME@
 Summary: Remote sniffers detector for TCP/IP networks
 Summary(pt_BR): Detector de sniffers remoto para redes TCP/IP
 Version: @PACKAGE_VERSION@
-Release: 1ade
-License: GPL
+Release: 1
+License: GPLv2+
 Group: Networking
 Group(pt_BR): Rede
 Group(es): Red
 URL: http://sniffdet.sourceforge.net
-Source0: sniffdet-%{version}.tar.gz
+Source0: sniffdet-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: libpcap-devel libnet1-devel
 
@@ -39,34 +40,31 @@ PreReq: %{name} = %{version}-%{release}
 %description devel
 This package contains the sniffdet library, headers and manpages
 necessary to developers who want to use the sniffdet API.
-Notice that by now the sniffdet project provides only the static library.
-The dynamic version will be created in 1.0 release.
+Notice that the shared library API is not considered stable.
+The dynamic library should not be used before the 1.0 release.
 
 %description -l pt_BR devel
 Este pacote contém a biblioteca sniffdet, arquivos de inclusão e
 páginas man necesárias a desenvolvedores que desejam utilizar a API do
 sniffdet.
 
-Note que até o momento apenas a versão estática da biblioteca está sendo
-disponibilizada. A biblioteca dinâmica será criada no lançamento da
-versão 1.0.
+Note que a API da biblioteca só será considerada estável na versão 1.0,
+então é recomendado o uso apenas da biblioteca estática.
 %endif
 
 %prep
 %setup -q
 
 %build
-./configure --prefix=%{_prefix} \
-	--bindir=%{_bindir} --sbindir=%{_sbindir} \
-	--sysconfdir=%{_sysconfdir} --includedir=%{_includedir} \
-	--libdir=%{_libdir} --mandir=%{_mandir}
-
-# parallel make is broken
-make
+%configure --with-pluginsdir=%{pluginsdir}
+%make
 
 %install
 rm -rf %{buildroot}
-make DESTDIR=%{buildroot} install
+%makeinstall
+
+# these are plugins, no need for .a or .la files
+rm -f %{buildroot}%{pluginsdir}/*.{a,la}
 
 %clean
 rm -rf %{buildroot}
@@ -76,8 +74,10 @@ rm -rf %{buildroot}
 %doc doc/RESOURCES doc/howitworks.txt
 %doc CHANGES README TODO COPYING
 %{_sbindir}/sniffdet
-%dir %{_libdir}/sniffdet/plugins
-%{_libdir}/sniffdet/plugins/*.so
+%{_libdir}/libsniffdet.so.*
+%{_libdir}/pkgconfig/libsniffdet.pc
+%dir %{pluginsdir}
+%{pluginsdir}/*.so
 %{_sysconfdir}/sniffdet.conf
 %{_mandir}/man1/sniffdet.1*
 %{_mandir}/man5/sniffdet.conf.5*
@@ -86,12 +86,19 @@ rm -rf %{buildroot}
 %files devel
 %defattr(-,root,root,-)
 %doc doc/*.c
+%{_libdir}/libsniffdet.la
+%{_libdir}/libsniffdet.so
 %{_libdir}/libsniffdet.a
 %{_includedir}/libsniffdet.h
 %{_mandir}/man3/libsniffdet.3*
 %endif
 
 %changelog
+* Thu Feb 07 2008 Ademar de Souza Reis Jr. <ademar@ademar.org>
+- General spec changes to work with the new build-system
+- Use more standard rpm macros
+- Minor improvements on descriptions
+
 * Fri Jul 04 2003 Ademar de Souza Reis Jr. <ademar@conectiva.com.br>
 + sniffdet-0.9-1ade
 - New version packaged
