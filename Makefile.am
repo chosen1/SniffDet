@@ -83,6 +83,7 @@ EXTRA_DIST = $(srcdir)/m4/auxdevel.m4 \
              $(srcdir)/mk/libtool-fix.am \
              $(srcdir)/README \
              $(srcdir)/TODO \
+             $(srcdir)/CHANGES \
              $(srcdir)/doc/RESOURCES \
              $(srcdir)/doc/howitworks.txt \
              $(srcdir)/doc/*.c \
