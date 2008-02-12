@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(sniffdet, 0.10, sniffdet-devel@lists.sourceforge.net, sniffdet)
+AC_INIT(sniffdet, 0.9svn, sniffdet-devel@lists.sourceforge.net, sniffdet)
 AC_PREREQ(2.58)
 
 AC_CONFIG_SRCDIR([src/sniffdet.c])
