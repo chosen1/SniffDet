@@ -11,6 +11,7 @@ it has not been forgotten. :-)
   compiling with latest linux distributions :-)
 - patch from Andrew Lockhart <andrew [ at ] ingsoc.net>, fixing get_mac()
   which was totally b0rken
+- General code cleanup
 
 sniffdet 0.9
 ----------------------------------------------------------------------------
