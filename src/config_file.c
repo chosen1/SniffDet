@@ -55,8 +55,8 @@
  *
  */
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
 #include <getopt.h>
@@ -209,7 +209,7 @@ static struct config_variables_t config_vars[] = {
 			NULL
 		}
 	},
-	{ CFG_VAR_LOGTYPE, 			get_logtype,
+	{ CFG_VAR_LOGTYPE,			get_logtype,
 		{ &(config.global.logtype),
 			NULL,
 			NULL,
@@ -218,7 +218,7 @@ static struct config_variables_t config_vars[] = {
 			NULL
 		}
 	},
-	{ CFG_VAR_LOGFILENAME, 		get_string,
+	{ CFG_VAR_LOGFILENAME,		get_string,
 		{ &(config.global.logfilename),
 			NULL,
 			NULL,
@@ -263,7 +263,7 @@ static struct config_variables_t config_vars[] = {
 			NULL
 		}
 	},
-	{ CFG_VAR_IFACE, 			get_string,
+	{ CFG_VAR_IFACE,			get_string,
 		{ &(config.global.iface),
 			NULL,
 			NULL,
@@ -279,7 +279,7 @@ static struct config_variables_t config_vars[] = {
 #endif
 		}
 	},
-	{ CFG_VAR_TIMEOUT, 			get_int,
+	{ CFG_VAR_TIMEOUT,			get_int,
 		{ NULL,
 			&(config.icmptest.timeout),
 			&(config.arptest.timeout),
@@ -289,7 +289,7 @@ static struct config_variables_t config_vars[] = {
 		}
 	},
 
-	{ CFG_VAR_TRIES, 			get_int,
+	{ CFG_VAR_TRIES,			get_int,
 		{ NULL,
 			&(config.icmptest.tries),
 			&(config.arptest.tries),
@@ -298,7 +298,7 @@ static struct config_variables_t config_vars[] = {
 			NULL
 		}
 	},
-	{ CFG_VAR_INTERVAL, 		get_int,
+	{ CFG_VAR_INTERVAL,		get_int,
 		{ NULL,
 			&(config.icmptest.interval),
 			&(config.arptest.interval),
@@ -307,7 +307,7 @@ static struct config_variables_t config_vars[] = {
 			NULL
 		}
 	},
-	{ CFG_VAR_FAKE_HWADDR, 		get_mac,
+	{ CFG_VAR_FAKE_HWADDR,		get_mac,
 		{ &(config.global.fake_hwaddr),
 			&(config.icmptest.fake_hwaddr),
 			&(config.arptest.fake_hwaddr),
@@ -316,7 +316,7 @@ static struct config_variables_t config_vars[] = {
 			NULL
 		}
 	},
-	{ CFG_VAR_FAKE_IPADDR, 		get_ip,
+	{ CFG_VAR_FAKE_IPADDR,		get_ip,
 		{ &(config.global.fake_ipaddr),
 			NULL,
 			NULL,
@@ -325,7 +325,7 @@ static struct config_variables_t config_vars[] = {
 			NULL
 		}
 	},
-	{ CFG_VAR_DPORT, 			get_ushort_int,
+	{ CFG_VAR_DPORT,			get_ushort_int,
 		{ NULL,
 			NULL,
 			NULL,
@@ -334,7 +334,7 @@ static struct config_variables_t config_vars[] = {
 			NULL
 		}
 	},
-	{ CFG_VAR_SPORT, 			get_ushort_int,
+	{ CFG_VAR_SPORT,			get_ushort_int,
 		{ NULL,
 			NULL,
 			NULL,
