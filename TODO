@@ -6,6 +6,9 @@ to the main authors or the the mailing list.
 See our home page for more details:
     http://sniffdet.sourceforge.net
 
+The big TODO is to port sniffdet to libnet-1.1. Whoever does that is going
+to receive a lot of karma points. :-)
+
 Application
 ---------------------------------------------------------------------------
 
