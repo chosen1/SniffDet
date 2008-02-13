@@ -18,6 +18,7 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
 
 /* because of strndup */
 #ifdef __USE_GNU
@@ -28,7 +29,6 @@
 #undef __USE_GNU
 #endif
 
-#include <string.h>
 #include <pcap.h>
 #include <libnet.h>
 #include "libsniffdet.h"

@@ -19,6 +19,7 @@
 
 #include <lib/libsniffdet.h>
 #include "../sniffdet.h"
+#include "../sniffdet.h" // XXX
 #include "plugins.h"
 
 int test_output(__attribute__((unused)) char *target,

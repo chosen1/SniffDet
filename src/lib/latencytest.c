@@ -18,8 +18,12 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <errno.h>
+#include <pthread.h>
 #include <limits.h>
 #include <libnet.h>
+#include <string.h>
 #include <pcap.h>
 #include "libsniffdet.h"
 

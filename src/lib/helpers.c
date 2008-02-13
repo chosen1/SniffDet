@@ -18,12 +18,15 @@
  */
 
 /* helpers module
- * This file have functions useful for many tests
+ * This file has functions useful for many tests
  */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <time.h>
 #include <netdb.h>
+#include <string.h>
+#include <sys/select.h>
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>

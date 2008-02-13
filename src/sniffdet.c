@@ -22,6 +22,7 @@
 #include <unistd.h>
 #include <getopt.h>
 #include <dlfcn.h>
+#include <string.h>
 
 #include "config.h"
 #include "libsniffdet.h"

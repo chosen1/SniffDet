@@ -21,12 +21,16 @@
  * This file contains ping main routine and subroutines
  */
 
+#include <stdlib.h>
+#include <stdio.h>
 #include <sys/time.h>
 #include <sys/poll.h>
 #include <sys/types.h>
-#include <stdio.h>
+#include <sys/select.h>
+#include <pthread.h>
 #include <unistd.h>
 #include <limits.h>
+#include <errno.h>
 #include <string.h>
 #include "libsniffdet.h"
 

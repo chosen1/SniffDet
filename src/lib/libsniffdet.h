@@ -20,6 +20,7 @@
 #ifndef __LIBSNIFFDET_H__
 #define __LIBSNIFFDET_H__
 
+#include <stdio.h>
 #include <time.h>
 #include <netdb.h>
 #include <pcap.h>
@@ -53,7 +54,7 @@
 		BUFFER = NULL; \
 	} \
 	else { \
-	DABORT() \
+		DABORT() \
 	}
 
 

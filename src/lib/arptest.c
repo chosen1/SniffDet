@@ -17,6 +17,12 @@
  *  $Id$
  */
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <errno.h>
+#include <signal.h>
+#include <sys/select.h>
+#include <pthread.h>
 #include <libnet.h>
 #include <pcap.h>
 #include <netinet/in.h>

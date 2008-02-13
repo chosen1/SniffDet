@@ -18,9 +18,12 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <limits.h>
 #include <libnet.h>
 #include <signal.h>
+#include <sys/select.h>
+#include <pthread.h>
 #include <time.h>
 #include <errno.h>
 #include <unistd.h>

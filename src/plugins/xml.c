@@ -18,8 +18,9 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <lib/libsniffdet.h>
-#include "../sniffdet.h"
+#include "../sniffdet.h" // XXX
 #include "plugins.h"
 
 static int xml_output(char *target, char *file, struct test_info info[],

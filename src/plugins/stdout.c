@@ -18,9 +18,10 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <lib/libsniffdet.h>
-#include "../sniffdet.h"
+#include "../sniffdet.h" // XXX
 #include "plugins.h"
 
 static int print_icmptest_results(struct test_info info, int verbose);
