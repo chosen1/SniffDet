@@ -21,6 +21,13 @@ AC_LIBTOOL_DLOPEN
 AC_PROG_LIBTOOL
 AC_PROG_CC
 
+dnl Check if pkg-config is installed
+AC_CHECK_PROG(PKGCONFIG, pkg-config, yes, no)
+if test $PKGCONFIG = "no"; then
+    AC_MSG_ERROR("*** pkg-config not found! ***")
+fi
+
+
 dnl Checks for header files.
 AC_CHECK_HEADERS([limits.h netdb.h netinet/in.h stdlib.h string.h sys/time.h unistd.h dlfcn.h syslog.h sys/param.h])
 AC_CHECK_HEADERS([pcap.h])
