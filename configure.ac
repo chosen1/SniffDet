@@ -46,14 +46,16 @@ dnl Checks for libraries.
 
 AC_CHECK_PROG(LIBNETCONFIG, libnet-config, yes, no)
 if test $LIBNETCONFIG = "yes"; then
-    LIBNET_DEFINES=`libnet-config --defines`
-    AC_SUBST(LIBNET_DEFINES)
+    __LIBNET_DEFINES=`libnet-config-1.0 --defines`
+    __LIBNET_CFLAGS=`libnet-config-1.0 --cflags`
+    LIBNET_LIBS=`libnet-config-1.0 --libs`
+	LIBNET_CFLAGS="$__LIBNET_DEFINES $__LIBNET_CFLAGS"
+    AC_SUBST(LIBNET_CFLAGS)
+    AC_SUBST(LIBNET_LIBS)
 else
-    AC_MSG_ERROR("*** libnet-config not found! You need libnet 1.0 to build $PACKAGE_NAME! ***")
+    AC_MSG_ERROR("*** libnet-config-1.0 not found! You need libnet 1.0 to build $PACKAGE_NAME! ***")
 fi
 
-AC_CHECK_LIB(net, libnet_open_link_interface, [ LIBNET_LIBS="-lnet" ], \
-    AC_MSG_ERROR("*** libnet 1.0 not found! You need it to build $PACKAGE_NAME. ***"))
 AC_SUBST(LIBNET_LIBS)
 AC_CHECK_LIB(pcap, pcap_open_live, [ LIBPCAP_LIBS="-lpcap" ], \
     AC_MSG_ERROR("*** libpcap not found! You need it to build $PACKAGE_NAME. ***"))

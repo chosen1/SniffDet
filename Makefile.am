@@ -19,7 +19,7 @@ libsniffdet_la_SOURCES = $(csourcedir)/lib/arptest.c \
                          $(csourcedir)/lib/ping.c \
                          $(csourcedir)/lib/init.c
 libsniffdet_la_CC = $(PTHREAD_CC)
-libsniffdet_la_CPPFLAGS = -I$(csourcedir)/lib/ $(LIBNET_DEFINES)
+libsniffdet_la_CPPFLAGS = -I$(csourcedir)/lib/ $(LIBNET_CFLAGS)
 libsniffdet_la_CFLAGS = $(PTHREAD_CFLAGS) $(AM_CFLAGS)
 libsniffdet_la_LIBADD = $(PTHREAD_CFLAGS) $(PTHREAD_LIBS) $(LIBLTDL_LIBS) $(LIBNET_LIBS) $(LIBPCAP_LIBS)
 
@@ -53,17 +53,17 @@ plugindir = $(libdir)/sniffdet/plugins
 plugin_LTLIBRARIES = null.la
 null_la_SOURCES = $(csourcedir)/plugins/null.c $(csourcedir)/plugins/plugins.h
 null_la_LDFLAGS = -avoid-version -export-dynamic -module
-null_la_CPPFLAGS = $(LIBNET_DEFINES)
+null_la_CPPFLAGS = $(LIBNET_CFLAGS)
 
 plugin_LTLIBRARIES += stdout.la
 stdout_la_SOURCES = $(csourcedir)/plugins/stdout.c $(csourcedir)/plugins/plugins.h
 stdout_la_LDFLAGS = -avoid-version -export-dynamic -module
-stdout_la_CPPFLAGS = $(LIBNET_DEFINES)
+stdout_la_CPPFLAGS = $(LIBNET_CFLAGS)
 
 plugin_LTLIBRARIES += xml.la
 xml_la_SOURCES = $(csourcedir)/plugins/xml.c $(csourcedir)/plugins/plugins.h
 xml_la_LDFLAGS = -avoid-version -export-dynamic -module
-xml_la_CPPFLAGS = $(LIBNET_DEFINES)
+xml_la_CPPFLAGS = $(LIBNET_CFLAGS)
 
 
 # unit-tests
