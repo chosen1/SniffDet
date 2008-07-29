@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <limits.h>
 #include <getopt.h>
 #include <dlfcn.h>
 #include <string.h>

@@ -19,6 +19,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <limits.h>
 #include <errno.h>
 #include <sys/select.h>
 #include <pthread.h>

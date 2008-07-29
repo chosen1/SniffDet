@@ -23,6 +23,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <limits.h>
 #include <time.h>
 #include <netdb.h>
 #include <string.h>
