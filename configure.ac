@@ -20,6 +20,7 @@ AC_PROG_INSTALL
 AC_LIBTOOL_DLOPEN
 AC_PROG_LIBTOOL
 AC_PROG_CC
+DOLT
 
 dnl Check if pkg-config is installed
 AC_CHECK_PROG(PKGCONFIG, pkg-config, yes, no)
