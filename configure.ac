@@ -45,16 +45,16 @@ AC_CHECK_FUNCS([strstr select strerror])
 
 dnl Checks for libraries.
 
-AC_CHECK_PROG(LIBNETCONFIG, libnet-config, yes, no)
+AC_CHECK_PROG(LIBNETCONFIG, libnet10-config, yes, no)
 if test $LIBNETCONFIG = "yes"; then
-    __LIBNET_DEFINES=`libnet-config-1.0 --defines`
-    __LIBNET_CFLAGS=`libnet-config-1.0 --cflags`
-    LIBNET_LIBS=`libnet-config-1.0 --libs`
+    __LIBNET_DEFINES=`libnet10-config --defines`
+    __LIBNET_CFLAGS=`libnet10-config --cflags`
+    LIBNET_LIBS=`libnet10-config --libs`
 	LIBNET_CFLAGS="$__LIBNET_DEFINES $__LIBNET_CFLAGS"
     AC_SUBST(LIBNET_CFLAGS)
     AC_SUBST(LIBNET_LIBS)
 else
-    AC_MSG_ERROR("*** libnet-config-1.0 not found! You need libnet 1.0 to build $PACKAGE_NAME! ***")
+    AC_MSG_ERROR("*** libnet10-config not found! You need libnet 1.0 to build $PACKAGE_NAME! ***")
 fi
 
 AC_SUBST(LIBNET_LIBS)
