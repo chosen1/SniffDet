@@ -1,7 +1,7 @@
 /*
  *  sniffdet - A tool for network sniffers detection
  *  Copyright (c) 2002, 2003
- *      Ademar de Souza Reis Jr. <myself@ademar.org>
+ *      Ademar de Souza Reis Jr. <ademar@ademar.org>
  *      Milton Soares Filho <eu_mil@yahoo.com>
  *
  *  This program is free software; you can redistribute it and/or

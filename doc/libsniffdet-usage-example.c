@@ -1,7 +1,7 @@
 /*
  *  libsniffdet usage example
  *  Copyright (c) 2002-2003
- *      Ademar de Souza Reis Jr. <myself@ademar.org>
+ *      Ademar de Souza Reis Jr. <ademar@ademar.org>
  *
  *  This program is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License

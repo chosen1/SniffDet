@@ -1,7 +1,7 @@
 /*
  *  sniffdet - A tool for network sniffers detection
  *  Copyright (c) 2002
- *      Ademar de Souza Reis Jr. <myself@ademar.org>
+ *      Ademar de Souza Reis Jr. <ademar@ademar.org>
  *      Milton Soares Filho <eu_mil@yahoo.com>
  *
  *  This program is free software; you can redistribute it and/or
@@ -624,7 +624,7 @@ static void show_version(void)
 	printf("sniffdet %s\n", PACKAGE_VERSION);
 	printf("A Remote Sniffer Detection Tool\n");
 	printf("Copyright (c) 2002\n");
-	printf("   Ademar de Souza Reis Jr. <myself@ademar.org>\n");
+	printf("   Ademar de Souza Reis Jr. <ademar@ademar.org>\n");
 	printf("   Milton Soares Filho <eu_mil@yahoo.com>\n");
 }
 
@@ -643,6 +643,7 @@ static void show_usage(void)
 static void show_help(void)
 {
 	show_version();
+	printf("\n");
 	printf("Usage: %s [options] TARGET\n", args.prgname);
 	printf("  Where:\n");
 	printf("  TARGET is a canonical hostname or a dotted decimal IPv4 address\n");
@@ -657,7 +658,7 @@ static void show_help(void)
 	printf("  -g  --gid=GID          Run program with GID (after dropping root)\n");
 	printf("\n");
 	printf("  -t  --test=[testname]  Perform specific test\n");
-	printf("      Where [testname] is a list composed by:\n");
+	printf("      Where [testname] is a comma-separated list of the following:\n");
 	printf("        dns         DNS test\n");
 	printf("        arp         ARP response test\n");
 	printf("        icmp        ICMP ping response test\n");
@@ -675,5 +676,5 @@ static void show_help(void)
 	printf("    Plugins Directory: \"%s\"\n", SNDET_PLUGINSDIR);
 	printf("    Plugin: \"stdout.so\"\n");
 	printf("\n");
-	printf("You have to inform at least one test to perform\n");
+	printf("You have to specify at least one test to be used (there's no default)\n");
 }

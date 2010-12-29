@@ -11,7 +11,7 @@ See file COPYING for details.
 -----------------------------------------------------------------------
 
  Sniffdet is an OpenSource implementation of a set of tests
- for remote sniffers detection in TCP/IP network environments.
+ for remote sniffers detection on IPv4 network environments.
  It is useful for remote sniffer detection or to just discover
  machines which are running in promiscuous mode.
 
@@ -19,14 +19,14 @@ See file COPYING for details.
 BUILDING
 ----------------------------------------------------------------------
 
-    (If you've downloaded it from SVN, run "autoreconf -ifs" to generate
+    (If you've downloaded it from git/svn, run "autoreconf -ifs" to generate
     build files before running the commands below)
 
     ./configure
     make
 
     Requirements
-        - Standard compilation tools (gcc, make, etc)
+        - Standard compilation tools (gcc, make, libtool, etc)
         - libnet 1.0 - http://www.packetfactory.net/projects/libnet/
           Please note that libnet 1.1 is not compatible with libnet 1.0
           and so it won't work.
@@ -35,7 +35,7 @@ BUILDING
     Note for FreeBSD users:
         - This program is not well tested on *BSD systems. In order to
           compile it, you may need some libraries (like GNUgetopt for
-          getopt_long()) not available on BSD by default
+          getopt_long()) not available on BSD by default.
 
         - Patches and bug reports with portability issues are really
           welcome.  :-)
@@ -53,7 +53,7 @@ DOWNLOAD
 
     Releases, patches and more documentation at our website:
 
-    http://sniffdet.sourceforge.net
+    http://sniffdet.sf.net
 
 # EOF
 # vim:et tw=74:
