@@ -6,5 +6,5 @@ includedir=@includedir@
 Name: libsniffdet
 Description: Sniffers detection library
 Version: @VERSION@
-Libs: -L${libdir} -lsniffdet @PTHREAD_LIBS@ @LIBPCAP_LIBS@ @LIBNET_LIBS@
+Libs: -L${libdir} -lsniffdet @PTHREAD_LIBS@ @LIBPCAP_LIBS@ @LIBNET_LIBS@ @LIBDL_LIBS@
 Cflags: -I${includedir} @PTHREAD_CFLAGS@

@@ -61,9 +61,13 @@ AC_SUBST(LIBNET_LIBS)
 AC_CHECK_LIB(pcap, pcap_open_live, [ LIBPCAP_LIBS="-lpcap" ], \
     AC_MSG_ERROR("*** libpcap not found! You need it to build $PACKAGE_NAME. ***"))
 AC_SUBST(LIBPCAP_LIBS)
-AC_CHECK_LIB(ltdl, dlopen, [ LIBLTDL_LIBS="-lltdl" ], \
-    AC_MSG_ERROR("*** libltd not found! You need it to build $PACKAGE_NAME. ***"))
-AC_SUBST(LIBLTDL_LIBS)
+
+AC_CHECK_LIB(dl, dlopen, [ LIBDL_LIBS="-ldl" ], ,) # glibc
+if test -z "$LIBDL_LIBS"; then
+    AC_CHECK_LIB(ltdl, dlopen, [ LIBDL_LIBS="-lltdl" ], \
+        AC_MSG_ERROR("*** dlopen() not found! You need it (-ldl or -lltdl) to build $PACKAGE_NAME. ***"))
+fi
+AC_SUBST(LIBDL_LIBS)
 
 ACX_PTHREAD(, [AC_MSG_ERROR("*** POSIX threads support not found! You need it to build $PACKAGE_NAME ***")])
 
@@ -128,7 +132,7 @@ $PACKAGE_NAME $PACKAGE_VERSION configuration:
   Host System Type:           ${host}
   Compiler:                   ${CC}
   CFLAGS:                     ${CFLAGS} ${ac_devel_default_warnings}
-  Libraries:                  ${LIBPCAP_LIBS} ${LIBNET_LIBS} ${LIBLTDL_LIBS}
+  Libraries:                  ${LIBPCAP_LIBS} ${LIBNET_LIBS} ${LIBDL_LIBS}
   Pthread support:            ${PTHREAD_CC} ${PTHREAD_LIBS} ${PTHREAD_CFLAGS}
   Install path (prefix):      ${prefix}
 

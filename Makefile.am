@@ -21,7 +21,7 @@ libsniffdet_la_SOURCES = $(csourcedir)/lib/arptest.c \
 libsniffdet_la_CC = $(PTHREAD_CC)
 libsniffdet_la_CPPFLAGS = -I$(csourcedir)/lib/ $(LIBNET_CFLAGS)
 libsniffdet_la_CFLAGS = $(PTHREAD_CFLAGS) $(AM_CFLAGS)
-libsniffdet_la_LIBADD = $(PTHREAD_CFLAGS) $(PTHREAD_LIBS) $(LIBLTDL_LIBS) $(LIBNET_LIBS) $(LIBPCAP_LIBS)
+libsniffdet_la_LIBADD = $(PTHREAD_CFLAGS) $(PTHREAD_LIBS) $(LIBDL_LIBS) $(LIBNET_LIBS) $(LIBPCAP_LIBS)
 
 # sniffdet itself
 confdir = $(sysconfdir)
