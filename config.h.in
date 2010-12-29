@@ -1,0 +1,9 @@
+#define SNIFFDET_VERSION_MAJOR @SNIFFDET_VERSION_MAJOR@
+#define SNIFFDET_VERSION_MINOR @SNIFFDET_VERSION_MINOR@
+
+// TODO: allow setting these via build parameters
+#define SNDET_DEFAULT_UID 280
+#define SNDET_DEFAULT_GID 280
+#define SNDET_CONFIG "/usr/local/etc/sniffdet.conf"
+#define SNDET_PLUGINSDIR "/usr/local/lib/sniffdet/plugins"
+#define PACKAGE_VERSION "0.9svn"
